@@ -8,9 +8,9 @@ import 'package:pikachu_education/pages/answer_page/component/detail_answer_page
 import 'package:pikachu_education/pages/answer_page/component/detail_answer_page/tab_view/component/tab_bar_show_number_like_comment.dart';
 import 'package:pikachu_education/pages/answer_page/component/detail_answer_page/tab_view/component/tab_view_detail_answer.dart';
 import 'package:pikachu_education/pages/answer_page/component/detail_answer_page/tab_view/component/tab_view_detail_answer_no_comment.dart';
-
+import 'package:pikachu_education/service/database_service/database_service_answer.dart';
 import '../../../../bloc/bloc_detail_answer_page/detail_answer_page_bloc.dart';
-import '../../../../service/database_service/database_service.dart';
+
 
 class DetailAnswerPage extends StatefulWidget {
   const DetailAnswerPage(
@@ -38,7 +38,7 @@ class _DetailAnswerPageState extends State<DetailAnswerPage>
 
   getListQuestionIdLiked() async {
     var listQuestionIdLikeFromSever =
-        await DatabaseService.getListUserIdLikedAnswer(
+        await AnswerDatabaseService.getListUserIdLikedAnswer(
             questionId: widget.questionInfo.questionId,
             userIdOfQuestion: widget.questionInfo.userId,
             answerId: widget.answerInfo.answerId);

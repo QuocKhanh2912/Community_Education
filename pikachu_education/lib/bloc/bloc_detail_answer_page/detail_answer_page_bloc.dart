@@ -1,12 +1,8 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:pikachu_education/service/service_login/firebase_login.dart';
-
+import 'package:pikachu_education/service/database_service/databaser_service_comment.dart';
 import '../../data/data_modal/data_comment_modal.dart';
-import '../../service/database_service/database_service.dart';
-
 part 'detail_answer_page_event.dart';
 
 part 'detail_answer_page_state.dart';
@@ -19,7 +15,7 @@ class DetailAnswerPageBloc
     });
     on<PostCommentEvent>((event, emit) async {
 
-      await DatabaseService.postDataCommentToSever(
+      await CommentDatabaseService.postDataCommentToSever(
           itemToPost: event.itemToPost,
           userIdOfQuestion: event.userIdOfQuestion,
           questionId: event.questionId,
@@ -29,7 +25,7 @@ class DetailAnswerPageBloc
 
     on<FetchDataCommentEvent>((event, emit) async {
       emit(CommentLoadingState());
-      var listDataComment = await DatabaseService.fetchDataCommentFromSever(
+      var listDataComment = await CommentDatabaseService.fetchDataCommentFromSever(
           userIdOfQuestion: event.userIdOfQuestion,
           questionId: event.questionId,
           answerId: event.answerId);
@@ -37,7 +33,7 @@ class DetailAnswerPageBloc
     });
 
     on<RefreshDataCommentEvent>((event, emit) async {
-      var listDataComment = await DatabaseService.fetchDataCommentFromSever(
+      var listDataComment = await CommentDatabaseService.fetchDataCommentFromSever(
           userIdOfQuestion: event.userIdOfQuestion,
           questionId: event.questionId,
           answerId: event.answerId);
@@ -45,7 +41,7 @@ class DetailAnswerPageBloc
     });
 
     on<EditCommentEvent>((event, emit) async {
-      await DatabaseService.editComment(
+      await CommentDatabaseService.editComment(
           itemToPost: event.itemToPost,
           userIdOfQuestion: event.userIdOfQuestion,
           questionId: event.questionId,
@@ -55,7 +51,7 @@ class DetailAnswerPageBloc
     });
 
     on<DeleteCommentEvent>((event, emit) async {
-      await DatabaseService.deleteComment(
+      await CommentDatabaseService.deleteComment(
           userIdOfQuestion: event.userIdOfQuestion,
           questionId: event.questionId,
           answerId: event.answerId,

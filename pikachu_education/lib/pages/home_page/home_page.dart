@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/service/database_service/database_service_question.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../bloc/bloc_home_page/data_home_bloc.dart';
 import '../../bloc/bloc_profile_page/profile_page_bloc.dart';
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-    await DatabaseService.getListQuestionIdLiked(currentUserId: userId);
+    await QuestionDatabaseService.getListQuestionIdLiked(currentUserId: userId);
     setState(() {
       listQuestionIdLiked = listQuestionIdLikeFromSever;
     });
