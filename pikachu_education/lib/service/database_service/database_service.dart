@@ -29,7 +29,7 @@ class DatabaseService {
         .child('name')
         .get();
 
-    var currentUserName = currentUserNameSnapshot.value as String;
+    var currentUserName = (currentUserNameSnapshot.value??'') as String;
     return currentUserName;
   }
 

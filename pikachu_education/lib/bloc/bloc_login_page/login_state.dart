@@ -13,3 +13,8 @@ class AutoLoginSuccessState extends LoginState{
    final String userId;
    AutoLoginSuccessState({required this.userId});
 }
+class LoginWithGoogleLoadingState extends LoginState {}
+class LoginWithGoogleSuccessState extends LoginState {
+  final String userId;
+  LoginWithGoogleSuccessState({required this.userId});
+}

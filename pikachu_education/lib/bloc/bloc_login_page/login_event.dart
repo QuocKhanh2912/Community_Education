@@ -16,3 +16,4 @@ class CheckLogin extends LoginEvent{
 }
 
 class AutoLogin extends LoginEvent{}
+class LoginWithGoogle  extends LoginEvent{}

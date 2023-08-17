@@ -1,22 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pikachu_education/bloc/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/components/positive_button.dart';
 import 'package:pikachu_education/components/snack_bar_custom.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/service/service_local_storage/service_save_data_to_local_storage.dart';
+import 'package:pikachu_education/service/service_login/firebase_login.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_key.dart';
 import 'package:pikachu_education/utils/management_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'method_login.dart';
+import 'method_login_loading.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
+
 class _LoginPageState extends State<LoginPage> {
   final keyOfLogin = GlobalKey<FormState>();
   final phoneController = TextEditingController();
@@ -31,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     super.dispose();
   }
+
   Future<void> loadDataForLogin() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var user = prefs.getString(ManagementKey.user) ?? '';
@@ -66,6 +74,11 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.pushNamed(context, PageName.homePage,
                     arguments: userId);
               }
+              if (state is LoginWithGoogleSuccessState) {
+                var userId = state.userId;
+                Navigator.pushNamed(context, PageName.homePage,
+                    arguments: userId);
+              }
             },
             child: WillPopScope(
               onWillPop: () {
@@ -81,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Form(
                         key: keyOfLogin,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 100),
@@ -158,41 +171,56 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              PositiveButtonCustom(nameButton: 'LOGIN',onPressed: (){
-                                {
-                                  keyOfLogin.currentState!.validate();
-                                  if (keyOfLogin.currentState!
-                                      .validate() ==
-                                      true) {
-                                    SaveDataToLocal.saveDataForLogin(
-                                        context,
-                                        phoneController.text,
-                                        passwordController.text);
-                                    context.read<LoginBloc>().add(
-                                        LoginPressEvent(
-                                            email: phoneController.text,
-                                            password:
-                                            passwordController.text,
-                                            context: context));
-                                  }
-                                }
-                              }),
+                              PositiveButtonCustom(
+                                  nameButton: 'LOGIN',
+                                  onPressed: () {
+                                    {
+                                      keyOfLogin.currentState!.validate();
+                                      if (keyOfLogin.currentState!.validate() ==
+                                          true) {
+                                        SaveDataToLocal.saveDataForLogin(
+                                            context,
+                                            phoneController.text,
+                                            passwordController.text);
+                                        context.read<LoginBloc>().add(
+                                            LoginPressEvent(
+                                                email: phoneController.text,
+                                                password:
+                                                    passwordController.text,
+                                                context: context));
+                                      }
+                                    }
+                                  }),
                               const SizedBox(
                                 height: 20,
                               ),
-                              Text('Or Login with',style: ManagementText.normalStyle),
+                              Text('Or Login with',
+                                  style: ManagementText.normalStyle),
                               const SizedBox(
                                 height: 20,
                               ),
-                              MethodLogin(iconMethod: ManagementImage.logoGoogle,nameMethod: 'Google',onTap: (){},),
+                              state is LoginWithGoogleLoadingState
+                                  ? const MethodLoginLoading()
+                                  : MethodLogin(
+                                      iconMethod: ManagementImage.logoGoogle,
+                                      nameMethod: 'Google',
+                                      onTap: () {
+                                        context
+                                            .read<LoginBloc>()
+                                            .add(LoginWithGoogle());
+                                      },
+                                    ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              MethodLogin(iconMethod: ManagementImage.logoFacebook,nameMethod: 'Facebook',onTap: (){},),
+                              MethodLogin(
+                                iconMethod: ManagementImage.logoFacebook,
+                                nameMethod: 'Facebook',
+                                onTap: () {},
+                              ),
                               const SizedBox(
                                 height: 40,
                               ),
-
                               InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(

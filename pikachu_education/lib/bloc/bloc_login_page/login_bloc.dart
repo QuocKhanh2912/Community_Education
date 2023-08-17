@@ -15,16 +15,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       // TODO: implement event handler
     });
     on<LoginPressEvent>((event, emit) async {
-      var checkLogin = await LoginService.login(
+      var loginWithEmail = await LoginService.login(
           event.email, event.password, event.context);
-      if (checkLogin == true) {
+      if (loginWithEmail == true) {
         var userId = await LoginService.getUserId();
         await SaveDataToLocal.saveDataUserId(userId: userId);
         await SaveDataToLocal.saveDataUserName(userId: userId);
         emit(LoginSuccessState(userId: userId));
 
       }
-      if (checkLogin == false) {
+      if (loginWithEmail == false) {
         emit(LoginUnSuccessState());
       }
     });
@@ -37,6 +37,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(AutoLoginSuccessState(userId: userId));
       }
       else{
+        emit(LoginUnSuccessState());
+      }
+    });
+
+    on<LoginWithGoogle>((event, emit) async {
+      emit(LoginWithGoogleLoadingState());
+      var loginWithGoogle = await LoginService.signInWithGoogle();
+      if (loginWithGoogle == true) {
+        var userId = await LoginService.getUserId();
+        await SaveDataToLocal.saveDataUserId(userId: userId);
+        await SaveDataToLocal.saveDataUserName(userId: userId);
+        emit(LoginWithGoogleSuccessState(userId: userId));
+      }
+      if (loginWithGoogle == false) {
         emit(LoginUnSuccessState());
       }
     });
