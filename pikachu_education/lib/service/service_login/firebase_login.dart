@@ -33,6 +33,8 @@ class LoginService {
 
   static Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().disconnect();
+
   }
 
 
@@ -62,7 +64,7 @@ class LoginService {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      
+       await FirebaseAuth.instance.signInWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       return false;
     }
