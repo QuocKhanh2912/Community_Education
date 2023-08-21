@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/bloc/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/service/service_login/firebase_login_by_phone_number.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 import '../../../utils/management_image.dart';
 
@@ -60,12 +61,6 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                               padding: const EdgeInsets.all(0),
                               child: Image.asset(ManagementImage.logo),
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(
-                            //       top: 65, left: 10, right: 10),
-                            //   child: Image.asset(
-                            //       'assets/image/time_line_step_2.png'),
-                            // ),
                             const Padding(
                               padding:
                                   EdgeInsets.only(top: 60, left: 10, right: 10),
@@ -92,10 +87,10 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                     hintText: 'Enter OTP Code',
-                                    hintStyle: const TextStyle(
+                                    hintStyle:  TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
-                                        color: Color(0x4D000000)),
+                                        color: ManagementColor.black),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),
