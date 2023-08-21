@@ -3,10 +3,11 @@ import 'package:pikachu_education/utils/management_color.dart';
 
 class PositiveButtonCustom extends StatelessWidget {
   const PositiveButtonCustom(
-      {super.key, required this.nameButton, required this.onPressed});
+      {super.key, required this.nameButton, required this.onPressed,required this.stateLoading});
 
   final VoidCallback onPressed;
   final String nameButton;
+  final bool stateLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class PositiveButtonCustom extends StatelessWidget {
                     MaterialStateProperty.all(ManagementColor.yellow),
               ),
               onPressed: () => onPressed.call(),
-              child: Text(
+              child: stateLoading? const Center(
+                  child: CircularProgressIndicator()): Text(
                 nameButton,
                 style:  TextStyle(
                     fontWeight: FontWeight.bold,

@@ -18,3 +18,12 @@ class LoginWithGoogleSuccessState extends LoginState {
   final String userId;
   LoginWithGoogleSuccessState({required this.userId});
 }
+
+class LoginWithPhoneNumLoadingState extends LoginState {}
+class LoginWithPhoneNumSuccessState extends LoginState {}
+
+class VerifyOTPLoadingState extends LoginState {}
+class VerifyOTPSuccessState extends LoginState {
+  final String userId;
+  VerifyOTPSuccessState({required this.userId});
+}

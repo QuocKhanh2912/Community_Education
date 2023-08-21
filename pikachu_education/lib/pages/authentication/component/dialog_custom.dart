@@ -105,6 +105,73 @@ class DialogCustom {
     );
   }
 
+  static dialogOfWrongPhoneNumber(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Color(0xFFFFFFFF),
+      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      title: const Text('The Phone Number is Invalid',
+
+          style: TextStyle(
+            //fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.black)),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 100,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Color(0xFFFDCA15),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Center(
+                child: Text('OK',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white)),
+              ),
+            ))
+      ],
+    );
+  }
+
+  static wrongOTPCode(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Color(0xFFFFFFFF),
+      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      title: const Text('OPT Code Is\'nt True',
+
+          style: TextStyle(
+            //fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: Colors.black)),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Container(
+              width: 100,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Color(0xFFFDCA15),
+                  borderRadius: BorderRadius.circular(10)),
+              child: const Center(
+                child: Text('OK',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white)),
+              ),
+            ))
+      ],
+    );
+  }
+
+
   static dialogOfEmailUseAlready(BuildContext context) {
     return AlertDialog(
       backgroundColor: Color(0xFFFFFFFF),
