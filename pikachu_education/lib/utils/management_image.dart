@@ -1,8 +1,12 @@
 class ManagementImage {
-  static String logo = 'assets/image/logo.png';
-  static String defaultAvatar = 'assets/image/pikachu.png';
-  static String defaultAvatar2='assets/image/pikachu_itachi.png';
-  static String iconTag='assets/image/icon_tag.png';
-  static String logoGoogle = 'assets/image/google_logo.png';
-  static String logoFacebook = 'assets/image/facebook_logo.png';
+  static String images = 'assets/image';
+
+
+
+  static String logo = '$images/logo.png';
+  static String defaultAvatar = '$images/pikachu.png';
+  static String defaultAvatar2='$images/pikachu_itachi.png';
+  static String iconTag='$images/icon_tag.png';
+  static String logoGoogle = '$images/google_logo.png';
+  static String logoFacebook = '$images/facebook_logo.png';
 }

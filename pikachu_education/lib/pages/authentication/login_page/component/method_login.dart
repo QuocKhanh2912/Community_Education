@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/utils/management_text.dart';
+import 'package:pikachu_education/utils/management_text_style.dart';
 
 class MethodLogin extends StatelessWidget {
   const MethodLogin(
@@ -21,7 +21,7 @@ class MethodLogin extends StatelessWidget {
           const SizedBox(width: 5),
           Text(
             'Login with $nameMethod',
-            style: ManagementText.methodLogin,
+            style: ManagementTextStyle.methodLogin,
           )
         ],
       ),

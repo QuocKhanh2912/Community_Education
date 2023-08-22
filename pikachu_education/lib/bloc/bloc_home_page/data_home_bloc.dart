@@ -5,7 +5,7 @@ import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 import 'package:pikachu_education/service/database_service/database_service.dart';
 import 'package:pikachu_education/service/database_service/database_service_question.dart';
-import 'package:pikachu_education/service/service_login/firebase_login.dart';
+import 'package:pikachu_education/service/service_login/firebase_login_by_google.dart';
 import 'package:pikachu_education/service/storage_service/storage_service.dart';
 
 

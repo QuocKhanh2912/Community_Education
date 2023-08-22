@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/utils/management_text.dart';
+import 'package:pikachu_education/utils/management_text_style.dart';
 
 class MethodLoginLoading extends StatelessWidget {
   const MethodLoginLoading(
@@ -14,7 +14,7 @@ class MethodLoginLoading extends StatelessWidget {
         const SizedBox(width: 5),
         Text(
           'Please waiting',
-          style: ManagementText.methodLogin,
+          style: ManagementTextStyle.methodLogin,
         )
       ],
     );

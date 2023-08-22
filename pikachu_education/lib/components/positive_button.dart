@@ -16,27 +16,31 @@ class PositiveButtonCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.transparent, borderRadius: BorderRadius.circular(10)),
-        width: MediaQuery.of(context).size.width,
-        height: 60,
-        child: ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(ManagementColor.yellow),
-            ),
-            onPressed: () => onPressed.call(),
-            child: stateLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Text(
-                    nameButton,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: ManagementColor.white,
-                        fontSize: 25),
-                  )),
-      ),
+      child: ElevatedButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(20))),
+            backgroundColor: MaterialStateProperty.all(ManagementColor.yellow),
+          ),
+          onPressed: () => onPressed.call(),
+          child: stateLoading
+              ? SizedBox(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Center(child: CircularProgressIndicator()))
+              : SizedBox(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: Text(
+                      nameButton,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ManagementColor.white,
+                          fontSize: 25),
+                    ),
+                  ),
+                )),
     );
   }
 }

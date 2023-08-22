@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../../pages/authentication/component/dialog_custom.dart';
+import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
+
 
 class LoginService {
 
@@ -63,7 +64,8 @@ class LoginService {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-       await FirebaseAuth.instance.signInWithCredential(credential);
+       var userInfo = await FirebaseAuth.instance.signInWithCredential(credential);
+
     } on FirebaseAuthException catch (e) {
       return false;
     }
