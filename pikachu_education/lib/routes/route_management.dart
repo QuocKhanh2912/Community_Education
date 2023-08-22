@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-
+import 'package:pikachu_education/pages/answer_page/component/detail_answer_page/detail_answer_page.dart';
+import 'package:pikachu_education/pages/authentication/forgot_password_page/1_get_otp_page.dart';
+import 'package:pikachu_education/pages/authentication/forgot_password_page/3_save_new_password_page.dart';
+import 'package:pikachu_education/pages/authentication/forgot_password_page/4_success_change_password_page.dart';
+import 'package:pikachu_education/pages/authentication/login_page/component/verify_otp_page.dart';
 import 'package:pikachu_education/pages/authentication/profile_page/profile_page.dart';
-
 import 'package:pikachu_education/pages/answer_page/list_answer_page.dart';
 import 'package:pikachu_education/pages/authentication/change_password_page/change_password_page.dart';
+import 'package:pikachu_education/pages/authentication/signup_page/signup_page.dart';
+import 'package:pikachu_education/pages/authentication/signup_page/signup_success_page.dart';
+import 'package:pikachu_education/pages/home_page/home_page.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/pages/authentication/login_page/login_page.dart';
-import '../pages/answer_page/component/detail_answer_page/detail_answer_page.dart';
-import '../pages/authentication/forgot_password_page/1_get_otp_page.dart';
-import '../pages/authentication/forgot_password_page/2_verify_page.dart';
-import '../pages/authentication/forgot_password_page/3_save_new_password_page.dart';
-import '../pages/authentication/forgot_password_page/4_success_change_password_page.dart';
-import '../pages/authentication/signup_page/signup_page.dart';
-import '../pages/authentication/signup_page/signup_success_page.dart';
-import '../pages/home_page/home_page.dart';
+
 
 var generateRoute = (settings) {
   switch (settings.name) {
@@ -46,7 +45,8 @@ var generateRoute = (settings) {
       }
     case PageName.verifyPage:
       {
-        return MaterialPageRoute(builder: (context) => const VerifyPage());
+        var verification=settings.arguments??'';
+        return MaterialPageRoute(builder: (context) =>  VerifyOTPPage(verification: verification));
       }
     case PageName.saveNewPasswordPage:
       {

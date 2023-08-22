@@ -22,7 +22,6 @@ class Signup {
     }
     return true;
   }
-
   static createUser(
       {required String userId, required String name, required String email}) {
     var user = {'name': name, 'email': email};

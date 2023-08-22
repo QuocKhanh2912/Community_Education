@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../pages/authentication/component/dialog_custom.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
+
 
 class LoginService {
 
@@ -31,6 +33,8 @@ class LoginService {
 
   static Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().disconnect();
+
   }
 
 
@@ -46,11 +50,26 @@ class LoginService {
 
   static Future<String> getUserId() async {
     var currentUserId =
-        await FirebaseAuth.instance.currentUser?.uid.toString() ?? '';
+         FirebaseAuth.instance.currentUser?.uid.toString() ?? '';
     return currentUserId;
   }
 
+  static Future<bool> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
+      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
 
+      final credential =  GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+       var userInfo = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    } on FirebaseAuthException catch (e) {
+      return false;
+    }
+    return true;
+  }
 
 }

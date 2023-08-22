@@ -16,3 +16,17 @@ class CheckLogin extends LoginEvent{
 }
 
 class AutoLogin extends LoginEvent{}
+class LoginWithGoogle  extends LoginEvent{}
+
+class LoginWithPhoneNumEvent extends LoginEvent{
+  String phoneNum;
+  final BuildContext context;
+  LoginWithPhoneNumEvent({required this.phoneNum,required this.context});
+}
+
+class VerifyOtpEvent extends LoginEvent{
+  String verificationId;
+  String otpNumber;
+  final BuildContext context;
+  VerifyOtpEvent({required this.otpNumber,required this.context,required this.verificationId});
+}
