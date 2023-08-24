@@ -5,15 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pikachu_education/bloc/bloc_get_image_to_create_answer/get_image_to_create_answer_bloc.dart';
+import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/pages/answer_page/component/bloc_get_image_to_create_answer/get_image_to_create_answer_bloc.dart';
+import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_time.dart';
-import '../../../../bloc/bloc_list_answer_page/list_answer_page_bloc.dart';
-import '../../../../data/data_modal/data_answer_modal.dart';
-import '../../../../utils/management_image.dart';
 
-class createAnswerPage extends StatefulWidget {
-  const createAnswerPage(
+class CreateAnswerPage extends StatefulWidget {
+  const CreateAnswerPage(
       {super.key,
       required this.listAnswerPageBloc,
       required this.questionId,
@@ -29,10 +29,10 @@ class createAnswerPage extends StatefulWidget {
   final String currentUserId;
 
   @override
-  State<createAnswerPage> createState() => _createAnswerPageState();
+  State<CreateAnswerPage> createState() => _CreateAnswerPageState();
 }
 
-class _createAnswerPageState extends State<createAnswerPage> {
+class _CreateAnswerPageState extends State<CreateAnswerPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final formAddQuestionKey = GlobalKey<FormBuilderState>();

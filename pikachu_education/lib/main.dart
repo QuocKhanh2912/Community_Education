@@ -5,7 +5,7 @@ import 'package:pikachu_education/pages/authentication/login_page/login_page.dar
 import 'package:pikachu_education/routes/route_management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pikachu_education/utils/observing_blog.dart';
-import 'utils/firebase_options.dart';
+import 'domain/services_config/firebase_options.dart';
 
 
 void main() async {

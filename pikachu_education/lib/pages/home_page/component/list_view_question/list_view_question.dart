@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../data/data_modal/data_question_modal.dart';
-import '../../../../../data/data_modal/data_user_modal.dart';
-import '../../../../bloc/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
+import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
 import 'item_list_view/item_listview.dart';
 
 class ListViewQuestion extends StatefulWidget {

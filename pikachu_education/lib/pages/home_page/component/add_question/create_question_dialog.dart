@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_get_image_to_create_question/get_image_bloc.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/service/storage_service/storage_service.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import '../../../../../data/data_modal/data_question_modal.dart';
-import '../../../../bloc/bloc_get_image_to_create_question/get_image_bloc.dart';
-import '../../../../bloc/bloc_home_page/data_home_bloc.dart';
-import '../../../../service/storage_service/storage_service.dart';
-import '../../../../utils/management_time.dart';
+import 'package:pikachu_education/utils/management_time.dart';
 import 'component/list_subject.dart';
 import 'dart:io';
 
@@ -317,7 +317,7 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                     alignment: Alignment.center,
                                     height: 50,
                                     decoration: BoxDecoration(
-                                        color: Color(0xFFFDCA15),
+                                        color: ManagementColor.yellow,
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: const Padding(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import '../../../../../data/data_modal/data_question_modal.dart';
-import '../../../../bloc/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
 import 'item_listview/item_listview.dart';
 
 class ListViewAnswerPage extends StatefulWidget {
@@ -57,7 +57,7 @@ class _ListViewAnswerPageState extends State<ListViewAnswerPage> {
                 return Padding(
                   padding: const EdgeInsets.only(top: 5, left: 8, right: 8),
                   child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) => ItemListView(
                       listAnswerIdLiked: widget.listAnswerIdLiked,

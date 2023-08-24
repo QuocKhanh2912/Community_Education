@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/service/database_service/database_service_question.dart';
+import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/pages/authentication/profile_page/component/bloc_profile_page/profile_page_bloc.dart';
+import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../bloc/bloc_home_page/data_home_bloc.dart';
-import '../../bloc/bloc_profile_page/profile_page_bloc.dart';
-import '../../routes/page_name.dart';
-import '../../service/database_service/database_service.dart';
-import '../../utils/management_image.dart';
 import 'component/add_question/add_question_button.dart';
+import 'component/bloc_home_page/data_home_bloc.dart';
 import 'component/draw_page.dart';
 import 'component/list_view_question/list_view_question.dart';
 import 'component/search_button.dart';
@@ -50,7 +49,7 @@ class _HomePageState extends State<HomePage> {
 
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-    await DatabaseService.getCurrentUserInfo(userID: userID);
+    await DatabaseRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       currentUserInfo = currentUserFromDataBase;
     });
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-    await QuestionDatabaseService.getListQuestionIdLiked(currentUserId: userId);
+    await DatabaseRepositories.getListQuestionIdLiked(currentUserId: userId);
     setState(() {
       listQuestionIdLiked = listQuestionIdLikeFromSever;
     });

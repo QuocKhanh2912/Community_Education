@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
 import 'package:pikachu_education/utils/management_time.dart';
-
-import '../../../../../../../../../bloc/bloc_home_page/data_home_bloc.dart';
-import '../../../../../../../../../data/data_modal/data_question_modal.dart';
-
 
 class EditQuestionDialog extends StatefulWidget {
   const EditQuestionDialog(
@@ -162,11 +160,11 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                                     userId: widget.questionInfo.userId,
                                     userName: widget.questionInfo.userName,
                                     questionTitle:
-                                        widget.titleController.text ?? '',
+                                        widget.titleController.text,
                                     questionSubject:
-                                        widget.subjectController.text ?? '',
+                                        widget.subjectController.text,
                                     questionContent:
-                                        widget.contentController.text ?? '',
+                                        widget.contentController.text,
                                     numberLike: widget.questionInfo.numberLike,
                                     numberAnswer:
                                         widget.questionInfo.numberAnswer);

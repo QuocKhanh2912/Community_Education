@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/bloc/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
+import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
 import 'package:pikachu_education/utils/management_text_inform.dart';
+import 'bloc_login_page/login_bloc.dart';
 
 
 class VerifyOTPPage extends StatefulWidget {
@@ -28,9 +29,12 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
       create: (context) => LoginBloc(),
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state is VerifyOTPSuccessState) {
+          if (state is LoginVerificationOTPSuccessState) {
             Navigator.pushNamed(context, PageName.homePage,
                 arguments: state.userId);
+          }
+          if (state is LoginVerificationOTPUnSuccessState){
+            showDialog(context: context, builder: (context) => DialogCustom.wrongOTPCode(context));
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(
@@ -121,14 +125,14 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                                     if (keyVerify.currentState!.validate() ==
                                         true) {
                                       context.read<LoginBloc>().add(
-                                          VerifyOtpEvent(
+                                          LoginVerifyOtpEvent(
                                               otpNumber: otpController.text,
                                               context: context,
                                               verificationId:
                                                   widget.verification));
                                     }
                                   },
-                                  child: state is VerifyOTPLoadingState
+                                  child: state is LoginVerificationOTPLoadingState
                                       ? SizedBox(
                                           height: 60,
                                           width:

@@ -1,0 +1,32 @@
+part of 'login_bloc.dart';
+
+@immutable
+abstract class LoginEvent {}
+
+class LoginCheckedEvent extends LoginEvent {
+  String token;
+
+  LoginCheckedEvent({required this.token});
+}
+
+class LoginAutoEvent extends LoginEvent {}
+
+class LoginWithGoogleEvent extends LoginEvent {}
+
+class LoginWithPhoneNumEvent extends LoginEvent {
+  String phoneNum;
+  final BuildContext context;
+
+  LoginWithPhoneNumEvent({required this.phoneNum, required this.context});
+}
+
+class LoginVerifyOtpEvent extends LoginEvent {
+  String verificationId;
+  String otpNumber;
+  final BuildContext context;
+
+  LoginVerifyOtpEvent(
+      {required this.otpNumber,
+      required this.context,
+      required this.verificationId});
+}
