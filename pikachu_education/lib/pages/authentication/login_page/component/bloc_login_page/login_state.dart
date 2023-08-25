@@ -21,6 +21,7 @@ class LoginWithGoogleSuccessState extends LoginState {
 
 class LoginWithPhoneNumLoadingState extends LoginState {}
 class LoginWithPhoneNumSuccessState extends LoginState {}
+class LoginWithPhoneNumUnSuccessState extends LoginState {}
 
 class LoginVerificationOTPLoadingState extends LoginState {}
 class LoginVerificationOTPUnSuccessState extends LoginState {}

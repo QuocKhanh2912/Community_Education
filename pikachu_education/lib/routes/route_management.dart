@@ -26,9 +26,9 @@ var generateRoute = (settings) {
 
     case PageName.verifyPage:
       {
-        var verification = settings.arguments ?? '';
+
         return MaterialPageRoute(
-            builder: (context) => VerifyOTPPage(verification: verification));
+            builder: (context) => VerifyOTPPage());
       }
     case PageName.detailAnswerPage:
       {

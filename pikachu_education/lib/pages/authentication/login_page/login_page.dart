@@ -65,6 +65,9 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.pushNamed(context, PageName.homePage,
                     arguments: userId);
               }
+              if (state is LoginWithPhoneNumSuccessState){
+                Navigator.pushNamed(context, PageName.verifyPage);
+              }
             },
             child: WillPopScope(
               onWillPop: () {

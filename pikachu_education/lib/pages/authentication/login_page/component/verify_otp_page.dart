@@ -11,9 +11,8 @@ import 'bloc_login_page/login_bloc.dart';
 
 
 class VerifyOTPPage extends StatefulWidget {
-  const VerifyOTPPage({super.key, required this.verification});
+  const VerifyOTPPage({super.key});
 
-  final String verification;
 
   @override
   State<VerifyOTPPage> createState() => _VerifyOTPPageState();
@@ -126,10 +125,7 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                                         true) {
                                       context.read<LoginBloc>().add(
                                           LoginVerifyOtpEvent(
-                                              otpNumber: otpController.text,
-                                              context: context,
-                                              verificationId:
-                                                  widget.verification));
+                                              otpNumber: otpController.text));
                                     }
                                   },
                                   child: state is LoginVerificationOTPLoadingState

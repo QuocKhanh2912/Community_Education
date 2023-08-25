@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 

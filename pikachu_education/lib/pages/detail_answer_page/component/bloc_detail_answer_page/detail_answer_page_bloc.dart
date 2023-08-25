@@ -3,9 +3,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pikachu_education/data/data_modal/data_comment_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'package:pikachu_education/domain/services/database_service/databaser_service_comment.dart';
-part 'detail_answer_page_event.dart';
 
+part 'detail_answer_page_event.dart';
 part 'detail_answer_page_state.dart';
 
 class DetailAnswerPageBloc

@@ -5,9 +5,7 @@ import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/domain/services/auth_service.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service_question.dart';
-import 'package:pikachu_education/service/storage_service/storage_service.dart';
+import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 
 
 part 'data_home_event.dart';

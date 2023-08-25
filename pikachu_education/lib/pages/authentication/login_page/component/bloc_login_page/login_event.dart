@@ -21,12 +21,9 @@ class LoginWithPhoneNumEvent extends LoginEvent {
 }
 
 class LoginVerifyOtpEvent extends LoginEvent {
-  String verificationId;
   String otpNumber;
-  final BuildContext context;
 
-  LoginVerifyOtpEvent(
-      {required this.otpNumber,
-      required this.context,
-      required this.verificationId});
+  LoginVerifyOtpEvent({
+    required this.otpNumber,
+  });
 }

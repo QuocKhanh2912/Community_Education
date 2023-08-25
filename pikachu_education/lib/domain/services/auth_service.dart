@@ -1,16 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
-import 'package:pikachu_education/routes/page_name.dart';
 
 class AuthenticationService {
   static Future<void> firebaseLogout() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
   }
-
 
   static Future<bool> firebaseLoginChecked() async {
     var userId = FirebaseAuth.instance.currentUser;
@@ -21,12 +17,10 @@ class AuthenticationService {
     }
   }
 
-
   static Future<String> firebaseGetUserId() async {
     var currentUserId = FirebaseAuth.instance.currentUser?.uid.toString() ?? '';
     return currentUserId;
   }
-
 
   static Future<DataUserModal> firebaseLoginByGoogle() async {
     DataUserModal userCurrentInfo =
@@ -57,9 +51,10 @@ class AuthenticationService {
     return userCurrentInfo;
   }
 
+  static String? verification;
 
   static Future<bool> firebaseLoginByPhoneNumber(
-      {required String phoneNum, required BuildContext context}) async {
+      {required String phoneNum}) async {
     try {
       await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNum,
@@ -67,17 +62,10 @@ class AuthenticationService {
         codeAutoRetrievalTimeout: (String verificationId) {},
         verificationCompleted: (PhoneAuthCredential credential) async {},
         verificationFailed: (FirebaseAuthException e) {
-          if (e.code == 'invalid-phone-number') {
-            showDialog(
-              context: context,
-              builder: (context) =>
-                  DialogCustom.dialogOfWrongPhoneNumber(context),
-            );
-          }
+          if (e.code == 'invalid-phone-number') {}
         },
         codeSent: (String verificationId, int? resendToken) async {
-          await Navigator.pushNamed(context, PageName.verifyPage,
-              arguments: verificationId);
+          verification = verificationId;
         },
       );
       return true;
@@ -86,6 +74,13 @@ class AuthenticationService {
     }
   }
 
+  static String otpCodeSending({required String verificationId}) {
+    return verificationId;
+  }
+
+  static bool wrongNumberPhoneWaring() {
+    return true;
+  }
 
   static Future<bool> firebaseVerifyOTP(
       {required String verificationId, required String otpNumber}) async {

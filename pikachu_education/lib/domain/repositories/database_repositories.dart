@@ -2,11 +2,11 @@ import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_comment_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service_answer.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service_question.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service_update_userinfo.dart';
-import 'package:pikachu_education/domain/services/database_service/databaser_service_comment.dart';
+import 'package:pikachu_education/domain/services/database_realtime_service/database_service.dart';
+import 'package:pikachu_education/domain/services/database_realtime_service/database_service_answer.dart';
+import 'package:pikachu_education/domain/services/database_realtime_service/database_service_question.dart';
+import 'package:pikachu_education/domain/services/database_realtime_service/database_service_update_userinfo.dart';
+import 'package:pikachu_education/domain/services/database_realtime_service/databaser_service_comment.dart';
 
 class DatabaseRepositories {
   static Future<DataUserModal> getCurrentUserInfo({required String userID}) {

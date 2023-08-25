@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'package:pikachu_education/service/storage_service/storage_service.dart';
+import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 part 'profile_page_event.dart';
 part 'profile_page_state.dart';
 

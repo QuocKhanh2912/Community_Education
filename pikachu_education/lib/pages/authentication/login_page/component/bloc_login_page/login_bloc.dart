@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/domain/services/auth_service.dart';
 import 'package:pikachu_education/service/service_local_storage/service_save_data_to_local_storage.dart';
 
 part 'login_event.dart';
@@ -52,14 +53,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (loginBynUm) {
       emit(LoginWithPhoneNumSuccessState());
     }
+    else {
+      emit(LoginWithPhoneNumUnSuccessState());
+    }
   }
 
   _verifyOtpEvent(LoginVerifyOtpEvent event, Emitter<LoginState> emit) async {
     emit(LoginVerificationOTPLoadingState());
+
     var verifyOTP = await AuthRepositories.firebaseVerifyOTP(
-        verificationId: event.verificationId,
-        otpNumber: event.otpNumber,
-        context: event.context);
+        verificationId: AuthenticationService.verification??'',
+        otpNumber: event.otpNumber);
     if (verifyOTP) {
       var userId = await AuthRepositories.firebaseGetUserId();
       await SaveDataToLocal.saveDataUserId(userId: userId);

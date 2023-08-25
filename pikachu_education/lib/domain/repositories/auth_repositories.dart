@@ -28,15 +28,23 @@ class AuthRepositories {
 // login by phoneNumber
   static Future<bool> firebaseLoginByPhoneNumber(
       {required String phoneNum, required BuildContext context}) {
-    return AuthenticationService.firebaseLoginByPhoneNumber(
-        context: context, phoneNum: phoneNum);
+    return AuthenticationService.firebaseLoginByPhoneNumber(phoneNum: phoneNum);
+  }
+
+  static String otpCodeSending(
+      {required String verificationId}) {
+    return AuthenticationService.otpCodeSending(verificationId: verificationId);
+  }
+
+  static bool wrongNumberPhoneWaring(
+      {required String verificationId}) {
+    return AuthenticationService.wrongNumberPhoneWaring();
   }
 
 // verify otp code
   static Future<bool> firebaseVerifyOTP(
       {required String verificationId,
-      required String otpNumber,
-      required BuildContext context}) {
+      required String otpNumber,}) {
     return AuthenticationService.firebaseVerifyOTP(otpNumber: otpNumber, verificationId: verificationId);
   }
 }

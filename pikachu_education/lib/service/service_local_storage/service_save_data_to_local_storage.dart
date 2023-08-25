@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'package:pikachu_education/domain/services/database_service/database_service.dart';
 import 'package:pikachu_education/utils/management_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
