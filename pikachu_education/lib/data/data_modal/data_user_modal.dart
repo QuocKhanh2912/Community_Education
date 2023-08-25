@@ -28,7 +28,7 @@ class DataUserModal {
           listAnswerIdLiked: map['listAnswerIdLiked'],
           avatarUrl: map['avatarUrl']??'');
 
-  toJson() {
+   toMap() {
     return {
       'name': userName,
       'email': email,

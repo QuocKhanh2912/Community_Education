@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
+import 'package:pikachu_education/service/database_service/database_service_update_userinfo.dart';
 import 'package:pikachu_education/service/service_local_storage/service_save_data_to_local_storage.dart';
 import 'package:pikachu_education/service/service_login/firebase_login_by_google.dart';
 import 'package:pikachu_education/service/service_login/firebase_login_by_phone_number.dart';
-
 
 part 'login_event.dart';
 
@@ -12,22 +12,6 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
-    on<LoginEvent>((event, emit) {
-      // TODO: implement event handler
-    });
-    on<LoginPressEvent>((event, emit) async {
-      var loginWithEmail =
-          await LoginService.login(event.email, event.password, event.context);
-      if (loginWithEmail == true) {
-        var userId = await LoginService.getUserId();
-        await SaveDataToLocal.saveDataUserId(userId: userId);
-        await SaveDataToLocal.saveDataUserName(userId: userId);
-        emit(LoginSuccessState(userId: userId));
-      }
-      if (loginWithEmail == false) {
-        emit(LoginUnSuccessState());
-      }
-    });
     on<AutoLogin>((event, emit) async {
       var checkLogin = await LoginService.checkAlreadyLogin();
       if (checkLogin) {
@@ -43,14 +27,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginWithGoogle>((event, emit) async {
       emit(LoginWithGoogleLoadingState());
       var loginWithGoogle = await LoginService.signInWithGoogle();
-      if (loginWithGoogle == true) {
+      if (loginWithGoogle.userId.isEmpty) {
+        emit(LoginUnSuccessState());
+      } else {
+        UpdateUserInfo.updateUserInfo(loginWithGoogle,loginWithGoogle.userId);
         var userId = await LoginService.getUserId();
         await SaveDataToLocal.saveDataUserId(userId: userId);
         await SaveDataToLocal.saveDataUserName(userId: userId);
         emit(LoginWithGoogleSuccessState(userId: userId));
-      }
-      if (loginWithGoogle == false) {
-        emit(LoginUnSuccessState());
       }
     });
 
