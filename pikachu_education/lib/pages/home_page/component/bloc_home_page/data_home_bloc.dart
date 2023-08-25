@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
@@ -7,16 +8,15 @@ import 'package:pikachu_education/domain/repositories/database_repositories.dart
 import 'package:pikachu_education/domain/services/auth_service.dart';
 import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 
-
 part 'data_home_event.dart';
-
 part 'data_home_state.dart';
 
 class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
   DataHomePageBloc() : super(DataHomePageInitial(const <DataQuestionModal>[])) {
     on<FetchDataQuestionEvent>((event, emit) async {
       emit(FetchDataQuestionLoadingState(const []));
-      var listDataUsers = await DatabaseRepositories.fetchDataQuestionFromSever();
+      var listDataUsers =
+          await DatabaseRepositories.fetchDataQuestionFromSever();
       emit(FetchDataQuestionSuccessState(listDataUsers));
     });
 
@@ -27,24 +27,26 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
     });
 
     on<RefreshDataQuestion>((event, emit) async {
-      var listDataUsers = await DatabaseRepositories.fetchDataQuestionFromSever();
+      var listDataUsers =
+          await DatabaseRepositories.fetchDataQuestionFromSever();
       emit(FetchDataQuestionSuccessState(listDataUsers));
     });
 
     on<PostDataQuestionsEvent>((event, emit) async {
-      if(event.file==null){
+      if (event.file == null) {
         await DatabaseRepositories.postDataQuestionToSever(
             itemToPost: event.dataToPost, userId: event.userId, imageUrl: '');
         emit(PostDataQuestionSuccessState());
-      }
-      else{
-        var imageUrl = await StorageService.upLoadImageToStorage(file: event.file!);
+      } else {
+        var imageUrl =
+            await StorageService.upLoadImageToStorage(file: event.file!);
         await DatabaseRepositories.postDataQuestionToSever(
-            itemToPost: event.dataToPost, userId: event.userId, imageUrl: imageUrl);
+            itemToPost: event.dataToPost,
+            userId: event.userId,
+            imageUrl: imageUrl);
 
         emit(PostDataQuestionSuccessState());
       }
-
     });
 
     on<EditQuestionsEvent>((event, emit) async {
@@ -62,8 +64,12 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
     });
 
     on<LogoutEvent>((event, emit) async {
-      await AuthenticationService.firebaseLogout();
-      emit(LogoutSuccessState());
+      try {
+        await AuthenticationService.firebaseLogout()
+            .then((value) => emit(LogoutSuccessState()));
+      } catch (e) {
+        //Todo: need logout false
+      }
     });
 
     on<LikeQuestionsEvent>((event, emit) async {
@@ -81,7 +87,5 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
           currentUserId: event.currentUserId);
       emit(RemovedLikeQuestionSuccessState());
     });
-
-
   }
 }

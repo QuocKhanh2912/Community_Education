@@ -4,8 +4,8 @@ import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 
 class AuthenticationService {
   static Future<void> firebaseLogout() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().disconnect();
+    return FirebaseAuth.instance.signOut();
+    //await GoogleSignIn().disconnect();
   }
 
   static Future<bool> firebaseLoginChecked() async {
