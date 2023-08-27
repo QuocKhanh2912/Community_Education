@@ -31,6 +31,6 @@ class GetCurrentUserSuccessState extends DataHomePageState {
 
 class EditQuestionSuccessState extends DataHomePageState {}
 class DeleteQuestionSuccessState extends DataHomePageState {}
-class LogoutSuccessState extends DataHomePageState{}
+
 class LikedQuestionSuccessState extends DataHomePageState{}
 class RemovedLikeQuestionSuccessState extends DataHomePageState{}

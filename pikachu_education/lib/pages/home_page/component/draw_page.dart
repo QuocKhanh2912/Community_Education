@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/pages/authentication/login_page/component/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
-
 import 'bloc_home_page/data_home_bloc.dart';
 
 
@@ -55,7 +55,7 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
                     labelBackgroundColor: const Color(0xFFFDCA15),
                     label: 'Logout',
                     onTap: () async {
-                      context.read<DataHomePageBloc>().add(LogoutEvent());
+                      context.read<LoginBloc>().add(LogoutEvent());
                     },
                   ),
                 ],

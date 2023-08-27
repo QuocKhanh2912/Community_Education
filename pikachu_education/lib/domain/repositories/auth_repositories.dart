@@ -7,7 +7,7 @@ class AuthRepositories {
 
   //logout
   Future<void>? firebaseLogout() {
-    return AuthenticationService.firebaseLogout();
+    return AuthenticationService.firebaseGoogleLogout();
   }
 
   // check login already or not

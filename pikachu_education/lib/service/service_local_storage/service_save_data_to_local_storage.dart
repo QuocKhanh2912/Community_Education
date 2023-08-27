@@ -11,6 +11,11 @@ class SaveDataToLocal {
     await prefs.setString('password', password);
   }
 
+  static Future<void> saveMethodLogin({required String methodLogin}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(ManagementKey.methodLoginKey,methodLogin);
+  }
+
   static Future<void> saveDataUserId({required String userId}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(ManagementKey.userId,userId);

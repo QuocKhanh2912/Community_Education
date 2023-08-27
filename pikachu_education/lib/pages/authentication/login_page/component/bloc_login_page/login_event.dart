@@ -1,6 +1,5 @@
 part of 'login_bloc.dart';
 
-@immutable
 abstract class LoginEvent {}
 
 class LoginCheckedEvent extends LoginEvent {
@@ -27,3 +26,5 @@ class LoginVerifyOtpEvent extends LoginEvent {
     required this.otpNumber,
   });
 }
+
+class LogoutEvent extends LoginEvent {}

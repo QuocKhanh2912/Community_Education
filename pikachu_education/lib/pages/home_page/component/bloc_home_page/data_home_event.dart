@@ -40,7 +40,7 @@ class DeleteQuestionsEvent extends DataHomePageEvent {
       {required this.userIdOfQuestion, required this.questionId});
 }
 
-class LogoutEvent extends DataHomePageEvent {}
+
 
 class LikeQuestionsEvent extends DataHomePageEvent {
   String userIdOfQuestion;

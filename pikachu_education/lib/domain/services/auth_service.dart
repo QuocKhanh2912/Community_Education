@@ -3,9 +3,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 
 class AuthenticationService {
-  static Future<void> firebaseLogout() async {
+  static Future<void> firebasePhoneNumberLogout() async {
     return FirebaseAuth.instance.signOut();
-    //await GoogleSignIn().disconnect();
+  }
+
+  static Future<void> firebaseGoogleLogout() async {
+    FirebaseAuth.instance.signOut();
+    await GoogleSignIn().disconnect();
   }
 
   static Future<bool> firebaseLoginChecked() async {

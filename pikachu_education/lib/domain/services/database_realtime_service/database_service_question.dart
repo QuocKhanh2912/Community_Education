@@ -35,6 +35,7 @@ class QuestionDatabaseService {
         .ref("users/$userId")
         .child('questions')
         .push();
+    print('okokokokokok $userId');
     await ref.set({
       'timePost': itemToPost.timePost,
       'questionTitle': itemToPost.questionTitle,

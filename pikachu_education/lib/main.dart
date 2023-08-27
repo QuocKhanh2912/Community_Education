@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:pikachu_education/pages/authentication/login_page/component/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/pages/authentication/login_page/login_page.dart';
 import 'package:pikachu_education/routes/route_management.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,11 +23,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
-      localizationsDelegates: const [FormBuilderLocalizations.delegate],
-      onGenerateRoute: generateRoute,
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const LoginPage(),
+        localizationsDelegates: const [FormBuilderLocalizations.delegate],
+        onGenerateRoute: generateRoute,
+      ),
     );
   }
 }

@@ -48,8 +48,8 @@ class DatabaseRepositories {
       required String answerId}) {
     return AnswerDatabaseService.editAnswer(
         itemToPost: itemToPost,
-        questionId: userIdOfQuestion,
-        userIdOfQuestion: questionId,
+        questionId: questionId,
+        userIdOfQuestion: userIdOfQuestion,
         answerId: answerId);
   }
 
@@ -75,7 +75,7 @@ class DatabaseRepositories {
       required String answerId,
       required String currentUserId}) {
     return AnswerDatabaseService.likedAnswer(
-        currentUserId: questionId,
+        currentUserId: currentUserId,
         userIdOfQuestion: userIdOfQuestion,
         answerId: answerId,
         questionId: questionId);
@@ -114,7 +114,7 @@ class DatabaseRepositories {
       required String userId,
       required String imageUrl}) {
     return QuestionDatabaseService.postDataQuestionToSever(
-        itemToPost: itemToPost, imageUrl: userId, userId: imageUrl);
+        itemToPost: itemToPost, imageUrl: imageUrl, userId: userId);
   }
 
   static Future<void> editDataQuestion(
