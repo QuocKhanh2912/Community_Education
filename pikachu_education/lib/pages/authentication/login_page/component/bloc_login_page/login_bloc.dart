@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
@@ -8,7 +7,6 @@ import 'package:pikachu_education/service/service_local_storage/service_read_dat
 import 'package:pikachu_education/service/service_local_storage/service_save_data_to_local_storage.dart';
 
 part 'login_event.dart';
-
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {

@@ -32,8 +32,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    loginBloc.add(LoginAutoEvent());
-    //loadDataForLogin();
     setState(() {
       phoneNumberController.text = '+84';
     });
