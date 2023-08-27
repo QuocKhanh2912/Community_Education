@@ -1,8 +1,10 @@
 class ManagementKey{
-  static String token = 'token';
-  static String email = 'email';
-  static String password = 'password';
-  static String userName = 'userName';
-  static String userId = 'userId';
-  static String user = 'user';
+  static const String token = 'token';
+  static const String email = 'email';
+  static const String password = 'password';
+  static const String userName = 'userName';
+  static const String userId = 'userId';
+  static const String user = 'user';
+  static const String methodLoginKey='methodLoginKey';
+
 }

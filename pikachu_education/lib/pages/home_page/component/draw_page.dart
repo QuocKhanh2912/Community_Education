@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import '../../../bloc/bloc_home_page/data_home_bloc.dart';
-import '../../../routes/page_name.dart';
+import 'package:pikachu_education/pages/authentication/login_page/component/bloc_login_page/login_bloc.dart';
+import 'package:pikachu_education/routes/page_name.dart';
+import 'bloc_home_page/data_home_bloc.dart';
+
 
 class DrawPageForHomePage extends StatefulWidget {
   const DrawPageForHomePage(
@@ -49,28 +50,12 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
                           arguments: widget.currentUserInfo);
                     },
                   ),
-                  // SpeedDialChild(
-                  //   backgroundColor: Colors.grey,
-                  //   child: const Icon(Icons.settings),
-                  //   label: 'Settings',
-                  //   labelBackgroundColor: Colors.grey,
-                  //   onTap: () {
-                  //     // Handle Phone menu action
-                  //   },
-                  // ),
-                  // SpeedDialChild(
-                  //   child: const Icon(Icons.camera),
-                  //   label: 'Camera',
-                  //   onTap: () {
-                  //     // Handle Camera menu action
-                  //   },
-                  // ),
                   SpeedDialChild(
                     child: const Icon(Icons.logout),
                     labelBackgroundColor: const Color(0xFFFDCA15),
                     label: 'Logout',
                     onTap: () async {
-                      context.read<DataHomePageBloc>().add(LogoutEvent());
+                      context.read<LoginBloc>().add(LogoutEvent());
                     },
                   ),
                 ],

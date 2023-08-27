@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
-import '../../../../../../../../../bloc/bloc_home_page/data_home_bloc.dart';
 
 class DeleteQuestionDialog extends StatefulWidget {
   const DeleteQuestionDialog(
@@ -61,7 +62,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: Color(0xFFD9D9D9),
+                                  color: ManagementColor.white,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text(
                                 'Cancel',
@@ -85,7 +86,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: Color(0xFFFDCA15),
+                                  color: ManagementColor.yellow,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text(
                                 'Delete',

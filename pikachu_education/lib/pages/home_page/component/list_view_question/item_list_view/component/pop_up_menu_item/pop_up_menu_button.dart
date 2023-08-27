@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import '../../../../../../../bloc/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
 import 'component/decline_dialog.dart';
 import 'component/delete_question/delete_question_dialog.dart';
 import 'component/edit_questions/edit_question_dialog.dart';

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/service/database_service/database_service_question.dart';
+import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
+import 'package:pikachu_education/pages/authentication/login_page/component/bloc_login_page/login_bloc.dart';
+import 'package:pikachu_education/pages/authentication/profile_page/component/bloc_profile_page/profile_page_bloc.dart';
+import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../bloc/bloc_home_page/data_home_bloc.dart';
-import '../../bloc/bloc_profile_page/profile_page_bloc.dart';
-import '../../routes/page_name.dart';
-import '../../service/database_service/database_service.dart';
-import '../../utils/management_image.dart';
 import 'component/add_question/add_question_button.dart';
+import 'component/bloc_home_page/data_home_bloc.dart';
 import 'component/draw_page.dart';
 import 'component/list_view_question/list_view_question.dart';
 import 'component/search_button.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-    await DatabaseService.getCurrentUserInfo(userID: userID);
+    await DatabaseRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       currentUserInfo = currentUserFromDataBase;
     });
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-    await QuestionDatabaseService.getListQuestionIdLiked(currentUserId: userId);
+    await DatabaseRepositories.getListQuestionIdLiked(currentUserId: userId);
     setState(() {
       listQuestionIdLiked = listQuestionIdLikeFromSever;
     });
@@ -103,9 +104,6 @@ class _HomePageState extends State<HomePage> {
                 if (state is DeleteQuestionSuccessState) {
                   context.read<DataHomePageBloc>().add(RefreshDataQuestion());
                 }
-                if (state is LogoutSuccessState) {
-                  Navigator.pushNamed(context, PageName.loginPage);
-                }
                 if (state is LikedQuestionSuccessState) {
                   context.read<DataHomePageBloc>().add(RefreshDataQuestion());
                   getListQuestionIdLiked(userId: widget.userId);
@@ -114,72 +112,83 @@ class _HomePageState extends State<HomePage> {
                   context.read<DataHomePageBloc>().add(RefreshDataQuestion());
                   getListQuestionIdLiked(userId: widget.userId);
                 }
-                if(state is PostAvatarSuccess){
+                if (state is PostAvatarSuccess) {
                   context.read<DataHomePageBloc>().add(RefreshDataQuestion());
                   getListQuestionIdLiked(userId: widget.userId);
                 }
               },
-              child: Scaffold(
-                backgroundColor: Colors.white,
-                body: SafeArea(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(ManagementImage.logo),
-                          ],
-                        ),
-                        Stack(
-                          children: [
-                            DrawPageForHomePage(
-                                currentUserInfo: currentUserInfo,
-                                dataHomePageBloc: _dataHomeBloc),
-                            AddQuestionButton(
-                                dataHomeBloc: _dataHomeBloc,
-                                currentUserInfo: currentUserInfo),
-                            SearchButton(
-                              searchController: searchController,
-                            )
-                          ],
-                        ),
-                        BlocBuilder<DataHomePageBloc, DataHomePageState>(
-                          builder: (context, state) {
-                            if (state is FetchDataQuestionSuccessState) {
-                              var dataQuestionFromServer =
-                                  state.listDataUserModal;
-                              return Expanded(
-                                child: SmartRefresher(
-                                    controller: _refreshController,
-                                    onRefresh: () {
-                                      context
-                                          .read<DataHomePageBloc>()
-                                          .add(RefreshDataQuestion());
-                                    },
-                                    child: ListViewQuestion(
-                                      listQuestionIdLiked: listQuestionIdLiked,
-                                      titleController: titleController,
-                                      editQuestionFormFieldKey:
-                                      editQuestionFormFieldKey,
-                                      subjectController: subjectController,
-                                      contentController: contentController,
-                                      dataHomePageBloc: _dataHomeBloc,
-                                      dataQuestionFromServer:
-                                      dataQuestionFromServer,
-                                      currentUserInfo: currentUserInfo,
-                                    )),
-                              );
-                            } else {
-                              return const Expanded(
-                                child: Center(
-                                    child: CircularProgressIndicator()),
-                              );
-                            }
-                          },
-                        )
-                      ]),
+              child:
+              BlocListener<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  if (state is LogoutSuccessState) {
+                    Navigator.pushNamed(context, PageName.loginPage);
+                  }
+                  if (state is LogoutUnSuccessState) {
+                    showDialog(context: context, builder: (context) => DialogCustom.falseLogout(context),);
+                  }
+                },
+                child: Scaffold(
+                  backgroundColor: Colors.white,
+                  body: SafeArea(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(ManagementImage.logo),
+                            ],
+                          ),
+                          Stack(
+                            children: [
+                              DrawPageForHomePage(
+                                  currentUserInfo: currentUserInfo,
+                                  dataHomePageBloc: _dataHomeBloc),
+                              AddQuestionButton(
+                                  dataHomeBloc: _dataHomeBloc,
+                                  currentUserInfo: currentUserInfo),
+                              SearchButton(
+                                searchController: searchController,
+                              )
+                            ],
+                          ),
+                          BlocBuilder<DataHomePageBloc, DataHomePageState>(
+                            builder: (context, state) {
+                              if (state is FetchDataQuestionSuccessState) {
+                                var dataQuestionFromServer =
+                                    state.listDataUserModal;
+                                return Expanded(
+                                  child: SmartRefresher(
+                                      controller: _refreshController,
+                                      onRefresh: () {
+                                        context
+                                            .read<DataHomePageBloc>()
+                                            .add(RefreshDataQuestion());
+                                      },
+                                      child: ListViewQuestion(
+                                        listQuestionIdLiked: listQuestionIdLiked,
+                                        titleController: titleController,
+                                        editQuestionFormFieldKey:
+                                        editQuestionFormFieldKey,
+                                        subjectController: subjectController,
+                                        contentController: contentController,
+                                        dataHomePageBloc: _dataHomeBloc,
+                                        dataQuestionFromServer:
+                                        dataQuestionFromServer,
+                                        currentUserInfo: currentUserInfo,
+                                      )),
+                                );
+                              } else {
+                                return const Expanded(
+                                  child: Center(
+                                      child: CircularProgressIndicator()),
+                                );
+                              }
+                            },
+                          )
+                        ]),
+                  ),
                 ),
               )),
         ));

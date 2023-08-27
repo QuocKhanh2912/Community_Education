@@ -171,14 +171,13 @@ class DialogCustom {
     );
   }
 
-
-  static dialogOfEmailUseAlready(BuildContext context) {
+  static autoLoginFalse(BuildContext context) {
     return AlertDialog(
       backgroundColor: Color(0xFFFFFFFF),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      title: const Text('The Email is used already',
+      title: const Text('Auto Login False, please enter Email and Password to login again',
           style: TextStyle(
-              //fontWeight: FontWeight.bold,
+            //fontWeight: FontWeight.bold,
               fontSize: 25,
               color: Colors.black)),
       actions: [
@@ -187,49 +186,29 @@ class DialogCustom {
               Navigator.pop(context);
             },
             child: Container(
-
+              width: 100,
+              height: 50,
               decoration: BoxDecoration(
                   color: Color(0xFFFDCA15),
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('OK',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.white)),
-                ),
-              ),
-            )),
-        TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, PageName.getOtpPage);
-            },
-            child: Container(
-
-              decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
-                  borderRadius: BorderRadius.circular(10)),
-              child: const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Forget Password',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.white)),
-                ),
+                child: Text('OK',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.white)),
               ),
             ))
       ],
     );
   }
-  static autoLoginFalse(BuildContext context) {
+
+  static falseLogout(BuildContext context) {
     return AlertDialog(
       backgroundColor: Color(0xFFFFFFFF),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      title: const Text('Auto Login False, please enter Email and Password to login again',
+      title: const Text('SomeThing Wrong',
+
           style: TextStyle(
             //fontWeight: FontWeight.bold,
               fontSize: 25,

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-
-import '../../../bloc/bloc_profile_page/profile_page_bloc.dart';
-import '../../../service/database_service/database_service.dart';
-import '../../../utils/management_image.dart';
-import 'get_image_to_set_avatar.dart';
+import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/utils/management_image.dart';
+import 'component/bloc_profile_page/profile_page_bloc.dart';
+import 'component/get_image_to_set_avatar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key, required this.currentUserInfo});
@@ -23,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
       userId: 'userId', userName: 'userName', email: 'email', avatarUrl: '');
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-    await DatabaseService.getCurrentUserInfo(userID: userID);
+    await DatabaseRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       currentUserInfo = currentUserFromDataBase;
     });

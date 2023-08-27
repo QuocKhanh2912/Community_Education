@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
-import 'package:pikachu_education/service/database_service/database_service_answer.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import '../../bloc/bloc_list_answer_page/list_answer_page_bloc.dart';
-import '../../data/data_modal/data_question_modal.dart';
-import '../../service/database_service/database_service.dart';
 import 'component/detail_question.dart';
 import 'component/list_view_answer_page/listview_answer_page.dart';
 import 'component/post_answer_button.dart';
@@ -33,7 +32,7 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-    await AnswerDatabaseService.getListAnswerIdLiked(currentUserId: userId);
+    await DatabaseRepositories.getListAnswerIdLiked(currentUserId: userId);
     setState(() {
       listAnswerIdLiked = listQuestionIdLikeFromSever;
     });
@@ -110,7 +109,7 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(

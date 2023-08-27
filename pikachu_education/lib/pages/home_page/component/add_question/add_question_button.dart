@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import '../../../../bloc/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
 import 'create_question_dialog.dart';
 
 class AddQuestionButton extends StatefulWidget {
