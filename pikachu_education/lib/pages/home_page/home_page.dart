@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pikachu_education/components/snack_bar_custom.dart';
 import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
 import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
@@ -130,64 +131,68 @@ class _HomePageState extends State<HomePage> {
                 child: Scaffold(
                   backgroundColor: Colors.white,
                   body: SafeArea(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(ManagementImage.logo),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              DrawPageForHomePage(
-                                  currentUserInfo: currentUserInfo,
-                                  dataHomePageBloc: _dataHomeBloc),
-                              AddQuestionButton(
-                                  dataHomeBloc: _dataHomeBloc,
-                                  currentUserInfo: currentUserInfo),
-                              SearchButton(
-                                searchController: searchController,
-                              )
-                            ],
-                          ),
-                          BlocBuilder<DataHomePageBloc, DataHomePageState>(
-                            builder: (context, state) {
-                              if (state is FetchDataQuestionSuccessState) {
-                                var dataQuestionFromServer =
-                                    state.listDataUserModal;
-                                return Expanded(
-                                  child: SmartRefresher(
-                                      controller: _refreshController,
-                                      onRefresh: () {
-                                        context
-                                            .read<DataHomePageBloc>()
-                                            .add(RefreshDataQuestion());
-                                      },
-                                      child: ListViewQuestion(
-                                        listQuestionIdLiked: listQuestionIdLiked,
-                                        titleController: titleController,
-                                        editQuestionFormFieldKey:
-                                        editQuestionFormFieldKey,
-                                        subjectController: subjectController,
-                                        contentController: contentController,
-                                        dataHomePageBloc: _dataHomeBloc,
-                                        dataQuestionFromServer:
-                                        dataQuestionFromServer,
-                                        currentUserInfo: currentUserInfo,
-                                      )),
-                                );
-                              } else {
-                                return const Expanded(
-                                  child: Center(
-                                      child: CircularProgressIndicator()),
-                                );
-                              }
-                            },
-                          )
-                        ]),
+                    child: WillPopScope(onWillPop: () {
+                      return SnackBarCustom.snackBarOfBack(context);
+                    },
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(ManagementImage.logo),
+                              ],
+                            ),
+                            Stack(
+                              children: [
+                                DrawPageForHomePage(
+                                    currentUserInfo: currentUserInfo,
+                                    dataHomePageBloc: _dataHomeBloc),
+                                AddQuestionButton(
+                                    dataHomeBloc: _dataHomeBloc,
+                                    currentUserInfo: currentUserInfo),
+                                SearchButton(
+                                  searchController: searchController,
+                                )
+                              ],
+                            ),
+                            BlocBuilder<DataHomePageBloc, DataHomePageState>(
+                              builder: (context, state) {
+                                if (state is FetchDataQuestionSuccessState) {
+                                  var dataQuestionFromServer =
+                                      state.listDataUserModal;
+                                  return Expanded(
+                                    child: SmartRefresher(
+                                        controller: _refreshController,
+                                        onRefresh: () {
+                                          context
+                                              .read<DataHomePageBloc>()
+                                              .add(RefreshDataQuestion());
+                                        },
+                                        child: ListViewQuestion(
+                                          listQuestionIdLiked: listQuestionIdLiked,
+                                          titleController: titleController,
+                                          editQuestionFormFieldKey:
+                                          editQuestionFormFieldKey,
+                                          subjectController: subjectController,
+                                          contentController: contentController,
+                                          dataHomePageBloc: _dataHomeBloc,
+                                          dataQuestionFromServer:
+                                          dataQuestionFromServer,
+                                          currentUserInfo: currentUserInfo,
+                                        )),
+                                  );
+                                } else {
+                                  return const Expanded(
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                }
+                              },
+                            )
+                          ]),
+                    ),
                   ),
                 ),
               )),

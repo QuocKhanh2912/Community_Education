@@ -4,6 +4,7 @@ import 'package:pikachu_education/pages/authentication/profile_page/profile_page
 import 'package:pikachu_education/pages/answer_page/list_answer_page.dart';
 import 'package:pikachu_education/pages/detail_answer_page/detail_answer_page.dart';
 import 'package:pikachu_education/pages/home_page/home_page.dart';
+import 'package:pikachu_education/pages/on_boarding_page/on_boarding_page.dart';
 import 'package:pikachu_education/pages/splash_page/splash_page.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/pages/authentication/login_page/login_page.dart';
@@ -13,6 +14,10 @@ var generateRoute = (settings) {
     case PageName.splashPage:
       {
         return MaterialPageRoute(builder: (context) => const SplashPage());
+      }
+    case PageName.onBoardingPage:
+      {
+        return MaterialPageRoute(builder: (context) => const OnBoardingPage1());
       }
 
     case PageName.loginPage:

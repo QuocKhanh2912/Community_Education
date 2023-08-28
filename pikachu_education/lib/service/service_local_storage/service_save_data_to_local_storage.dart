@@ -26,6 +26,10 @@ class SaveDataToLocal {
     var currentUserName = await DatabaseRepositories.getCurrentUserName(currentUserID: userId);
     await prefs.setString(ManagementKey.userName,currentUserName);
   }
+  static Future<void> saveOnBoardingAlready() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(ManagementKey.onBoardingAlready,true);
+  }
 
 
 }
