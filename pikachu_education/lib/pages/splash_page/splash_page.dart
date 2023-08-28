@@ -27,13 +27,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value:_splashBloc ,
+      value: _splashBloc,
       child: BlocListener<SplashBloc, SplashState>(
         listener: (context, state) {
-          if(state is OnBoardingAlreadyState){
+          if (state is OnBoardingAlreadyState) {
             loginBloc.add(LoginAutoEvent());
           }
-          if (state is OnBoardingNotYetState){
+          if (state is OnBoardingNotYetState) {
             Navigator.pushNamed(context, PageName.onBoardingPage);
           }
         },
