@@ -1,5 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 
 class UpdateUserInfo {
   static Future<void> updateUserInfo(

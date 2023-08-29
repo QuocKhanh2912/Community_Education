@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'component/detail_question.dart';
 import 'component/list_view_answer_page/listview_answer_page.dart';
 import 'component/post_answer_button.dart';
@@ -28,11 +28,11 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
   final TextEditingController contentController = TextEditingController();
   final TextEditingController titleController = TextEditingController();
   final GlobalKey<FormState> editAnswerFormFieldKey = GlobalKey<FormState>();
-  List<String> listAnswerIdLiked=[];
+  List<String> listAnswerIdLiked = [];
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-    await DatabaseRepositories.getListAnswerIdLiked(currentUserId: userId);
+        await DatabaseRepositories.getListAnswerIdLiked(currentUserId: userId);
     setState(() {
       listAnswerIdLiked = listQuestionIdLikeFromSever;
     });
@@ -61,31 +61,14 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
               if (state is FetchListAnswerPageSuccessState) {
                 _refreshController.refreshCompleted();
               }
-              if (state is DeleteAnswerSuccessState) {
+             else if (state is DeleteAnswerSuccessState ||
+                  state is EditAnswerSuccessState ||
+                  state is LikeAnswerSuccessState ||
+                  state is RemoveLikeAnswerSuccessState) {
                 context.read<ListAnswerPageBloc>().add(
                     RefreshDataAnswerListEvent(
                         userIdOfQuestion: widget.questionInfo.userId,
                         questionId: widget.questionInfo.questionId));
-              }
-              if (state is EditAnswerSuccessState) {
-                context.read<ListAnswerPageBloc>().add(
-                    RefreshDataAnswerListEvent(
-                        userIdOfQuestion: widget.questionInfo.userId,
-                        questionId: widget.questionInfo.questionId));
-              }
-              if (state is LikeAnswerSuccessState) {
-                context.read<ListAnswerPageBloc>().add(
-                    RefreshDataAnswerListEvent(
-                        userIdOfQuestion: widget.questionInfo.userId,
-                        questionId: widget.questionInfo.questionId));
-                getListQuestionIdLiked(userId: widget.currentUserInfo.userId);
-              }
-              if (state is RemoveLikeAnswerSuccessState) {
-                context.read<ListAnswerPageBloc>().add(
-                    RefreshDataAnswerListEvent(
-                        userIdOfQuestion: widget.questionInfo.userId,
-                        questionId: widget.questionInfo.questionId));
-                getListQuestionIdLiked(userId: widget.currentUserInfo.userId);
               }
             },
             child: BlocBuilder<ListAnswerPageBloc, ListAnswerPageState>(
@@ -113,12 +96,11 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                                 child: InkWell(
                                   onTap: () {
                                     Navigator.pushNamed(
-                                        context, PageName.profilePage,arguments: widget.currentUserInfo);
+                                        context, PageName.profilePage,
+                                        arguments: widget.currentUserInfo);
                                   },
                                   child: Text(
-                                      (widget.currentUserInfo.userName.length ??
-                                                  0) ==
-                                              0
+                                      widget.currentUserInfo.userName.isEmpty
                                           ? 'Login'
                                           : widget.currentUserInfo.userName,
                                       style: const TextStyle(
@@ -154,7 +136,8 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                                     questionId:
                                         widget.questionInfo.questionId));
                           },
-                          child: ListViewAnswerPage(listAnswerIdLiked: listAnswerIdLiked,
+                          child: ListViewAnswerPage(
+                            listAnswerIdLiked: listAnswerIdLiked,
                             editAnswerFormFieldKey: editAnswerFormFieldKey,
                             contentController: contentController,
                             titleController: titleController,

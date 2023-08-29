@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import 'component/bloc_profile_page/profile_page_bloc.dart';
+import 'bloc/profile_page/profile_page_bloc.dart';
 import 'component/get_image_to_set_avatar.dart';
 
 class ProfilePage extends StatefulWidget {

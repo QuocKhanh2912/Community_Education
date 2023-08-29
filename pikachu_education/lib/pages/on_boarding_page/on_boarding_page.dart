@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/pages/authentication/login_page/component/bloc_login_page/login_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
-import 'package:pikachu_education/service/service_local_storage/service_save_data_to_local_storage.dart';
+import 'package:pikachu_education/service/initialization/initialization_service.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-
-import 'component/dot_witget.dart';
+import 'component/dot_widget.dart';
 
 class OnBoardingPage1 extends StatefulWidget {
   const OnBoardingPage1({super.key});
@@ -75,7 +72,7 @@ class _OnBoardingPage1State extends State<OnBoardingPage1> {
                       children: [
                         InkWell(
                             onTap: () {
-                              SaveDataToLocal.saveOnBoardingAlready();
+                              InitializationService.saveOnBoardingAlready();
                               Navigator.pushNamed(context, PageName.loginPage);
                             },
                             child: const Text('Skip')),
@@ -95,7 +92,7 @@ class _OnBoardingPage1State extends State<OnBoardingPage1> {
                                     curve: Curves.easeInOut);
                               }
                               if (pageViewIndex == 2) {
-                                SaveDataToLocal.saveOnBoardingAlready();
+                                InitializationService.saveOnBoardingAlready();
                                 Navigator.pushNamed(
                                     context, PageName.loginPage);
                               }

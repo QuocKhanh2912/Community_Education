@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:pikachu_education/service/service_local_storage/service_read_data_from_local_storage.dart';
+import 'package:pikachu_education/service/initialization/initialization_service.dart';
 
 part 'splash_event.dart';
 
@@ -11,7 +11,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     on<OnBoardingAlreadyCheckingEvent>(_onBoardingAlreadyCheckingEvent);
   }
   _onBoardingAlreadyCheckingEvent(OnBoardingAlreadyCheckingEvent event, Emitter<SplashState>  emit) async {
-    var obBoardingAlready = await ReadDataFromLocal.onBoardingAlready();
+    var obBoardingAlready = await InitializationService.onBoardingAlready();
     if (obBoardingAlready) {
       emit(OnBoardingAlreadyState());
     } else {

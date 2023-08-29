@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/post_answer/create_answer_page.dart';
 import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
 
@@ -38,7 +38,7 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                     MaterialStateProperty.all(const Color(0xFFFDCA15)),
               ),
               onPressed: () {
-                if ((widget.currentUserInfo.userName.length ?? 0) == 0) {
+                if (widget.currentUserInfo.userName.isEmpty) {
                   showDialog(
                     context: context,
                     builder: (context) {

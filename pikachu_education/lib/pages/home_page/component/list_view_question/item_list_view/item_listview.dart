@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
+import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import 'component/pop_up_menu_item/pop_up_menu_button.dart';
 
 class ItemListviewQuestion extends StatefulWidget {
   const ItemListviewQuestion(
@@ -71,13 +71,18 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                                     .userAvatarUrl ==
                                 ''
                             ? Image.asset(ManagementImage.defaultAvatar2)
-                            : ClipRRect(borderRadius: BorderRadius.circular(5),
-                              child: SizedBox(width: 40,height: 40,
-                                child: Image.network(widget
-                                    .dataQuestionFromServer[widget.index]
-                                    .userAvatarUrl!,fit: BoxFit.fill),
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SizedBox(
+                                  width: 40,
+                                  height: 40,
+                                  child: Image.network(
+                                      widget
+                                          .dataQuestionFromServer[widget.index]
+                                          .userAvatarUrl!,
+                                      fit: BoxFit.fill),
+                                ),
                               ),
-                            ),
                         Padding(
                           padding: const EdgeInsets.only(right: 8, left: 8),
                           child: Column(

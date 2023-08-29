@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-import 'component/bloc_detail_answer_page/detail_answer_page_bloc.dart';
-import 'component/tab_view/component/answer_detail.dart';
-import 'component/tab_view/component/tab_bar_on_top.dart';
-import 'component/tab_view/component/tab_bar_show_number_like_comment.dart';
-import 'component/tab_view/component/tab_view_detail_answer.dart';
-import 'component/tab_view/component/tab_view_detail_answer_no_comment.dart';
 
-
-
+import 'bloc/detail_answer_page/detail_answer_page_bloc.dart';
+import 'component/tab_view/answer_detail.dart';
+import 'component/tab_view/tab_bar_on_top.dart';
+import 'component/tab_view/tab_bar_show_number_like_comment.dart';
+import 'component/tab_view/tab_view_detail_answer.dart';
+import 'component/tab_view/tab_view_detail_answer_no_comment.dart';
 
 class DetailAnswerPage extends StatefulWidget {
   const DetailAnswerPage(
@@ -73,29 +71,19 @@ class _DetailAnswerPageState extends State<DetailAnswerPage>
 
     return BlocProvider.value(
       value: detailAnswerPageBloc,
-      child: BlocListener<DetailAnswerPageBloc, DetailAnswerPageState>(
-        listener: (context, state) {
-          if (state is PostCommentSuccessState) {
-            context.read<DetailAnswerPageBloc>().add(RefreshDataCommentEvent(
-                answerId: widget.answerInfo.answerId,
-                questionId: widget.questionInfo.questionId,
-                userIdOfQuestion: widget.questionInfo.userId));
-          }
-          if (state is EditCommentSuccessState) {
-            context.read<DetailAnswerPageBloc>().add(RefreshDataCommentEvent(
-                answerId: widget.answerInfo.answerId,
-                questionId: widget.questionInfo.questionId,
-                userIdOfQuestion: widget.questionInfo.userId));
-          }
-          if (state is DeleteCommentSuccessState) {
-            context.read<DetailAnswerPageBloc>().add(RefreshDataCommentEvent(
-                answerId: widget.answerInfo.answerId,
-                questionId: widget.questionInfo.questionId,
-                userIdOfQuestion: widget.questionInfo.userId));
-          }
-        },
-        child: Scaffold(
-          body: SafeArea(
+      child: Scaffold(
+        body: BlocListener<DetailAnswerPageBloc, DetailAnswerPageState>(
+          listener: (context, state) {
+            if (state is PostCommentSuccessState ||
+                state is EditCommentSuccessState ||
+                state is DeleteCommentSuccessState) {
+              context.read<DetailAnswerPageBloc>().add(RefreshDataCommentEvent(
+                  answerId: widget.answerInfo.answerId,
+                  questionId: widget.questionInfo.questionId,
+                  userIdOfQuestion: widget.questionInfo.userId));
+            }
+          },
+          child: SafeArea(
             child: SingleChildScrollView(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +119,8 @@ class _DetailAnswerPageState extends State<DetailAnswerPage>
                             } else {
                               return SizedBox(
                                 height: MediaQuery.sizeOf(context).height / 1.5,
-                                child: TabViewDetailAnswer(listUserIdLiked: listUserIdLiked,
+                                child: TabViewDetailAnswer(
+                                  listUserIdLiked: listUserIdLiked,
                                   tabController: tabController,
                                   commentController: commentController,
                                   currentUserInfo: widget.currentUserInfo,

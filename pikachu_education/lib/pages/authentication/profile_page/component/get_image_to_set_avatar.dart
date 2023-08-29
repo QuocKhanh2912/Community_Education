@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/authentication/profile_page/component/bloc_profile_page/profile_page_bloc.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/authentication/profile_page/bloc/image_to_set_avatar/get_image_to_set_avatar_bloc.dart';
+import 'package:pikachu_education/pages/authentication/profile_page/bloc/profile_page/profile_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-
-import 'bloc_get_image_to_set_avatar/get_image_to_set_avatar_bloc.dart';
 
 class GetImageToSetAvatar extends StatefulWidget {
   const GetImageToSetAvatar({super.key, required this.currentUserInfo});
@@ -30,7 +30,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
           return BlocProvider(
             create: (context) => GetImageToSetAvatarBloc(),
             child:
-            BlocListener<GetImageToSetAvatarBloc, GetImageToSetAvatarState>(
+                BlocListener<GetImageToSetAvatarBloc, GetImageToSetAvatarState>(
               listener: (context, state) {
                 if (state is GetImageToCreateAnswerSuccess) {
                   setState(() {
@@ -40,7 +40,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
               },
               child: BlocListener<ProfilePageBloc, ProfilePageState>(
                 listener: (context, state) {
-                  if(state is PostAvatarSuccess){
+                  if (state is PostAvatarSuccess) {
                     Navigator.pop(context);
                   }
                 },
@@ -48,7 +48,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                     GetImageToSetAvatarState>(
                   builder: (context, state) {
                     return AlertDialog(
-                      backgroundColor: Color(0xFFFDFFAE),
+                      backgroundColor: ManagementColor.lightYellow,
                       insetPadding: EdgeInsets.zero,
                       contentPadding: EdgeInsets.zero,
                       content: StatefulBuilder(
@@ -91,22 +91,22 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         InkWell(
                                           onTap: () {
                                             context
                                                 .read<GetImageToSetAvatarBloc>()
                                                 .add(
-                                                GetImageToSetAvatarByGalleyEvent(
-                                                    source:
-                                                    ImageSource.gallery));
+                                                    GetImageToSetAvatarByGalleyEvent(
+                                                        source: ImageSource
+                                                            .gallery));
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(5.0),
                                             child: Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Container(
                                                     height: 50,
@@ -114,24 +114,26 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                         color: const Color(
                                                             0xFFFDCA15),
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
+                                                            BorderRadius
+                                                                .circular(10)),
                                                     child: const Row(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment.start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                          EdgeInsets.all(8.0),
+                                                              EdgeInsets.all(
+                                                                  8.0),
                                                           child: Text(
                                                             'Your Storage',
                                                             style: TextStyle(
                                                                 color:
-                                                                Colors.grey,
+                                                                    Colors.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w400),
+                                                                    FontWeight
+                                                                        .w400),
                                                           ),
                                                         ),
                                                         Icon(
@@ -149,42 +151,42 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                             context
                                                 .read<GetImageToSetAvatarBloc>()
                                                 .add(
-                                                GetImageToSetAvatarByGalleyEvent(
-                                                    source:
-                                                    ImageSource.camera));
+                                                    GetImageToSetAvatarByGalleyEvent(
+                                                        source: ImageSource
+                                                            .camera));
                                           },
                                           child: Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                                MainAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.all(8.0),
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
                                                     height: 50,
                                                     decoration: BoxDecoration(
-                                                        color: Color(
-                                                            0xFFFDCA15),
+                                                        color: ManagementColor
+                                                            .yellow,
                                                         borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
+                                                            BorderRadius
+                                                                .circular(10)),
                                                     child: const Padding(
                                                       padding:
-                                                      EdgeInsets.all(5.0),
+                                                          EdgeInsets.all(5.0),
                                                       child: Row(
                                                         mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .start,
+                                                            MainAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Text(
                                                             'Your Camera',
                                                             style: TextStyle(
                                                                 color:
-                                                                Colors.grey,
+                                                                    Colors.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w400),
+                                                                    FontWeight
+                                                                        .w400),
                                                           ),
                                                           Icon(
                                                             Icons
@@ -204,7 +206,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextButton(
                                         onPressed: () {
@@ -214,9 +216,9 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                           alignment: Alignment.center,
                                           height: 50,
                                           decoration: BoxDecoration(
-                                              color: Color(0xFFD9D9D9),
+                                              color: ManagementColor.white,
                                               borderRadius:
-                                              BorderRadius.circular(10)),
+                                                  BorderRadius.circular(10)),
                                           child: const Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Text(
@@ -231,7 +233,11 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                     TextButton(
                                         onPressed: () async {
                                           context.read<ProfilePageBloc>().add(
-                                              PostAvatarEvent(currentImageName: widget.currentUserInfo.avatarUrl??'',
+                                              PostAvatarEvent(
+                                                  currentImageName: widget
+                                                          .currentUserInfo
+                                                          .avatarUrl ??
+                                                      '',
                                                   userId: widget
                                                       .currentUserInfo.userId,
                                                   file: _image!));
@@ -240,9 +246,9 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                           alignment: Alignment.center,
                                           height: 50,
                                           decoration: BoxDecoration(
-                                              color: Color(0xFFFDCA15),
+                                              color: ManagementColor.yellow,
                                               borderRadius:
-                                              BorderRadius.circular(10)),
+                                                  BorderRadius.circular(10)),
                                           child: const Padding(
                                             padding: EdgeInsets.all(8.0),
                                             child: Text(
@@ -270,6 +276,5 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
         },
       ),
     );
-    ;
   }
 }

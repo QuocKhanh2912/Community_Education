@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pikachu_education/pages/home_page/component/bloc_get_image_to_create_question/get_image_bloc.dart';
+import 'package:pikachu_education/pages/home_page/bloc/get_image_to_create_question/get_image_bloc.dart';
 
 
 class GetImageDialog extends StatefulWidget {

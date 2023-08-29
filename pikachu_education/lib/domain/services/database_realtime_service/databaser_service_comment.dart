@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pikachu_education/data/data_modal/data_comment_modal.dart';
+import 'package:pikachu_education/data/modal/comment_modal.dart';
+
 
 class CommentDatabaseService{
 

@@ -1,7 +1,9 @@
-import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_comment_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/data/modal/comment_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/comment_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/database_service.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/database_service_answer.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/database_service_question.dart';

@@ -34,7 +34,7 @@ class PositiveButtonCustom extends StatelessWidget {
                   child: Center(
                     child: Text(
                       nameButton,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ManagementColor.white,
                           fontSize: 25),

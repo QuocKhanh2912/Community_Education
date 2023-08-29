@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/services/auth_service.dart';
 
 class AuthRepositories {
