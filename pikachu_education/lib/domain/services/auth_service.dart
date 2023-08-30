@@ -108,7 +108,6 @@ class AuthenticationService {
       };
       userCurrentInfo =
           DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
-
       return userCurrentInfo;
     } catch (e) {
       return userCurrentInfo;
