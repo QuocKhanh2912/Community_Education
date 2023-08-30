@@ -22,6 +22,11 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
   final keyVerify = GlobalKey<FormState>();
   final otpController = TextEditingController();
 
+@override
+  void dispose() {
+  otpController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(

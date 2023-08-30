@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
@@ -19,7 +20,7 @@ class _ItemLikeListViewState extends State<ItemLikeListView> {
 
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-        await DatabaseRepositories.getCurrentUserInfo(userID: userID);
+        await AuthRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       userLiked = currentUserFromDataBase;
     });

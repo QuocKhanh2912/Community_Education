@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
 import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
 
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-        await DatabaseRepositories.getCurrentUserInfo(userID: userID);
+        await AuthRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       currentUserInfo = currentUserFromDataBase;
     });

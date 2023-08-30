@@ -6,6 +6,7 @@ import 'package:pikachu_education/domain/services/auth_service.dart';
 import 'package:pikachu_education/service/authentication/authentication_service.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -35,13 +36,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (loginWithGoogle.userId.isEmpty) {
       emit(LoginUnSuccessState());
     } else {
-      DatabaseRepositories.updateUserInfo(
+      await AuthenticationService.updateUserInfoFromGoogle(
           userInfo: loginWithGoogle, key: loginWithGoogle.userId);
-      var userId = await AuthRepositories.firebaseGetUserId();
-      await AuthenticationLocalService.saveDataUserId(userId: userId);
-      await AuthenticationLocalService.saveDataUserName(userId: userId);
+      await AuthenticationLocalService.saveDataUserId(
+          userId: loginWithGoogle.userId);
+      await AuthenticationLocalService.saveDataUserName(
+          userId: loginWithGoogle.userId);
       await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byGoogle');
-      emit(LoginWithGoogleSuccessState(userId: userId));
+      emit(LoginWithGoogleSuccessState(userId: loginWithGoogle.userId));
     }
   }
 
@@ -52,8 +54,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         phoneNum: event.phoneNum, context: event.context);
     if (loginBynUm) {
       emit(LoginWithPhoneNumSuccessState());
-    }
-    else {
+    } else {
       emit(LoginWithPhoneNumUnSuccessState());
     }
   }
@@ -61,15 +62,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   _verifyOtpEvent(LoginVerifyOtpEvent event, Emitter<LoginState> emit) async {
     emit(LoginVerificationOTPLoadingState());
 
-    var verifyOTP = await AuthRepositories.firebaseVerifyOTP(
-        verificationId: AuthenticationService.verification??'',
+    var currentUserInfo = await AuthRepositories.firebaseVerifyOTP(
+        verificationId: AuthenticationService.verification ?? '',
         otpNumber: event.otpNumber);
-    if (verifyOTP) {
-      var userId = await AuthRepositories.firebaseGetUserId();
-      await AuthenticationLocalService.saveDataUserId(userId: userId);
-      await AuthenticationLocalService.saveDataUserName(userId: userId);
-      await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byPhoneNumber');
-      emit(LoginVerificationOTPSuccessState(userId: userId));
+    print('ookokoko: ${AuthenticationService.verification}');
+    print('ookoasdasdkoko: ${event.otpNumber}');
+    if (currentUserInfo.userId.isNotEmpty) {
+      await AuthenticationService.updateUserInfoFromPhoneNumber(
+          userInfo: currentUserInfo, key: currentUserInfo.userId);
+      await AuthenticationLocalService.saveDataUserId(
+          userId: currentUserInfo.userId);
+      await AuthenticationLocalService.saveDataUserName(
+          userId: currentUserInfo.userId);
+      await AuthenticationLocalService.saveMethodLogin(
+          methodLogin: 'byPhoneNumber');
+      emit(LoginVerificationOTPSuccessState(userId: currentUserInfo.userId));
     } else {
       emit(LoginVerificationOTPUnSuccessState());
     }
@@ -79,19 +86,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var methodLogin = await AuthenticationLocalService.methodLoginCurrent();
 
     try {
-      if(methodLogin =='byPhoneNumber'){
+      if (methodLogin == 'byPhoneNumber') {
         await AuthenticationService.firebasePhoneNumberLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
-      if (methodLogin=='byGoogle'){
+      if (methodLogin == 'byGoogle') {
         await AuthenticationService.firebaseGoogleLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
+    } catch (e) {
 
-  } catch (e) {
-    emit(LogoutUnSuccessState());
-  }
+    }
   }
 }
-
-

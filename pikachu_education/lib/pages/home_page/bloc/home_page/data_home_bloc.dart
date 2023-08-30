@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 part 'data_home_event.dart';
@@ -19,7 +20,7 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
 
     on<GetCurrentUserInfoEvent>((event, emit) async {
       var currentUserInfo =
-          await DatabaseRepositories.getCurrentUserInfo(userID: event.userId);
+          await AuthRepositories.getCurrentUserInfo(userID: event.userId);
       emit(GetCurrentUserSuccessState(currentUserInfo: currentUserInfo));
     });
 

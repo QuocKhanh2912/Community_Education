@@ -24,13 +24,11 @@ class PositiveButtonCustom extends StatelessWidget {
           ),
           onPressed: () => onPressed.call(),
           child: stateLoading
-              ? SizedBox(
+              ? const SizedBox(
                   height: 60,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Center(child: CircularProgressIndicator()))
+                  child: Center(child: CircularProgressIndicator()))
               : SizedBox(
                   height: 60,
-                  width: MediaQuery.of(context).size.width,
                   child: Center(
                     child: Text(
                       nameButton,

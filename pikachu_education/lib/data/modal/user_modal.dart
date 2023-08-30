@@ -5,6 +5,7 @@ class DataUserModal {
   final String userName;
   final String email;
   final String? avatarUrl;
+  final String? phoneNumber;
   Map<dynamic, dynamic>? listQuestion;
   Map<dynamic, dynamic>? listQuestionIdLiked;
   Map<dynamic, dynamic>? listAnswerIdLiked;
@@ -15,7 +16,7 @@ class DataUserModal {
       required this.email,
       this.listQuestion,
       this.listQuestionIdLiked,
-      this.listAnswerIdLiked,this.avatarUrl});
+      this.listAnswerIdLiked,this.avatarUrl,this.phoneNumber});
 
   static DataUserModal fromMap(
           {required String key, required Map<dynamic, dynamic> map}) =>
@@ -23,6 +24,7 @@ class DataUserModal {
           userId: key,
           userName: map['name'],
           email: map['email'],
+          phoneNumber: map['phoneNumber']??'',
           listQuestion: map['questions'],
           listQuestionIdLiked: map['listQuestionIdLiked'],
           listAnswerIdLiked: map['listAnswerIdLiked'],

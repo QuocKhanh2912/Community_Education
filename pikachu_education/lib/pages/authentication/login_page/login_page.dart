@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/components/positive_button.dart';
+import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_image.dart';
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                                   textEditingController: phoneNumberController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Password can not be empty';
+                                      return 'Phone Number can not be empty';
                                     }
                                     RegExp phoneNumExp =
                                         ManagementRegex.phoneNumber;

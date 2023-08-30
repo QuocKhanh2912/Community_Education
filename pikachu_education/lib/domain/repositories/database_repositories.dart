@@ -1,28 +1,11 @@
 import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
-import 'package:pikachu_education/data/modal/comment_modal.dart';
-import 'package:pikachu_education/data/modal/question_modal.dart';
-import 'package:pikachu_education/data/modal/user_modal.dart';
-import 'package:pikachu_education/domain/services/database_realtime_service/database_service.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/database_service_answer.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/database_service_question.dart';
-import 'package:pikachu_education/domain/services/database_realtime_service/database_service_update_userinfo.dart';
 import 'package:pikachu_education/domain/services/database_realtime_service/databaser_service_comment.dart';
 
 class DatabaseRepositories {
-  static Future<DataUserModal> getCurrentUserInfo({required String userID}) {
-    return DatabaseService.getCurrentUserInfo(userID: userID);
-  }
-
-  static Future<void> postUserAvatar(
-      {required String avatarUrl, required String userId}) {
-    return DatabaseService.postUserAvatar(avatarUrl: avatarUrl, userId: userId);
-  }
-
-  static Future<String> getCurrentUserName({required String currentUserID}) {
-    return DatabaseService.getCurrentUserName(currentUserID: currentUserID);
-  }
 
 // Database answer
   static Future<List<DataAnswerModal>> fetchDataAnswerFromSever(
@@ -211,8 +194,5 @@ class DatabaseRepositories {
   }
 
   //update UserInfo
-  static Future<void> updateUserInfo(
-      {required DataUserModal userInfo, required String key}) {
-    return UpdateUserInfo.updateUserInfo(key: key, userInfo: userInfo);
-  }
+
 }
