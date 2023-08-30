@@ -4,7 +4,6 @@ import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
-
 import 'bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'component/tab_view/answer_detail.dart';
 import 'component/tab_view/tab_bar_on_top.dart';

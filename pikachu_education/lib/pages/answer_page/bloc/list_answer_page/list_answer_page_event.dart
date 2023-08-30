@@ -1,6 +1,6 @@
 part of 'list_answer_page_bloc.dart';
 
-@immutable
+
 abstract class ListAnswerPageEvent {}
 
 class FetchDataAnswerListEvent extends ListAnswerPageEvent {

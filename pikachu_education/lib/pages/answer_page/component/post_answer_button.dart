@@ -38,14 +38,6 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                     MaterialStateProperty.all(const Color(0xFFFDCA15)),
               ),
               onPressed: () {
-                if (widget.currentUserInfo.userName.isEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return DialogCustom.dialogOfPostAnswer(context);
-                    },
-                  );
-                } else {
                   showDialog(
                       context: context,
                       builder: (context) => CreateAnswerPage(
@@ -56,17 +48,7 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                             currentUserName: widget.currentUserInfo.userName,
                         currentUserInfo: widget.currentUserInfo,
                           ));
-                  // showModalBottomSheet(
-                  //     backgroundColor: const Color(0xFFFDFFAE),
-                  //     shape: const RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.vertical(
-                  //             top: Radius.circular(20))),
-                  //     context: context,
-                  //     builder: (context) {
-
-                  // });
-                }
-              },
+                },
               child: const Text(
                 'Post Answer',
                 style: TextStyle(

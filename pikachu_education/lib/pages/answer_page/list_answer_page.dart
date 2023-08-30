@@ -101,7 +101,7 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                                   },
                                   child: Text(
                                       widget.currentUserInfo.userName.isEmpty
-                                          ? 'Login'
+                                          ? widget.currentUserInfo.phoneNumber??''
                                           : widget.currentUserInfo.userName,
                                       style: const TextStyle(
                                           fontSize: 20,

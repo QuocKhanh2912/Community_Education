@@ -65,8 +65,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     var currentUserInfo = await AuthRepositories.firebaseVerifyOTP(
         verificationId: AuthenticationService.verification ?? '',
         otpNumber: event.otpNumber);
-    print('ookokoko: ${AuthenticationService.verification}');
-    print('ookoasdasdkoko: ${event.otpNumber}');
     if (currentUserInfo.userId.isNotEmpty) {
       await AuthenticationService.updateUserInfoFromPhoneNumber(
           userInfo: currentUserInfo, key: currentUserInfo.userId);
@@ -95,7 +93,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             .then((value) => emit(LogoutSuccessState()));
       }
     } catch (e) {
-
+      emit(LogoutUnSuccessState());
     }
   }
 }

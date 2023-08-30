@@ -22,8 +22,8 @@ class DataUserModal {
           {required String key, required Map<dynamic, dynamic> map}) =>
       DataUserModal(
           userId: key,
-          userName: map['name'],
-          email: map['email'],
+          userName: map['name']??'',
+          email: map['email']??'',
           phoneNumber: map['phoneNumber']??'',
           listQuestion: map['questions'],
           listQuestionIdLiked: map['listQuestionIdLiked'],
