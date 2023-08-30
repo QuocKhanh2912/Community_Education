@@ -5,6 +5,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'component/detail_question.dart';
 import 'component/list_view_answer_page/listview_answer_page.dart';
@@ -60,11 +61,16 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
             listener: (context, state) {
               if (state is FetchListAnswerPageSuccessState) {
                 _refreshController.refreshCompleted();
+              } else if (state is DeleteAnswerSuccessState ||
+                  state is EditAnswerSuccessState) {
+                context.read<ListAnswerPageBloc>().add(
+                    RefreshDataAnswerListEvent(
+                        userIdOfQuestion: widget.questionInfo.userId,
+                        questionId: widget.questionInfo.questionId));
               }
-             else if (state is DeleteAnswerSuccessState ||
-                  state is EditAnswerSuccessState ||
-                  state is LikeAnswerSuccessState ||
+              if (state is LikeAnswerSuccessState ||
                   state is RemoveLikeAnswerSuccessState) {
+                getListQuestionIdLiked(userId: widget.currentUserInfo.userId);
                 context.read<ListAnswerPageBloc>().add(
                     RefreshDataAnswerListEvent(
                         userIdOfQuestion: widget.questionInfo.userId,
@@ -101,7 +107,9 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                                   },
                                   child: Text(
                                       widget.currentUserInfo.userName.isEmpty
-                                          ? widget.currentUserInfo.phoneNumber??''
+                                          ? widget.currentUserInfo
+                                                  .phoneNumber ??
+                                              ''
                                           : widget.currentUserInfo.userName,
                                       style: const TextStyle(
                                           fontSize: 20,
