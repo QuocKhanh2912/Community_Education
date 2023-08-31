@@ -37,7 +37,6 @@ class ProfilePageBloc extends Bloc<ProfilePageEvent, ProfilePageState> {
       emit(FetchProfileInfoLoadingState());
       var currentUserInfo = await AuthRepositories.getCurrentUserInfo(userID: event.userId);
       emit(FetchProfileInfoSuccessState(currentUserInfo: currentUserInfo));
-      print('object: ${currentUserInfo.phoneNumber}');
     }catch (e){
       emit(FetchProfileInfoLoadingState());
       emit(FetchProfileInfoUnSuccessState());

@@ -81,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         var currentUserInfo = state.currentUserInfo;
                         userNameController.text = currentUserInfo.userName;
                         phoneNumberController.text =
-                            currentUserInfo.phoneNumber??'';
+                            currentUserInfo.phoneNumber ?? '';
                         emailController.text = currentUserInfo.email;
                         return Column(
                           children: [
@@ -192,8 +192,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               height: 30,
                             ),
                             TextFormFieldCustom(
-                                enabled:
-                                    methodLogin == 'byGoogle' ? false : true,
+                                enabled: methodLogin == 'byGoogle' ||
+                                        methodLogin == 'byFacebook'
+                                    ? false
+                                    : true,
                                 textEditingController: emailController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
@@ -237,7 +239,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                         }
                                       },
                                       nameButton: '  Save  ',
-                                      stateLoading: (state is UpdateProfileLoadingState)?true:false),
+                                      stateLoading:
+                                          (state is UpdateProfileLoadingState)
+                                              ? true
+                                              : false),
                                 ],
                               ),
                             ),

@@ -10,12 +10,12 @@ class AuthenticationService {
   }
 
   static Future<void> firebaseGoogleLogout() async {
-    FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
   }
 
   static Future<void> firebaseFacebookLogout() async {
-    FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut();
     await FacebookAuth.instance.logOut();
   }
 
@@ -51,9 +51,10 @@ class AuthenticationService {
       var checkIsNewUser = userInfo.additionalUserInfo!.isNewUser;
       if (checkIsNewUser) {
         Map mapDataUser = {
-          'email': userInfo.user?.email??'',
-          'name': userInfo.user?.displayName??'',
-          'avatarUrl': userInfo.user?.photoURL??''
+          'email': userInfo.user?.email ?? '',
+          'name': userInfo.user?.displayName ?? '',
+          'avatarUrl': userInfo.user?.photoURL ?? '',
+          'phoneNumber': userInfo.user?.phoneNumber ?? ''
         };
         userCurrentInfo =
             DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
@@ -70,12 +71,11 @@ class AuthenticationService {
 
   static Future<DataUserModal> firebaseLoginByFacebook() async {
     DataUserModal userCurrentInfo =
-    DataUserModal(userId: '', userName: '', email: '');
+        DataUserModal(userId: '', userName: '', email: '');
     try {
       final LoginResult loginResult = await FacebookAuth.instance.login();
-
       final OAuthCredential facebookAuthCredential =
-      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
       // Once signed in, return the UserCredential
       var userInfo = await FirebaseAuth.instance
           .signInWithCredential(facebookAuthCredential);
@@ -85,7 +85,7 @@ class AuthenticationService {
           'email': userInfo.user?.email ?? '',
           'name': userInfo.user?.displayName ?? '',
           'avatarUrl': userInfo.user?.photoURL ?? '',
-          'phoneNumber': userInfo.user?.photoURL ?? ''
+          'phoneNumber': userInfo.user?.phoneNumber ?? ''
         };
         userCurrentInfo =
             DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
@@ -95,8 +95,8 @@ class AuthenticationService {
             userID: userInfo.user!.uid);
         return userCurrentInfo;
       }
-    }catch (e){
-      print ('ok: $e');
+    } catch (e) {
+      print('ok: $e');
     }
     return userCurrentInfo;
   }
@@ -159,7 +159,7 @@ class AuthenticationService {
       'name': userInfo.userName,
       'email': userInfo.email,
       'avatarUrl': userInfo.avatarUrl,
-      'phoneNumber': userInfo.phoneNumber??''
+      'phoneNumber': userInfo.phoneNumber ?? ''
     });
   }
 
