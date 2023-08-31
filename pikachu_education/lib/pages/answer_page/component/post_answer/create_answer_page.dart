@@ -1,14 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_get_image_to_create_answer/get_image_to_create_answer_bloc.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/answer_page/bloc/get_image_to_create_answer/get_image_to_create_answer_bloc.dart';
+import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_time.dart';
 
@@ -65,7 +65,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                 GetImageToCreateAnswerState>(
               builder: (context, state) {
                 return AlertDialog(
-                  backgroundColor: Color(0xFFFDFFAE),
+                  backgroundColor: ManagementColor.lightYellow,
                   insetPadding: EdgeInsets.zero,
                   contentPadding: EdgeInsets.zero,
                   content: StatefulBuilder(
@@ -117,7 +117,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           filled: true,
-                                          fillColor: Colors.white,
+                                          fillColor: ManagementColor.white,
                                           labelText: 'Content'),
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(),
@@ -137,7 +137,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: ManagementColor.white,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all()),
                               child: Column(children: [
@@ -145,7 +145,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                   padding: EdgeInsets.all(8.0),
                                   child: Text('Add Image By:',
                                       style: TextStyle(
-                                          color: Colors.grey,
+                                          color: ManagementColor.grey,
                                           fontSize: 25,
                                           fontWeight: FontWeight.w400)),
                                 ),
@@ -215,7 +215,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                             child: Container(
                                                 height: 50,
                                                 decoration: BoxDecoration(
-                                                    color: Color(0xFFFDCA15),
+                                                    color: ManagementColor.yellow,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
@@ -261,7 +261,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                       alignment: Alignment.center,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFD9D9D9),
+                                          color: ManagementColor.white,
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: const Padding(
@@ -306,7 +306,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                       alignment: Alignment.center,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFFDCA15),
+                                          color: ManagementColor.yellow,
                                           borderRadius:
                                               BorderRadius.circular(10)),
                                       child: const Padding(

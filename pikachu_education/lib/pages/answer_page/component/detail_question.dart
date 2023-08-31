@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 class DetailQuestion extends StatefulWidget {

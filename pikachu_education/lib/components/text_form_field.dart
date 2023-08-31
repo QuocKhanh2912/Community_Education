@@ -8,7 +8,7 @@ class TextFormFieldCustom extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
        this.obscuringCharacter,
-       this.turnObscuringCharacter,this.suffixIcon});
+       this.turnObscuringCharacter,this.suffixIcon,this.textLabel,this.enabled});
 
   final TextEditingController textEditingController;
   final Function(String?) validator;
@@ -17,17 +17,21 @@ class TextFormFieldCustom extends StatelessWidget {
   final String? obscuringCharacter;
   final bool? turnObscuringCharacter;
   final IconButton? suffixIcon;
+  final String? textLabel;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextFormField(
+        enabled: enabled,
         keyboardType: textInputType,
         controller: textEditingController,
         obscuringCharacter: obscuringCharacter??'*',
         obscureText: turnObscuringCharacter??false,
         decoration: InputDecoration(
+          labelText: textLabel,
             hintText: hintText,
             hintStyle: const TextStyle(
                 fontSize: 14,

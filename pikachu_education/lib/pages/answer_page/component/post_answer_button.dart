@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/post_answer/create_answer_page.dart';
 import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
 
@@ -38,14 +38,6 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                     MaterialStateProperty.all(const Color(0xFFFDCA15)),
               ),
               onPressed: () {
-                if ((widget.currentUserInfo.userName.length ?? 0) == 0) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return DialogCustom.dialogOfPostAnswer(context);
-                    },
-                  );
-                } else {
                   showDialog(
                       context: context,
                       builder: (context) => CreateAnswerPage(
@@ -56,17 +48,7 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                             currentUserName: widget.currentUserInfo.userName,
                         currentUserInfo: widget.currentUserInfo,
                           ));
-                  // showModalBottomSheet(
-                  //     backgroundColor: const Color(0xFFFDFFAE),
-                  //     shape: const RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.vertical(
-                  //             top: Radius.circular(20))),
-                  //     context: context,
-                  //     builder: (context) {
-
-                  // });
-                }
-              },
+                },
               child: const Text(
                 'Post Answer',
                 style: TextStyle(

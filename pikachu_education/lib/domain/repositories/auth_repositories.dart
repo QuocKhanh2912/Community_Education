@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/services/auth_service.dart';
 
 class AuthRepositories {
   final AuthenticationService _service = AuthenticationService();
 
+  static Future<DataUserModal> getCurrentUserInfo({required String userID}) {
+    return AuthenticationService.getCurrentUserInfo(userID: userID);
+  }
+
+  static Future<void> postUserAvatar(
+      {required String avatarUrl, required String userId}) {
+    return AuthenticationService.postUserAvatar(avatarUrl: avatarUrl, userId: userId);
+  }
+
+  static Future<String> getCurrentUserName({required String currentUserID}) {
+    return AuthenticationService.getCurrentUserName(currentUserID: currentUserID);
+  }
+
+
   //logout
   Future<void>? firebaseLogout() {
     return AuthenticationService.firebaseGoogleLogout();
   }
+
 
   // check login already or not
   static Future<bool> firebaseLoginChecked() {
@@ -23,6 +38,10 @@ class AuthRepositories {
 // login by google
   static Future<DataUserModal> firebaseLoginByGoogle() {
     return AuthenticationService.firebaseLoginByGoogle();
+  }
+//login by facebook
+  static Future<DataUserModal> firebaseLoginByFacebook() {
+    return AuthenticationService.firebaseLoginByFacebook();
   }
 
 // login by phoneNumber
@@ -42,9 +61,17 @@ class AuthRepositories {
   }
 
 // verify otp code
-  static Future<bool> firebaseVerifyOTP(
+  static Future<DataUserModal> firebaseVerifyOTP(
       {required String verificationId,
       required String otpNumber,}) {
     return AuthenticationService.firebaseVerifyOTP(otpNumber: otpNumber, verificationId: verificationId);
+  }
+  static Future<void> updateCurrentUserInfo(
+      {required DataUserModal itemToUpdate}) {
+    return AuthenticationService.updateCurrentUserInfo(itemToUpdate:itemToUpdate);
+  }
+  static Future<void> updateUserInfoFromGoogle(
+      {required DataUserModal userInfo, required String key}) {
+    return AuthenticationService.updateUserInfoFromMethodLogin(key: key, userInfo: userInfo);
   }
 }

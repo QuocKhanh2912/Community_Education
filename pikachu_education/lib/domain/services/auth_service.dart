@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
 
 class AuthenticationService {
   static Future<void> firebasePhoneNumberLogout() async {
@@ -8,8 +10,13 @@ class AuthenticationService {
   }
 
   static Future<void> firebaseGoogleLogout() async {
-    FirebaseAuth.instance.signOut();
+    await FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
+  }
+
+  static Future<void> firebaseFacebookLogout() async {
+    await FirebaseAuth.instance.signOut();
+    await FacebookAuth.instance.logOut();
   }
 
   static Future<bool> firebaseLoginChecked() async {
@@ -41,16 +48,55 @@ class AuthenticationService {
       );
       var userInfo =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      Map mapDataUser = {
-        'email': userInfo.user?.email,
-        'name': userInfo.user?.displayName,
-        'avatarUrl': userInfo.user?.photoURL
-      };
-      userCurrentInfo =
-          DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
+      var checkIsNewUser = userInfo.additionalUserInfo!.isNewUser;
+      if (checkIsNewUser) {
+        Map mapDataUser = {
+          'email': userInfo.user?.email ?? '',
+          'name': userInfo.user?.displayName ?? '',
+          'avatarUrl': userInfo.user?.photoURL ?? '',
+          'phoneNumber': userInfo.user?.phoneNumber ?? ''
+        };
+        userCurrentInfo =
+            DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
+      } else {
+        userCurrentInfo = await AuthenticationService.getCurrentUserInfo(
+            userID: userInfo.user!.uid);
+      }
       return userCurrentInfo;
     } on FirebaseAuthException catch (e) {
       print(e);
+    }
+    return userCurrentInfo;
+  }
+
+  static Future<DataUserModal> firebaseLoginByFacebook() async {
+    DataUserModal userCurrentInfo =
+        DataUserModal(userId: '', userName: '', email: '');
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      // Once signed in, return the UserCredential
+      var userInfo = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+      var checkIsNewUser = userInfo.additionalUserInfo!.isNewUser;
+      if (checkIsNewUser) {
+        Map mapDataUser = {
+          'email': userInfo.user?.email ?? '',
+          'name': userInfo.user?.displayName ?? '',
+          'avatarUrl': userInfo.user?.photoURL ?? '',
+          'phoneNumber': userInfo.user?.phoneNumber ?? ''
+        };
+        userCurrentInfo =
+            DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
+        return userCurrentInfo;
+      } else {
+        userCurrentInfo = await AuthenticationService.getCurrentUserInfo(
+            userID: userInfo.user!.uid);
+        return userCurrentInfo;
+      }
+    } catch (e) {
+      print('ok: $e');
     }
     return userCurrentInfo;
   }
@@ -86,16 +132,87 @@ class AuthenticationService {
     return true;
   }
 
-  static Future<bool> firebaseVerifyOTP(
+  static Future<DataUserModal> firebaseVerifyOTP(
       {required String verificationId, required String otpNumber}) async {
+    DataUserModal userCurrentInfo =
+        DataUserModal(userId: '', userName: '', email: '');
     FirebaseAuth auth = FirebaseAuth.instance;
     try {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: verificationId, smsCode: otpNumber);
-      await auth.signInWithCredential(credential);
-      return true;
+      var userInfo = await auth.signInWithCredential(credential);
+      Map mapDataUser = {
+        'phoneNumber': userInfo.user?.phoneNumber,
+      };
+      userCurrentInfo =
+          DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
+      return userCurrentInfo;
     } catch (e) {
-      return false;
+      return userCurrentInfo;
     }
+  }
+
+  static Future<void> updateUserInfoFromMethodLogin(
+      {required DataUserModal userInfo, required String key}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users").child(key);
+    await ref.update({
+      'name': userInfo.userName,
+      'email': userInfo.email,
+      'avatarUrl': userInfo.avatarUrl,
+      'phoneNumber': userInfo.phoneNumber ?? ''
+    });
+  }
+
+  static Future<void> updateUserInfoFromPhoneNumber(
+      {required DataUserModal userInfo, required String key}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users").child(key);
+    await ref.update({
+      'name': userInfo.userName,
+      'email': userInfo.email,
+      'avatarUrl': userInfo.avatarUrl,
+      'phoneNumber': userInfo.phoneNumber
+    });
+  }
+
+  static Future<void> updateCurrentUserInfo(
+      {required DataUserModal itemToUpdate}) async {
+    DatabaseReference ref =
+        FirebaseDatabase.instance.ref("users").child(itemToUpdate.userId);
+    await ref.update({
+      'name': itemToUpdate.userName,
+      'email': itemToUpdate.email,
+      'phoneNumber': itemToUpdate.phoneNumber
+    });
+  }
+
+  static Future<DataUserModal> getCurrentUserInfo(
+      {required String userID}) async {
+    var currentUserInfoSnapshot =
+        await FirebaseDatabase.instance.ref('users/$userID').orderByKey().get();
+    var currentUserInfoMap = (currentUserInfoSnapshot.value ?? {}) as Map;
+    final DataUserModal currentUserInfo = DataUserModal(
+        userId: userID,
+        avatarUrl: currentUserInfoMap['avatarUrl'] ?? '',
+        userName: currentUserInfoMap['name'] ?? '',
+        email: currentUserInfoMap['email'] ?? '',
+        phoneNumber: currentUserInfoMap['phoneNumber'] ?? '');
+    return currentUserInfo;
+  }
+
+  static Future<void> postUserAvatar(
+      {required String avatarUrl, required String userId}) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users/$userId");
+    await ref.update({'avatarUrl': avatarUrl});
+  }
+
+  static Future<String> getCurrentUserName(
+      {required String currentUserID}) async {
+    var currentUserNameSnapshot = await FirebaseDatabase.instance
+        .ref("/users/$currentUserID")
+        .child('name')
+        .get();
+
+    var currentUserName = (currentUserNameSnapshot.value ?? '') as String;
+    return currentUserName;
   }
 }

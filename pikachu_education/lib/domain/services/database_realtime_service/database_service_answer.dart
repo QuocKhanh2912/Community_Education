@@ -1,5 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
+import 'package:pikachu_education/data/modal/answer_modal.dart';
 
 class AnswerDatabaseService{
   static Future<List<DataAnswerModal>> fetchDataAnswerFromSever(
@@ -9,6 +9,7 @@ class AnswerDatabaseService{
         .ref("/users/$userIdOfQuestion/questions/$questionId/answers")
         .orderByKey()
         .get();
+
     var dataAnswers = (needSnapShotUser.value ?? {}) as Map;
     dataAnswers.forEach((key, value) {
       var answer = (dataAnswers['$key'] ?? {}) as Map;
@@ -16,6 +17,7 @@ class AnswerDatabaseService{
       listDataAnswer.add(DataAnswerModal.fromMap(
           key: key, map: value, numberComment: comments.length));
     });
+
 
     return listDataAnswer;
   }

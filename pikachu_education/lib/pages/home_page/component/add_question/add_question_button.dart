@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'create_question_dialog.dart';
 
 class AddQuestionButton extends StatefulWidget {
@@ -30,7 +30,7 @@ class _AddQuestionButtonState extends State<AddQuestionButton> {
               await showDialog(
                 context: context,
                 builder: (context) =>
-                    createQuestionPage(
+                    CreateQuestionPage(
                        dataHomeBloc: widget.dataHomeBloc,userCurrentInfo:widget.currentUserInfo ),
               );
             },

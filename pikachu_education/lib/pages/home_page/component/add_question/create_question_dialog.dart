@@ -1,31 +1,31 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/data/subject/list_subject.dart';
 import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
-import 'package:pikachu_education/pages/home_page/component/bloc_get_image_to_create_question/get_image_bloc.dart';
-import 'package:pikachu_education/pages/home_page/component/bloc_home_page/data_home_bloc.dart';
+import 'package:pikachu_education/pages/home_page/bloc/get_image_to_create_question/get_image_bloc.dart';
+import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_time.dart';
-import 'component/list_subject.dart';
-import 'dart:io';
 
-class createQuestionPage extends StatefulWidget {
-  const createQuestionPage(
+class CreateQuestionPage extends StatefulWidget {
+  const CreateQuestionPage(
       {super.key, required this.dataHomeBloc, required this.userCurrentInfo});
 
   final DataHomePageBloc dataHomeBloc;
   final DataUserModal userCurrentInfo;
 
   @override
-  State<createQuestionPage> createState() => _createQuestionPageState();
+  State<CreateQuestionPage> createState() => CreateQuestionPageState();
 }
 
-class _createQuestionPageState extends State<createQuestionPage> {
+class CreateQuestionPageState extends State<CreateQuestionPage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
   TextEditingController contentController = TextEditingController();
@@ -128,7 +128,6 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                     // This is called when the user selects an item.
                                     setState(() {
                                       subjectController.text = value ?? '';
-                                      print(subjectController.text);
                                     });
                                   },
                                 ),
@@ -163,14 +162,22 @@ class _createQuestionPageState extends State<createQuestionPage> {
                             height: 10,
                           ),
                           Container(
-                            decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),border: Border.all()),
-
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all()),
                             child: Column(children: [
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Add Image By:',style: TextStyle(color: Colors.grey,fontSize: 25,fontWeight: FontWeight.w400)),
+                                child: Text('Add Image By:',
+                                    style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w400)),
                               ),
-                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   InkWell(
                                     onTap: () {
@@ -187,7 +194,8 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                           Container(
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                  color: const Color(0xFFFDCA15),
+                                                  color:
+                                                      const Color(0xFFFDCA15),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
@@ -200,14 +208,17 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                                         EdgeInsets.all(8.0),
                                                     child: Text(
                                                       'Your Storage',
-                                                      style: TextStyle(color: Colors.grey,
+                                                      style: TextStyle(
+                                                          color: Colors.grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
                                                   ),
-                                                  Icon(Icons
-                                                      .photo_library,color: Colors.grey,),
+                                                  Icon(
+                                                    Icons.photo_library,
+                                                    color: Colors.grey,
+                                                  ),
                                                 ],
                                               )),
                                         ],
@@ -229,7 +240,7 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                           child: Container(
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                  color: Color(0xFFFDCA15),
+                                                  color: ManagementColor.yellow,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
@@ -241,13 +252,16 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                                   children: [
                                                     Text(
                                                       'Your Camera',
-                                                      style: TextStyle(color: Colors.grey,
+                                                      style: TextStyle(
+                                                          color: Colors.grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
-                                                    Icon(Icons
-                                                        .camera_alt_outlined,color: Colors.grey,),
+                                                    Icon(
+                                                      Icons.camera_alt_outlined,
+                                                      color: Colors.grey,
+                                                    ),
                                                   ],
                                                 ),
                                               )),
@@ -267,14 +281,14 @@ class _createQuestionPageState extends State<createQuestionPage> {
                             children: [
                               TextButton(
                                   onPressed: () {
-                                    StorageService.upLoadImageToStorage(file: _image!);
-
+                                    StorageService.upLoadImageToStorage(
+                                        file: _image!);
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 50,
                                     decoration: BoxDecoration(
-                                        color: Color(0xFFD9D9D9),
+                                        color: ManagementColor.white,
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                     child: const Padding(
@@ -295,21 +309,25 @@ class _createQuestionPageState extends State<createQuestionPage> {
                                             .validate() ==
                                         true) {
                                       var item = DataQuestionModal(
-                                        timePost: ManagementTime.getTimePost(),
-                                        questionContent: contentController.text,
-                                        questionSubject: subjectController.text,
-                                        questionTitle: titleController.text,
-                                        numberLike: 0,
-                                        questionId: '',
-                                        userName: '',
-                                        userId: '',
-                                        userAvatarUrl: widget.userCurrentInfo.avatarUrl
-                                      );
+                                          timePost:
+                                              ManagementTime.getTimePost(),
+                                          questionContent:
+                                              contentController.text,
+                                          questionSubject:
+                                              subjectController.text,
+                                          questionTitle: titleController.text,
+                                          numberLike: 0,
+                                          questionId: '',
+                                          userName: '',
+                                          userId: '',
+                                          userAvatarUrl:
+                                              widget.userCurrentInfo.avatarUrl);
                                       context.read<DataHomePageBloc>().add(
                                           PostDataQuestionsEvent(
                                               dataToPost: item,
-                                              userId: widget
-                                                  .userCurrentInfo.userId,file: _image));
+                                              userId:
+                                                  widget.userCurrentInfo.userId,
+                                              file: _image));
                                       Navigator.pop(context);
                                     }
                                   },

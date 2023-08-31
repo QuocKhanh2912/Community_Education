@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
+import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
 import 'package:pikachu_education/utils/management_text_inform.dart';
-import 'bloc_login_page/login_bloc.dart';
 
 
 class VerifyOTPPage extends StatefulWidget {
@@ -22,6 +22,11 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
   final keyVerify = GlobalKey<FormState>();
   final otpController = TextEditingController();
 
+@override
+  void dispose() {
+  otpController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
@@ -76,13 +81,13 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                           const SizedBox(
                             height: 40,
                           ),
-                           Padding(
+                           const Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 20),
+                                EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                                 textAlign: TextAlign.center,
                                 ManagementTextInform.informOTP,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.normal)),
                           ),

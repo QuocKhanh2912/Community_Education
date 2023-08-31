@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pikachu_education/data/data_modal/data_answer_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_question_modal.dart';
-import 'package:pikachu_education/data/data_modal/data_user_modal.dart';
-import 'package:pikachu_education/pages/answer_page/component/bloc_list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/pages/answer_page/component/list_view_answer_page/item_listview/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import 'component/pop_up_menu_button.dart';
 
 class ItemListView extends StatefulWidget {
   const ItemListView(
@@ -67,7 +67,7 @@ class _ItemListViewState extends State<ItemListView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -101,21 +101,25 @@ class _ItemListViewState extends State<ItemListView> {
                                     ),
                               Padding(
                                 padding: const EdgeInsets.all(5.0),
-                                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(widget
                                         .listDataAnswerFromSever[widget.index]
                                         .userNamePost),
-                                    Text(widget
-                                        .listDataAnswerFromSever[widget.index]
-                                        .timePost,style: const TextStyle(
-                                        fontSize: 10, color: Color(0x4D000000)))
+                                    Text(
+                                        widget
+                                            .listDataAnswerFromSever[
+                                                widget.index]
+                                            .timePost,
+                                        style: const TextStyle(
+                                            fontSize: 10,
+                                            color: Color(0x4D000000)))
                                   ],
                                 ),
                               )
                             ],
                           ),
-
                           PopUpMenuButtonAnswerPage(
                             listAnswerPageBloc: widget.listAnswerPageBloc,
                             questionInfo: widget.questionInfo,
@@ -134,12 +138,12 @@ class _ItemListViewState extends State<ItemListView> {
                       ),
                     ),
                     Text(
-                        widget.listDataAnswerFromSever[widget.index]
-                            .answerTitle,
+                        widget
+                            .listDataAnswerFromSever[widget.index].answerTitle,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 18)),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         widget.listDataAnswerFromSever[widget.index]
                             .answerContent,
