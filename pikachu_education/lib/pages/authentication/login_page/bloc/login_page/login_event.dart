@@ -11,6 +11,7 @@ class LoginCheckedEvent extends LoginEvent {
 class LoginAutoEvent extends LoginEvent {}
 
 class LoginWithGoogleEvent extends LoginEvent {}
+class LoginWithFacebookEvent extends LoginEvent {}
 
 class LoginWithPhoneNumEvent extends LoginEvent {
   String phoneNum;

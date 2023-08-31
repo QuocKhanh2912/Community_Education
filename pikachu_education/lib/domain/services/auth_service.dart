@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 
@@ -11,6 +12,11 @@ class AuthenticationService {
   static Future<void> firebaseGoogleLogout() async {
     FirebaseAuth.instance.signOut();
     await GoogleSignIn().disconnect();
+  }
+
+  static Future<void> firebaseFacebookLogout() async {
+    FirebaseAuth.instance.signOut();
+    await FacebookAuth.instance.logOut();
   }
 
   static Future<bool> firebaseLoginChecked() async {
@@ -45,9 +51,9 @@ class AuthenticationService {
       var checkIsNewUser = userInfo.additionalUserInfo!.isNewUser;
       if (checkIsNewUser) {
         Map mapDataUser = {
-          'email': userInfo.user?.email,
-          'name': userInfo.user?.displayName,
-          'avatarUrl': userInfo.user?.photoURL
+          'email': userInfo.user?.email??'',
+          'name': userInfo.user?.displayName??'',
+          'avatarUrl': userInfo.user?.photoURL??''
         };
         userCurrentInfo =
             DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
@@ -55,10 +61,42 @@ class AuthenticationService {
         userCurrentInfo = await AuthenticationService.getCurrentUserInfo(
             userID: userInfo.user!.uid);
       }
-
       return userCurrentInfo;
     } on FirebaseAuthException catch (e) {
       print(e);
+    }
+    return userCurrentInfo;
+  }
+
+  static Future<DataUserModal> firebaseLoginByFacebook() async {
+    DataUserModal userCurrentInfo =
+    DataUserModal(userId: '', userName: '', email: '');
+    try {
+      final LoginResult loginResult = await FacebookAuth.instance.login();
+
+      final OAuthCredential facebookAuthCredential =
+      FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      // Once signed in, return the UserCredential
+      var userInfo = await FirebaseAuth.instance
+          .signInWithCredential(facebookAuthCredential);
+      var checkIsNewUser = userInfo.additionalUserInfo!.isNewUser;
+      if (checkIsNewUser) {
+        Map mapDataUser = {
+          'email': userInfo.user?.email ?? '',
+          'name': userInfo.user?.displayName ?? '',
+          'avatarUrl': userInfo.user?.photoURL ?? '',
+          'phoneNumber': userInfo.user?.photoURL ?? ''
+        };
+        userCurrentInfo =
+            DataUserModal.fromMap(key: userInfo.user!.uid, map: mapDataUser);
+        return userCurrentInfo;
+      } else {
+        userCurrentInfo = await AuthenticationService.getCurrentUserInfo(
+            userID: userInfo.user!.uid);
+        return userCurrentInfo;
+      }
+    }catch (e){
+      print ('ok: $e');
     }
     return userCurrentInfo;
   }
@@ -114,13 +152,14 @@ class AuthenticationService {
     }
   }
 
-  static Future<void> updateUserInfoFromGoogle(
+  static Future<void> updateUserInfoFromMethodLogin(
       {required DataUserModal userInfo, required String key}) async {
     DatabaseReference ref = FirebaseDatabase.instance.ref("users").child(key);
     await ref.update({
       'name': userInfo.userName,
       'email': userInfo.email,
-      'avatarUrl': userInfo.avatarUrl
+      'avatarUrl': userInfo.avatarUrl,
+      'phoneNumber': userInfo.phoneNumber??''
     });
   }
 

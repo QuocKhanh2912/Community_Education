@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pikachu Education</string>
+    <string name="facebook_app_id">1416316142275587</string>
+    <string name="fb_login_protocol_scheme">fb1416316142275587</string>
+    <string name="facebook_client_token">06c6f7e10661aea8b915fceb97821d8d</string>
+</resources>

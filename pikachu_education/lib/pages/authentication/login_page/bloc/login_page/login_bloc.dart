@@ -13,6 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginAutoEvent>(_autoLogin);
     on<LoginWithGoogleEvent>(_loginWithGoogle);
+    on<LoginWithFacebookEvent>(_loginWithFacebookEvent);
     on<LoginWithPhoneNumEvent>(_loginWithPhoneNumEvent);
     on<LoginVerifyOtpEvent>(_verifyOtpEvent);
     on<LogoutEvent>(_logoutEvent);
@@ -36,7 +37,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (loginWithGoogle.userId.isEmpty) {
       emit(LoginUnSuccessState());
     } else {
-      await AuthenticationService.updateUserInfoFromGoogle(
+      await AuthenticationService.updateUserInfoFromMethodLogin(
           userInfo: loginWithGoogle, key: loginWithGoogle.userId);
       await AuthenticationLocalService.saveDataUserId(
           userId: loginWithGoogle.userId);
@@ -44,6 +45,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           userId: loginWithGoogle.userId);
       await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byGoogle');
       emit(LoginWithGoogleSuccessState(userId: loginWithGoogle.userId));
+    }
+  }
+
+  _loginWithFacebookEvent(LoginWithFacebookEvent event, Emitter<LoginState> emit) async {
+    emit(LoginWithFacebookLoadingState());
+    var loginWithGoogle = await AuthRepositories.firebaseLoginByFacebook();
+    if (loginWithGoogle.userId.isEmpty) {
+      emit(LoginUnSuccessState());
+    } else {
+      await AuthenticationService.updateUserInfoFromMethodLogin(
+          userInfo: loginWithGoogle, key: loginWithGoogle.userId);
+      await AuthenticationLocalService.saveDataUserId(
+          userId: loginWithGoogle.userId);
+      await AuthenticationLocalService.saveDataUserName(
+          userId: loginWithGoogle.userId);
+      await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byFacebook');
+      emit(LoginWithFacebookSuccessState(userId: loginWithGoogle.userId));
     }
   }
 
@@ -90,6 +108,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
       if (methodLogin == 'byGoogle') {
         await AuthenticationService.firebaseGoogleLogout()
+            .then((value) => emit(LogoutSuccessState()));
+      }
+      if (methodLogin == 'byFacebook') {
+        await AuthenticationService.firebaseFacebookLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
     } catch (e) {

@@ -16,6 +16,12 @@ class LoginWithGoogleSuccessState extends LoginState {
   LoginWithGoogleSuccessState({required this.userId});
 }
 
+class LoginWithFacebookLoadingState extends LoginState {}
+class LoginWithFacebookSuccessState extends LoginState {
+  final String userId;
+  LoginWithFacebookSuccessState({required this.userId});
+}
+
 class LoginWithPhoneNumLoadingState extends LoginState {}
 class LoginWithPhoneNumSuccessState extends LoginState {}
 class LoginWithPhoneNumUnSuccessState extends LoginState {}

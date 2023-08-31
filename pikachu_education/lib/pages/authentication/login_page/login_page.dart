@@ -55,6 +55,10 @@ class _LoginPageState extends State<LoginPage> {
                     var userId = state.userId;
                     Navigator.pushNamed(context, PageName.homePage,
                         arguments: userId);
+                  } else if (state is LoginWithFacebookSuccessState) {
+                    var userId = state.userId;
+                    Navigator.pushNamed(context, PageName.homePage,
+                        arguments: userId);
                   } else if (state is LoginWithPhoneNumSuccessState) {
                     Navigator.pushNamed(context, PageName.verifyPage);
                   }
@@ -138,9 +142,16 @@ class _LoginPageState extends State<LoginPage> {
                                   const SizedBox(
                                     width: 50,
                                   ),
-                                  MethodLogin(
-                                    iconMethod: ManagementImage.logoFacebook,
-                                    onTap: () {},
+                                  state is LoginWithFacebookLoadingState
+                                      ? const MethodLoginLoading()
+                                      : MethodLogin(
+                                    iconMethod:
+                                    ManagementImage.logoFacebook,
+                                    onTap: () {
+                                      context
+                                          .read<LoginBloc>()
+                                          .add(LoginWithFacebookEvent());
+                                    },
                                   ),
                                 ],
                               ),

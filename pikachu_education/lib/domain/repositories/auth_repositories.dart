@@ -24,6 +24,7 @@ class AuthRepositories {
     return AuthenticationService.firebaseGoogleLogout();
   }
 
+
   // check login already or not
   static Future<bool> firebaseLoginChecked() {
     return AuthenticationService.firebaseLoginChecked();
@@ -37,6 +38,10 @@ class AuthRepositories {
 // login by google
   static Future<DataUserModal> firebaseLoginByGoogle() {
     return AuthenticationService.firebaseLoginByGoogle();
+  }
+//login by facebook
+  static Future<DataUserModal> firebaseLoginByFacebook() {
+    return AuthenticationService.firebaseLoginByFacebook();
   }
 
 // login by phoneNumber
@@ -67,6 +72,6 @@ class AuthRepositories {
   }
   static Future<void> updateUserInfoFromGoogle(
       {required DataUserModal userInfo, required String key}) {
-    return AuthenticationService.updateUserInfoFromGoogle(key: key, userInfo: userInfo);
+    return AuthenticationService.updateUserInfoFromMethodLogin(key: key, userInfo: userInfo);
   }
 }
