@@ -39,11 +39,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     profilePageBloc.add(FetchProfilePageData(widget.currentUserInfo.userId));
-    AuthenticationLocalService.methodLoginCurrent().then((value) {
-      setState(() {
-        methodLogin = value;
-      });
-    });
+    //Todo: should use LoginBloc instead
+    // AuthenticationLocalService.methodLoginCurrent().then((value) {
+    //   setState(() {
+    //     methodLogin = value;
+    //   });
+    // });
     super.initState();
   }
 

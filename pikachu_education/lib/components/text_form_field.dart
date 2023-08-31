@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
   const TextFormFieldCustom(
@@ -36,7 +37,7 @@ class TextFormFieldCustom extends StatelessWidget {
             hintStyle: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.normal,
-                color: Color(0x4D000000)),
+                color: ManagementColor.black),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),

@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,5 +17,4 @@ class GetImageService {
     final image = File('${directory.path}/$name');
     return File(imagePath).copy(image.path);
   }
-
 }
