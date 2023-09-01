@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
-import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/domain/services/auth_service.dart';
 import 'package:pikachu_education/service/authentication/authentication_service.dart';
 
 part 'login_event.dart';
-
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
+    _authService = AuthenticationLocalService();
+
     on<LoginAutoEvent>(_autoLogin);
     on<LoginWithGoogleEvent>(_loginWithGoogle);
     on<LoginWithFacebookEvent>(_loginWithFacebookEvent);
@@ -19,12 +19,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LogoutEvent>(_logoutEvent);
   }
 
+  late final AuthenticationLocalService _authService;
+
   _autoLogin(LoginAutoEvent event, Emitter<LoginState> emit) async {
     var checkLogin = await AuthRepositories.firebaseLoginChecked();
     if (checkLogin) {
       var userId = await AuthRepositories.firebaseGetUserId();
-      await AuthenticationLocalService.saveDataUserId(userId: userId);
-      await AuthenticationLocalService.saveDataUserName(userId: userId);
+      await _authService.saveDataUserId(userId: userId);
+      await _authService.saveDataUserName(userId: userId);
       emit(AutoLoginSuccessState(userId: userId));
     } else {
       emit(LoginUnSuccessState());
@@ -39,16 +41,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else {
       await AuthenticationService.updateUserInfoFromMethodLogin(
           userInfo: loginWithGoogle, key: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveDataUserId(
-          userId: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveDataUserName(
-          userId: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byGoogle');
+      await _authService.saveDataUserId(userId: loginWithGoogle.userId);
+      await _authService.saveDataUserName(userId: loginWithGoogle.userId);
+      await _authService.saveMethodLogin(methodLogin: 'byGoogle');
       emit(LoginWithGoogleSuccessState(userId: loginWithGoogle.userId));
     }
   }
 
-  _loginWithFacebookEvent(LoginWithFacebookEvent event, Emitter<LoginState> emit) async {
+  _loginWithFacebookEvent(
+      LoginWithFacebookEvent event, Emitter<LoginState> emit) async {
     emit(LoginWithFacebookLoadingState());
     var loginWithGoogle = await AuthRepositories.firebaseLoginByFacebook();
     if (loginWithGoogle.userId.isEmpty) {
@@ -56,11 +57,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } else {
       await AuthenticationService.updateUserInfoFromMethodLogin(
           userInfo: loginWithGoogle, key: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveDataUserId(
-          userId: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveDataUserName(
-          userId: loginWithGoogle.userId);
-      await AuthenticationLocalService.saveMethodLogin(methodLogin: 'byFacebook');
+      await _authService.saveDataUserId(userId: loginWithGoogle.userId);
+      await _authService.saveDataUserName(userId: loginWithGoogle.userId);
+      await _authService.saveMethodLogin(methodLogin: 'byFacebook');
       emit(LoginWithFacebookSuccessState(userId: loginWithGoogle.userId));
     }
   }
@@ -86,12 +85,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (currentUserInfo.userId.isNotEmpty) {
       await AuthenticationService.updateUserInfoFromPhoneNumber(
           userInfo: currentUserInfo, key: currentUserInfo.userId);
-      await AuthenticationLocalService.saveDataUserId(
-          userId: currentUserInfo.userId);
-      await AuthenticationLocalService.saveDataUserName(
-          userId: currentUserInfo.userId);
-      await AuthenticationLocalService.saveMethodLogin(
-          methodLogin: 'byPhoneNumber');
+      await _authService.saveDataUserId(userId: currentUserInfo.userId);
+      await _authService.saveDataUserName(userId: currentUserInfo.userId);
+      await _authService.saveMethodLogin(methodLogin: 'byPhoneNumber');
       emit(LoginVerificationOTPSuccessState(userId: currentUserInfo.userId));
     } else {
       emit(LoginVerificationOTPUnSuccessState());
@@ -99,7 +95,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   _logoutEvent(LogoutEvent event, Emitter<LoginState> emit) async {
-    var methodLogin = await AuthenticationLocalService.methodLoginCurrent();
+    var methodLogin = await _authService.methodLoginCurrent();
 
     try {
       if (methodLogin == 'byPhoneNumber') {

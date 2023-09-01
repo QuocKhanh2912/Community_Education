@@ -4,7 +4,6 @@ import 'package:pikachu_education/components/button/negative_button.dart';
 import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
-import 'package:pikachu_education/service/authentication/authentication_service.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
@@ -40,11 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     profilePageBloc.add(FetchProfilePageData(widget.currentUserInfo.userId));
-    AuthenticationLocalService.methodLoginCurrent().then((value) {
-      setState(() {
-        methodLogin = value;
-      });
-    });
+    profilePageBloc.add(GetMethodLogin());
     super.initState();
   }
 
@@ -56,6 +51,11 @@ class _ProfilePageState extends State<ProfilePage> {
         listener: (context, state) {
           if (state is PostAvatarSuccess) {
             setState(() {});
+          }
+          if (state is GetMethodLoginSuccessState) {
+            setState(() {
+              methodLogin = state.methodLogin;
+            });
           }
         },
         child: Scaffold(
@@ -135,7 +135,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                              width: 4, color: ManagementColor.white),
+                                              width: 4,
+                                              color: ManagementColor.white),
                                           color: ManagementColor.yellow),
                                       child: InkWell(
                                         onTap: () {

@@ -30,3 +30,4 @@ class UpdateProfileEvent extends ProfilePageEvent {
 
   UpdateProfileEvent({required this.itemToUpdate});
 }
+class GetMethodLogin extends ProfilePageEvent {}
