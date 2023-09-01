@@ -5,6 +5,7 @@ import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/service/authentication/authentication_service.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
 
@@ -106,7 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 130,
                                   height: 130,
                                   decoration: const BoxDecoration(
-                                      color: Colors.red,
+                                      color: ManagementColor.red,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(130))),
                                   child: widget.currentUserInfo.avatarUrl == ''
@@ -134,8 +135,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                              width: 4, color: Colors.white),
-                                          color: Colors.yellow),
+                                              width: 4, color: ManagementColor.white),
+                                          color: ManagementColor.yellow),
                                       child: InkWell(
                                         onTap: () {
                                           showDialog(
@@ -148,7 +149,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         },
                                         child: const Icon(
                                           Icons.photo_camera,
-                                          color: Colors.white,
+                                          color: ManagementColor.white,
                                         ),
                                       ),
                                     ))

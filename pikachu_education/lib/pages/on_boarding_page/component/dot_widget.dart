@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class DotBuild extends StatelessWidget {
   const DotBuild({super.key,required this.pageViewIndex});
@@ -26,7 +27,7 @@ final int pageViewIndex;
       width: 10,
       height: 10,
       decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFAD3F32) : Colors.grey,
+          color: isSelected ? ManagementColor.red : ManagementColor.grey,
           borderRadius: BorderRadius.circular(50)),
     );
   }

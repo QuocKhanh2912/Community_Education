@@ -6,6 +6,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/list_view_answer_page/item_listview/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 class ItemListView extends StatefulWidget {
@@ -114,7 +115,7 @@ class _ItemListViewState extends State<ItemListView> {
                                             .timePost,
                                         style: const TextStyle(
                                             fontSize: 10,
-                                            color: Color(0x4D000000)))
+                                            color: ManagementColor.black))
                                   ],
                                 ),
                               )
@@ -201,7 +202,7 @@ class _ItemListViewState extends State<ItemListView> {
                                   checkLiked
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: Colors.red,
+                                  color: ManagementColor.red,
                                 ),
                                 Text(
                                     '${widget.listDataAnswerFromSever[widget.index].numberLike} like'),
@@ -246,7 +247,7 @@ class _ItemListViewState extends State<ItemListView> {
                                           .timePost,
                                       style: const TextStyle(
                                           fontSize: 8,
-                                          color: Color(0x4D000000)))
+                                          color: ManagementColor.black))
                                 ],
                               ),
                             ],

@@ -4,6 +4,7 @@ import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/delete_question/delete_question_dialog.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/edit_questions/edit_question_dialog.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog/decline_dialog.dart';
 
 class PopUpMenuButtonHomePage extends StatefulWidget {
@@ -103,9 +104,9 @@ class _PopUpMenuButtonHomePageState extends State<PopUpMenuButtonHomePage> {
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.delete, color: Colors.red),
+                            Icon(Icons.delete, color: ManagementColor.red),
                             Text('Delete',
-                                style: TextStyle(color: Colors.red)),
+                                style: TextStyle(color: ManagementColor.red)),
                           ],
                         ),
                       ),

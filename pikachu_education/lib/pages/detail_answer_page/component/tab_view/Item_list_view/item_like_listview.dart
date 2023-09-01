@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 
@@ -36,11 +37,11 @@ class _ItemLikeListViewState extends State<ItemLikeListView> {
   Widget build(BuildContext context) {
     print('okokokoko $userLiked');
     return Container(
-      decoration: const BoxDecoration(
+      decoration:  const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
-              colors: [Color(0xFFFDFFAE), Color(0xFFFFFFFF)])),
+              colors: [ManagementColor.yellow, ManagementColor.white])),
       child: Row(children: [
         userLiked.avatarUrl == ''
             ? ClipRRect(

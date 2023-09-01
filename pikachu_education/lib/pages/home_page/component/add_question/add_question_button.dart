@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'create_question_dialog.dart';
 
 class AddQuestionButton extends StatefulWidget {
@@ -23,7 +24,7 @@ class _AddQuestionButtonState extends State<AddQuestionButton> {
         child: Container(
           width: MediaQuery.of(context).size.width / 2,
           decoration: BoxDecoration(
-              color: const Color(0xFFFDCA15),
+              color:  ManagementColor.yellow,
               borderRadius: BorderRadius.circular(15)),
           child: InkWell(
             onTap: () async {
@@ -41,7 +42,7 @@ class _AddQuestionButtonState extends State<AddQuestionButton> {
                 Icon(
                   Icons.add,
                   size: 35,
-                  color: Colors.black,
+                  color: ManagementColor.black,
                 ),
                 Text(
                   'Add Question',

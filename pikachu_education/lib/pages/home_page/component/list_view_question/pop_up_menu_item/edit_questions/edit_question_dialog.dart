@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_time.dart';
 
 class EditQuestionDialog extends StatefulWidget {
@@ -48,7 +49,7 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
         child: BlocBuilder<DataHomePageBloc, DataHomePageState>(
           builder: (context, state) {
             return AlertDialog(
-              backgroundColor: const Color(0xFFFDFFAE),
+              backgroundColor: ManagementColor.lightYellow,
               insetPadding: EdgeInsets.zero,
               contentPadding: EdgeInsets.zero,
               alignment: Alignment.topCenter,
@@ -82,7 +83,7 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: ManagementColor.white,
                                 labelText: 'Title'),
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(),
@@ -97,7 +98,7 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: ManagementColor.white,
                                 border: OutlineInputBorder(),
                                 labelText: 'Subject'),
                             validator: FormBuilderValidators.compose([
@@ -113,7 +114,7 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
                                 filled: true,
-                                fillColor: Colors.white,
+                                fillColor: ManagementColor.white,
                                 border: OutlineInputBorder(),
                                 labelText: 'Content'),
                             validator: FormBuilderValidators.compose([
@@ -138,13 +139,13 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: const Color(0xFFD9D9D9),
+                                  color: ManagementColor.white,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text(
                                 'Cancel',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.red,
+                                    color: ManagementColor.red,
                                     fontWeight: FontWeight.bold),
                               ),
                             )),
@@ -181,13 +182,13 @@ class _EditQuestionDialogState extends State<EditQuestionDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: const Color(0xFFFDCA15),
+                                  color: ManagementColor.yellow,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text(
                                 'Edit Question',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: ManagementColor.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             )),

@@ -4,6 +4,7 @@ import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 
 class DeleteCommentDialog extends StatefulWidget {
@@ -35,7 +36,7 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
           }
         },
         child: AlertDialog(
-          backgroundColor: const Color(0xFFFDFFAE),
+          backgroundColor: ManagementColor.lightYellow,
           insetPadding: EdgeInsets.zero,
           contentPadding: EdgeInsets.zero,
           alignment: Alignment.center,
@@ -51,7 +52,7 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.red),
+                        color: ManagementColor.red),
                   ),
                 ),
                 Row(
@@ -66,13 +67,13 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
                           width: 165,
                           height: 50,
                           decoration: BoxDecoration(
-                              color: Color(0xFFD9D9D9),
+                              color: ManagementColor.white,
                               borderRadius: BorderRadius.circular(10)),
                           child: const Text(
                             'Cancel',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Colors.red,
+                                color: ManagementColor.red,
                                 fontWeight: FontWeight.bold),
                           ),
                         )),
@@ -94,13 +95,13 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: Color(0xFFFDCA15),
+                                  color: ManagementColor.yellow,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text(
                                 'Delete',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: ManagementColor.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ));

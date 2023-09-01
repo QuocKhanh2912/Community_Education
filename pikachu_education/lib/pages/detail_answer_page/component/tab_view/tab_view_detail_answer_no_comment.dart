@@ -6,6 +6,7 @@ import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/detail_answer_page/component/tab_view/text_form_field_comment.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 
 
@@ -82,27 +83,27 @@ class _TabViewDetailAnswerNoCommentState extends State<TabViewDetailAnswerNoComm
                       Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: Container(
-                            color: Colors.yellow,
+                            color: ManagementColor.yellow,
                           )),
                       Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: Container(
-                            color: Colors.yellow,
+                            color: ManagementColor.yellow,
                           )),
                       Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: Container(
-                            color: Colors.yellow,
+                            color: ManagementColor.yellow,
                           )),
                       Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: Container(
-                            color: Colors.yellow,
+                            color: ManagementColor.yellow,
                           )),
                       Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: Container(
-                            color: Colors.yellow,
+                            color: ManagementColor.yellow,
                           )),
                     ],
                   ),

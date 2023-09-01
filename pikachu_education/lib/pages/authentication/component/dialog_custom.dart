@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import '../../../routes/page_name.dart';
 
 class DialogCustom {
@@ -42,13 +43,13 @@ class DialogCustom {
 
   static dialogOfInvalidEmail(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('The Email is Invalid',
           style: TextStyle(
               //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -58,14 +59,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],
@@ -74,14 +75,14 @@ class DialogCustom {
 
   static dialogOfWrongPassword(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('The Password or Email is Invalid',
 
           style: TextStyle(
               //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -91,14 +92,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],
@@ -107,14 +108,14 @@ class DialogCustom {
 
   static dialogOfWrongPhoneNumber(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('The Phone Number is Invalid',
 
           style: TextStyle(
             //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -124,14 +125,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],
@@ -140,14 +141,14 @@ class DialogCustom {
 
   static wrongOTPCode(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('OPT Code Is\'nt True',
 
           style: TextStyle(
             //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -157,14 +158,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],
@@ -173,13 +174,13 @@ class DialogCustom {
 
   static autoLoginFalse(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('Auto Login False, please enter Email and Password to login again',
           style: TextStyle(
             //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -189,14 +190,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],
@@ -205,14 +206,14 @@ class DialogCustom {
 
   static falseLogout(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: ManagementColor.white,
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       title: const Text('SomeThing Wrong',
 
           style: TextStyle(
             //fontWeight: FontWeight.bold,
               fontSize: 25,
-              color: Colors.black)),
+              color: ManagementColor.black)),
       actions: [
         TextButton(
             onPressed: () {
@@ -222,14 +223,14 @@ class DialogCustom {
               width: 100,
               height: 50,
               decoration: BoxDecoration(
-                  color: Color(0xFFFDCA15),
+                  color: ManagementColor.yellow,
                   borderRadius: BorderRadius.circular(10)),
               child: const Center(
                 child: Text('OK',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.white)),
+                        color: ManagementColor.white)),
               ),
             ))
       ],

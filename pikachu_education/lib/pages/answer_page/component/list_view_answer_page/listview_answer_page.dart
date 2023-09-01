@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 import 'item_listview/item_listview.dart';
 
@@ -81,7 +82,7 @@ class _ListViewAnswerPageState extends State<ListViewAnswerPage> {
                     child: Text(
                       'Nobody can give answer for this question, please add answer to this question or visit another time. Thanks!!!',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: ManagementColor.black,
                           fontWeight: FontWeight.w400,
                           fontSize: 30),
                       textAlign: TextAlign.center,

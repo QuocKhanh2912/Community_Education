@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 class DetailQuestion extends StatefulWidget {
@@ -18,10 +19,10 @@ class _DetailQuestionState extends State<DetailQuestion> {
       padding: const EdgeInsets.only(top: 8, left: 10, right: 10),
       child: Container(
           decoration: BoxDecoration(
-              gradient: const LinearGradient(
+              gradient:  const LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color(0xFFFDFFAE), Color(0xFFFFFFFF)]),
+                  colors: [ManagementColor.lightYellow, ManagementColor.white]),
               borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -76,7 +77,7 @@ class _DetailQuestionState extends State<DetailQuestion> {
                               Text(widget.dataQuestionInfo.timePost,
                                   style: const TextStyle(
                                     fontSize: 8,
-                                    color: Color(0x4D000000),
+                                    color: ManagementColor.black,
                                   ))
                             ],
                           ),

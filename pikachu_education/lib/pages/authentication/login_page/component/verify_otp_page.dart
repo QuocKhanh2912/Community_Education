@@ -149,7 +149,7 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                                             'VERIFY',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white,
+                                                color: ManagementColor.white,
                                                 fontSize: 25),
                                           ),
                                         ),

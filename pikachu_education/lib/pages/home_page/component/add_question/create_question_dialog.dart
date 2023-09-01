@@ -61,7 +61,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
               child: BlocBuilder<GetImageBloc, GetImageState>(
                 builder: (context, state) {
                   return AlertDialog(
-                    backgroundColor: const Color(0xFFFDFFAE),
+                    backgroundColor:  ManagementColor.lightYellow,
                     insetPadding: EdgeInsets.zero,
                     contentPadding: EdgeInsets.zero,
                     alignment: Alignment.topCenter,
@@ -95,7 +95,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: ManagementColor.white,
                                         labelText: 'Title'),
                                     validator: FormBuilderValidators.compose([
                                       FormBuilderValidators.required(),
@@ -108,7 +108,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                   validator: FormBuilderValidators.required(),
                                   decoration: InputDecoration(
                                     filled: true,
-                                    fillColor: Colors.white,
+                                    fillColor: ManagementColor.white,
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
@@ -140,7 +140,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: ManagementColor.white,
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
@@ -163,7 +163,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: ManagementColor.white,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all()),
                             child: Column(children: [
@@ -171,7 +171,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                 padding: EdgeInsets.all(8.0),
                                 child: Text('Add Image By:',
                                     style: TextStyle(
-                                        color: Colors.grey,
+                                        color: ManagementColor.grey,
                                         fontSize: 25,
                                         fontWeight: FontWeight.w400)),
                               ),
@@ -195,7 +195,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                               height: 50,
                                               decoration: BoxDecoration(
                                                   color:
-                                                      const Color(0xFFFDCA15),
+                                                       ManagementColor.yellow,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
@@ -209,7 +209,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                                     child: Text(
                                                       'Your Storage',
                                                       style: TextStyle(
-                                                          color: Colors.grey,
+                                                          color: ManagementColor.grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
@@ -217,7 +217,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                                   ),
                                                   Icon(
                                                     Icons.photo_library,
-                                                    color: Colors.grey,
+                                                    color: ManagementColor.grey,
                                                   ),
                                                 ],
                                               )),
@@ -253,14 +253,14 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                                     Text(
                                                       'Your Camera',
                                                       style: TextStyle(
-                                                          color: Colors.grey,
+                                                          color: ManagementColor.grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
                                                     Icon(
                                                       Icons.camera_alt_outlined,
-                                                      color: Colors.grey,
+                                                      color: ManagementColor.grey,
                                                     ),
                                                   ],
                                                 ),
@@ -297,7 +297,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                         'Cancel',
                                         style: TextStyle(
                                             fontSize: 20,
-                                            color: Colors.red,
+                                            color: ManagementColor.red,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -344,7 +344,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                         'Create Question',
                                         style: TextStyle(
                                             fontSize: 20,
-                                            color: Colors.white,
+                                            color: ManagementColor.white,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),

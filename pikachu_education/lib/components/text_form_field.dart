@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
   const TextFormFieldCustom(
@@ -40,7 +41,7 @@ class TextFormFieldCustom extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            fillColor: Colors.white,
+            fillColor: ManagementColor.white,
         suffixIcon: suffixIcon),
         validator: (value) => validator(value),
       ),

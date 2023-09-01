@@ -6,7 +6,6 @@ import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
 import 'package:pikachu_education/utils/management_text_style.dart';
-
 import 'bloc/login_page/login_bloc.dart';
 import 'component/method_login.dart';
 import 'component/method_login_loading.dart';

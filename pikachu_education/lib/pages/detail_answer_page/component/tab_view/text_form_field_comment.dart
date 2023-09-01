@@ -5,6 +5,7 @@ import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_time.dart';
 
 class TextFormFieldComment extends StatefulWidget {
@@ -70,13 +71,13 @@ class _TextFormFieldCommentState extends State<TextFormFieldComment> {
                   },
                   child: const Icon(
                     Icons.send,
-                    color: Color(0xFFFF005C),
+                    color: ManagementColor.red,
                   ),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-                fillColor: Colors.white),
+                fillColor: ManagementColor.white),
           ),
         ),
       ),

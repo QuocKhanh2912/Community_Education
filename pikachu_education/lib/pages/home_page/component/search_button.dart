@@ -1,5 +1,6 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class SearchButton extends StatefulWidget {
   const SearchButton({super.key,required this.searchController});
@@ -34,8 +35,8 @@ class _SearchButtonState extends State<SearchButton> {
                 widget.searchController.clear();
               });
             },
-            textFieldColor: const Color(0xFFFDFFAE),
-            color: const Color(0xFFFDCA15),
+            textFieldColor: ManagementColor.lightYellow,
+            color: ManagementColor.yellow,
             onSubmitted: (p0) {},
             animationDurationInMilli: 500,
           ),

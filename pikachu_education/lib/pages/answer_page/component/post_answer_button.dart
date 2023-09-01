@@ -4,6 +4,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/post_answer/create_answer_page.dart';
 import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 
 class PostAnswerButton extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
           child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all(const Color(0xFFFDCA15)),
+                    MaterialStateProperty.all(ManagementColor.yellow),
               ),
               onPressed: () {
                   showDialog(
@@ -53,7 +54,7 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                 'Post Answer',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ManagementColor.white,
                     fontSize: 25),
               )),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog.dart';
 import 'delete_answer/delete_question_dialog.dart';
 import 'edit_answer/edit_answer_dialog.dart';
@@ -105,8 +106,8 @@ class _PopUpMenuButtonAnswerPageState extends State<PopUpMenuButtonAnswerPage> {
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.delete, color: Colors.red),
-                        Text('Delete', style: TextStyle(color: Colors.red)),
+                        Icon(Icons.delete, color: ManagementColor.red),
+                        Text('Delete', style: TextStyle(color: ManagementColor.red)),
                       ],
                     ),
                   ),

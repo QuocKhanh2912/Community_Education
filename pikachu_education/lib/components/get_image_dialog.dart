@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pikachu_education/pages/home_page/bloc/get_image_to_create_question/get_image_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 
 class GetImageDialog extends StatefulWidget {
@@ -25,7 +26,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
           }
         },
         child: AlertDialog(
-          backgroundColor: const Color(0xFFFDFFAE),
+          backgroundColor: ManagementColor.lightYellow,
           insetPadding: EdgeInsets.zero,
           contentPadding: EdgeInsets.zero,
           alignment: Alignment.center,
@@ -43,7 +44,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red),
+                            color: ManagementColor.red),
                       ),
                     ),
                     Column(
@@ -62,7 +63,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
                                   width: 165,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      color: const Color(0xFFFDCA15),
+                                      color:  ManagementColor.yellow,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: const Row(
                                     children: [
@@ -70,7 +71,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
                                         'Your Storage',
                                         style: TextStyle(
                                             fontSize: 20,
-                                            color: Colors.white,
+                                            color: ManagementColor.white,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Icon(Icons.photo_library)
@@ -88,7 +89,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
                                   width: 165,
                                   height: 50,
                                   decoration: BoxDecoration(
-                                      color: const Color(0xFFFDCA15),
+                                      color: ManagementColor.yellow,
                                       borderRadius: BorderRadius.circular(10)),
                                   child: const Row(
                                     children: [
@@ -96,7 +97,7 @@ class _GetImageDialogState extends State<GetImageDialog> {
                                         'Your Camera',
                                         style: TextStyle(
                                             fontSize: 20,
-                                            color: Colors.white,
+                                            color: ManagementColor.white,
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Icon(Icons.camera_alt_outlined)
@@ -114,12 +115,12 @@ class _GetImageDialogState extends State<GetImageDialog> {
                               width: 165,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: const Color(0xFFD9D9D9),
+                                  color: ManagementColor.white,
                                   borderRadius: BorderRadius.circular(10)),
                               child: const Text('Cancel',
                                   style: TextStyle(
                                       fontSize: 20,
-                                      color: Colors.red,
+                                      color: ManagementColor.red,
                                       fontWeight: FontWeight.bold)),
                             )),
                       ],

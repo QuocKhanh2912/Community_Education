@@ -8,6 +8,7 @@ import 'package:pikachu_education/pages/authentication/component/dialog_custom.d
 import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
 import 'package:pikachu_education/pages/authentication/profile_page/bloc/profile_page/profile_page_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'bloc/home_page/data_home_bloc.dart';
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
         )
       ],
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: ManagementColor.white,
         body: MultiBlocListener(
           listeners: [
             BlocListener<DataHomePageBloc, DataHomePageState>(

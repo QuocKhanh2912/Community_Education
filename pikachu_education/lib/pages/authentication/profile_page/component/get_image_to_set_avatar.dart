@@ -77,7 +77,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: ManagementColor.white,
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all()),
                                   child: Column(children: [
@@ -85,7 +85,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                       padding: EdgeInsets.all(8.0),
                                       child: Text('Add Image By:',
                                           style: TextStyle(
-                                              color: Colors.grey,
+                                              color: ManagementColor.grey,
                                               fontSize: 25,
                                               fontWeight: FontWeight.w400)),
                                     ),
@@ -111,8 +111,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                 Container(
                                                     height: 50,
                                                     decoration: BoxDecoration(
-                                                        color: const Color(
-                                                            0xFFFDCA15),
+                                                        color:  ManagementColor.yellow,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10)),
@@ -129,7 +128,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                             'Your Storage',
                                                             style: TextStyle(
                                                                 color:
-                                                                    Colors.grey,
+                                                                ManagementColor.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
@@ -138,7 +137,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                         ),
                                                         Icon(
                                                           Icons.photo_library,
-                                                          color: Colors.grey,
+                                                          color: ManagementColor.grey,
                                                         ),
                                                       ],
                                                     )),
@@ -182,7 +181,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                             'Your Camera',
                                                             style: TextStyle(
                                                                 color:
-                                                                    Colors.grey,
+                                                                ManagementColor.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
@@ -191,7 +190,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                           Icon(
                                                             Icons
                                                                 .camera_alt_outlined,
-                                                            color: Colors.grey,
+                                                            color: ManagementColor.grey,
                                                           ),
                                                         ],
                                                       ),
@@ -225,7 +224,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                               'Cancel',
                                               style: TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.red,
+                                                  color: ManagementColor.red,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
@@ -255,7 +254,7 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                               'Update Avatar',
                                               style: TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.white,
+                                                  color: ManagementColor.white,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),

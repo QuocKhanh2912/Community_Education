@@ -5,6 +5,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 
 
@@ -33,18 +34,18 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
               const EdgeInsets.only(top: 1, right: 8),
               child: SpeedDial(
                 icon: Icons.menu,
-                iconTheme: const IconThemeData(size: 35),
-                foregroundColor: Colors.black,
+                iconTheme: const IconThemeData(size: 35,color: ManagementColor.black),
+                foregroundColor: ManagementColor.black,
                 activeIcon: Icons.close,
-                backgroundColor: const Color(0xFFFDCA15),
+                backgroundColor: ManagementColor.yellow,
                 buttonSize: const Size(50, 48),
                 direction: SpeedDialDirection.down,
                 children: [
                   SpeedDialChild(
-                    backgroundColor: Colors.red,
+                    backgroundColor: ManagementColor.red,
                     child: const Icon(Icons.people),
                     label: 'Profile',
-                    labelBackgroundColor: const Color(0xFFFDCA15),
+                    labelBackgroundColor: ManagementColor.yellow,
                     onTap: () {
                       Navigator.pushNamed(
                           context, PageName.profilePage,
@@ -53,7 +54,7 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
                   ),
                   SpeedDialChild(
                     child: const Icon(Icons.logout),
-                    labelBackgroundColor: const Color(0xFFFDCA15),
+                    labelBackgroundColor: ManagementColor.yellow,
                     label: 'Logout',
                     onTap: () async {
                       context.read<LoginBloc>().add(LogoutEvent());

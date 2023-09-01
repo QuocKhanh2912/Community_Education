@@ -5,6 +5,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 class ItemListviewQuestion extends StatefulWidget {
@@ -96,7 +97,7 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                                   widget.dataQuestionFromServer[widget.index]
                                       .timePost,
                                   style: const TextStyle(
-                                      fontSize: 10, color: Color(0x4D000000))),
+                                      fontSize: 10, color: ManagementColor.black)),
                             ],
                           ),
                         ),
@@ -226,7 +227,7 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                                       checkLiked
                                           ? Icons.favorite
                                           : Icons.favorite_border,
-                                      color: Colors.red,
+                                      color: ManagementColor.red,
                                     )
                                   ],
                                 ),

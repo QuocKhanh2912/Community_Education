@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class TabBarShowNumberLikeComment extends StatefulWidget {
   const TabBarShowNumberLikeComment({super.key,required this.answerInfo,required this.tabController});
@@ -15,8 +16,8 @@ class _TabBarShowNumberLikeCommentState extends State<TabBarShowNumberLikeCommen
   @override
   Widget build(BuildContext context) {
     return TabBar(
-        overlayColor: MaterialStateProperty.all(Colors.white),
-        indicatorColor: Colors.yellowAccent,
+        overlayColor: MaterialStateProperty.all(ManagementColor.white),
+        indicatorColor: ManagementColor.lightYellow,
         controller: widget.tabController,
         tabs: [
           Padding(

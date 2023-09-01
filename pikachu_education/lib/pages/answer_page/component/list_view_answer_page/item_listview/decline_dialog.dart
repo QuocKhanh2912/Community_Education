@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 
 class DeclineDialogAnswerPage extends StatelessWidget {
   const DeclineDialogAnswerPage({super.key});
@@ -17,11 +18,11 @@ class DeclineDialogAnswerPage extends StatelessWidget {
               height: 50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xFFFDCA15)),
+                  color: ManagementColor.yellow),
               child: const Center(
                 child: Text('OK',style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: ManagementColor.white,
                     fontSize: 25)),
               ),
             ))
