@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pikachu_education/bloc/internationalization_bloc.dart';
 import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
 import 'package:pikachu_education/utils/management_text_style.dart';
+
 import 'bloc/login_page/login_bloc.dart';
 import 'component/method_login.dart';
 import 'component/method_login_loading.dart';
@@ -74,6 +77,35 @@ class _LoginPageState extends State<LoginPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    InkWell(
+                                        onTap: () {
+                                          context
+                                              .read<InternationalizationBloc>()
+                                              .add(
+                                                  InternationalizationEnEvent());
+                                        },
+                                        child: const Text('EN')),
+                                    const Text('    |    '),
+                                    InkWell(
+                                        onTap: () {
+                                          context
+                                              .read<InternationalizationBloc>()
+                                              .add(
+                                                  InternationalizationViEvent());
+                                        },
+                                        child: const Text('VI'))
+                                  ],
+                                ),
+                              ),
                               const SizedBox(height: 100),
                               Image.asset(ManagementImage.logo),
                               const SizedBox(height: 60),
@@ -81,12 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                                   textEditingController: phoneNumberController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Phone Number can not be empty';
+                                      return AppLocalizations.of(context)?.invalidPhoneNum??'';
                                     }
                                     RegExp phoneNumExp =
                                         ManagementRegex.phoneNumber;
                                     if (!phoneNumExp.hasMatch(value)) {
-                                      return 'Your Phone Number is invalid';
+                                      return AppLocalizations.of(context)?.emptyPhoneNum??'';
                                     }
                                   },
                                   hintText: 'Phone Number',
@@ -99,7 +131,9 @@ class _LoginPageState extends State<LoginPage> {
                                       state is LoginWithPhoneNumLoadingState
                                           ? true
                                           : false,
-                                  nameButton: 'LOGIN',
+                                  nameButton:
+                                      AppLocalizations.of(context)?.login ??
+                                          '',
                                   onPressed: () {
                                     {
                                       keyOfLogin.currentState!.validate();
@@ -119,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              const Text('Or Login with',
+                              Text(
+                                  AppLocalizations.of(context)?.orLoginWith ??
+                                      '',
                                   style: ManagementTextStyle.normalStyle),
                               const SizedBox(
                                 height: 30,
@@ -144,14 +180,14 @@ class _LoginPageState extends State<LoginPage> {
                                   state is LoginWithFacebookLoadingState
                                       ? const MethodLoginLoading()
                                       : MethodLogin(
-                                    iconMethod:
-                                    ManagementImage.logoFacebook,
-                                    onTap: () {
-                                      context
-                                          .read<LoginBloc>()
-                                          .add(LoginWithFacebookEvent());
-                                    },
-                                  ),
+                                          iconMethod:
+                                              ManagementImage.logoFacebook,
+                                          onTap: () {
+                                            context
+                                                .read<LoginBloc>()
+                                                .add(LoginWithFacebookEvent());
+                                          },
+                                        ),
                                 ],
                               ),
                             ]),

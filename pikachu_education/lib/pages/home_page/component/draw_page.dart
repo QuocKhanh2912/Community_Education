@@ -6,6 +6,8 @@ import 'package:pikachu_education/pages/authentication/login_page/bloc/login_pag
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 
@@ -44,7 +46,8 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
                   SpeedDialChild(
                     backgroundColor: ManagementColor.red,
                     child: const Icon(Icons.people),
-                    label: 'Profile',
+                    label: AppLocalizations.of(context)?.profile ??
+                        '',
                     labelBackgroundColor: ManagementColor.yellow,
                     onTap: () {
                       Navigator.pushNamed(
@@ -55,7 +58,8 @@ class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
                   SpeedDialChild(
                     child: const Icon(Icons.logout),
                     labelBackgroundColor: ManagementColor.yellow,
-                    label: 'Logout',
+                    label: AppLocalizations.of(context)?.logout ??
+                        '',
                     onTap: () async {
                       context.read<LoginBloc>().add(LogoutEvent());
                     },

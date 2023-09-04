@@ -5,22 +5,30 @@ import 'package:pikachu_education/utils/management_key.dart';
 class AuthenticationLocalService {
   late final AppSharePreference _prefs = AppSharePreference();
 
-
   Future<void> saveMethodLogin({required String methodLogin}) async {
-    await _prefs.saveData(key:  ManagementKey.methodLoginKey,data:  methodLogin);
+    await _prefs.saveData(key: ManagementKey.methodLoginKey, data: methodLogin);
   }
 
   Future<void> saveDataUserId({required String userId}) async {
-    await _prefs.saveData( key:  ManagementKey.userId, data:  userId);
+    await _prefs.saveData(key: ManagementKey.userId, data: userId);
   }
 
   Future<void> saveDataUserName({required String userId}) async {
     var currentUserName =
         await AuthRepositories.getCurrentUserName(currentUserID: userId);
-    await _prefs.saveData(key:  ManagementKey.userName,data:  currentUserName);
+    await _prefs.saveData(key: ManagementKey.userName, data: currentUserName);
+  }
+
+  Future<void> saveAppLang({required String appLang}) async {
+    await _prefs.saveData(key: ManagementKey.appLang, data: appLang);
+  }
+
+  Future<String> readAppLang() async {
+    return await _prefs.readData<String>(key: ManagementKey.methodLoginKey) ??
+        '';
   }
 
   Future<String> methodLoginCurrent() async {
-    return await _prefs.readData<String>(key:  ManagementKey.methodLoginKey)??'';
+    return await _prefs.readData<String>(key: ManagementKey.appLang) ?? '';
   }
 }

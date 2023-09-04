@@ -1,0 +1,20 @@
+{
+"language": "Tiếng Việt",
+  "login": "Đăng nhập",
+  "orLoginWith": "Hoặc đăng nhập với",
+  "addQuestion": "Thêm Câu hỏi",
+  "profile": "Hồ sơ",
+  "logout": "Đăng xuất",
+  "newQuestion": "Thêm Câu hỏi",
+  "title": "Tiêu Đề",
+  "subject": "Chủ Đề",
+  "content": "Nội Dung",
+  "addImageBy": "Thêm Hình Bằng",
+  "yourStorage": "Bộ Siu Tập",
+  "yourCamera": "Máy Ảnh",
+  "createQuestion": "Tạo câu hỏi",
+  "cancel": "Hủy",
+  "invalidPhoneNum": "Số điện thoại không hợp lệ",
+  "emptyPhoneNum": "Số điện thoại không được để chống",
+  "pleaseWaiting": "Vui lòng chờ trong giây lát"
+}

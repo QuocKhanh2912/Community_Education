@@ -1,0 +1,20 @@
+{
+  "language": "English",
+  "login": "Login",
+  "orLoginWith": "Or Login with",
+  "addQuestion": "Add Question",
+  "profile": "Profile",
+  "logout": "Logout",
+  "newQuestion": "New Question",
+  "title": "Title",
+  "subject": "Subject",
+  "content": "Content",
+  "addImageBy": "Add Image By",
+  "yourStorage": "Your Storage",
+  "yourCamera": "Your Storage",
+  "createQuestion": "Create Question",
+  "cancel": "Cancel",
+  "invalidPhoneNum": "Your Phone Number is invalid",
+  "emptyPhoneNum": "Phone Number can not be empty",
+  "pleaseWaiting": "Please Waiting"
+}
