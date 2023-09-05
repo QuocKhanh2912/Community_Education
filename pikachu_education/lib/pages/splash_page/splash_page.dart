@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pikachu_education/bloc/internationalization_bloc.dart';
 import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_color.dart';
@@ -17,10 +18,12 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   final loginBloc = LoginBloc();
   final SplashBloc _splashBloc = SplashBloc();
+  final InternationalizationBloc _internationalizationBloc = InternationalizationBloc();
 
   @override
   void initState() {
     _splashBloc.add(OnBoardingAlreadyCheckingEvent());
+    _internationalizationBloc.add(InternationalizationInitEvent());
     super.initState();
   }
 

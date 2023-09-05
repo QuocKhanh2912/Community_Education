@@ -102,12 +102,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await AuthenticationService.firebasePhoneNumberLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
-      if (methodLogin == 'byGoogle') {
+      else if (methodLogin == 'byGoogle') {
         await AuthenticationService.firebaseGoogleLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
-      if (methodLogin == 'byFacebook') {
+      else if (methodLogin == 'byFacebook') {
         await AuthenticationService.firebaseFacebookLogout()
+            .then((value) => emit(LogoutSuccessState()));
+      }
+      else if(methodLogin == ''){
+        await AuthenticationService.firebasePhoneNumberLogout()
             .then((value) => emit(LogoutSuccessState()));
       }
     } catch (e) {

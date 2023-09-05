@@ -24,11 +24,11 @@ class AuthenticationLocalService {
   }
 
   Future<String> readAppLang() async {
-    return await _prefs.readData<String>(key: ManagementKey.methodLoginKey) ??
-        '';
+    return await _prefs.readData<String>(key: ManagementKey.appLang) ??
+        'en';
   }
 
   Future<String> methodLoginCurrent() async {
-    return await _prefs.readData<String>(key: ManagementKey.appLang) ?? '';
+    return await _prefs.readData<String>(key: ManagementKey.methodLoginKey) ?? '';
   }
 }

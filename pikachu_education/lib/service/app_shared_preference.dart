@@ -34,6 +34,7 @@ class AppSharePreference {
       return result;
     }
     else {
+      print('object');
       return null;
     }
 

@@ -6,6 +6,7 @@ abstract class InternationalizationState {
   InternationalizationState({required this.appLangCode});
 }
 
+
 class InternationalizationInitial extends InternationalizationState {
   InternationalizationInitial({required super.appLangCode});
 }

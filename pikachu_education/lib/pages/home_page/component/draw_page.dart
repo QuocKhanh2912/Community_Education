@@ -5,6 +5,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/authentication/login_page/bloc/login_page/login_bloc.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/service/authentication/authentication_service.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -22,7 +23,10 @@ class DrawPageForHomePage extends StatefulWidget {
   State<DrawPageForHomePage> createState() => _DrawPageForHomePageState();
 }
 
+
 class _DrawPageForHomePageState extends State<DrawPageForHomePage> {
+  final _authService = AuthenticationLocalService();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
