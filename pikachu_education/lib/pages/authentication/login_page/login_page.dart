@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                       return AppLocalizations.of(context)?.emptyPhoneNum??'';
                                     }
                                   },
-                                  hintText: 'Phone Number',
+                                  hintText: AppLocalizations.of(context)?.phoneNumber??'',
                                   textInputType: TextInputType.phone),
                               const SizedBox(
                                 height: 40,

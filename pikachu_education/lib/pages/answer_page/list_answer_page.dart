@@ -9,6 +9,8 @@ import 'bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'component/detail_question.dart';
 import 'component/list_view_answer_page/listview_answer_page.dart';
 import 'component/post_answer_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ListAnswerPage extends StatefulWidget {
   const ListAnswerPage(
@@ -127,7 +129,7 @@ class _ListAnswerPageState extends State<ListAnswerPage> {
                         padding:
                             const EdgeInsets.only(top: 8, left: 10, right: 10),
                         child: Text(
-                            '${widget.questionInfo.numberAnswer} Answers',
+                            '${widget.questionInfo.numberAnswer} ${AppLocalizations.of(context)?.answers??''}',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold)),

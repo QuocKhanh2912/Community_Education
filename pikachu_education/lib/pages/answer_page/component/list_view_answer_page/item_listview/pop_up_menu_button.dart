@@ -7,18 +7,20 @@ import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog.dart';
 import 'delete_answer/delete_question_dialog.dart';
 import 'edit_answer/edit_answer_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PopUpMenuButtonAnswerPage extends StatefulWidget {
-  const PopUpMenuButtonAnswerPage({super.key,
-    required this.answerInfo,
-    required this.editAnswerFormFieldKey,
-    required this.titleController,
-    required this.contentController,
-    required this.questionInfo,
-    required this.checkOwner,
-    required this.index,
-    required this.dataAnswerFromServer,
-    required this.listAnswerPageBloc});
+  const PopUpMenuButtonAnswerPage(
+      {super.key,
+      required this.answerInfo,
+      required this.editAnswerFormFieldKey,
+      required this.titleController,
+      required this.contentController,
+      required this.questionInfo,
+      required this.checkOwner,
+      required this.index,
+      required this.dataAnswerFromServer,
+      required this.listAnswerPageBloc});
 
   final DataAnswerModal answerInfo;
   final DataQuestionModal questionInfo;
@@ -46,73 +48,73 @@ class _PopUpMenuButtonAnswerPageState extends State<PopUpMenuButtonAnswerPage> {
           child: PopupMenuButton(
               shape: ContinuousRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
-              itemBuilder: (context) =>
-              <PopupMenuEntry>[
-                PopupMenuItem(
-                  child: InkWell(
-                    onTap: () async {
-                      if (widget.checkOwner) {
-                        await showDialog(
-                            context: context,
-                            builder: (context) =>
-                                EditAnswerDialog(
-                                  questionInfo: widget.questionInfo,
-                                  contentController: widget.contentController,
-                                  titleController: widget.titleController,
-                                  answerInfo: widget.answerInfo,
-                                  editAnswerFormFieldKey:
-                                  widget.editAnswerFormFieldKey,
-                                  listAnswerPageBloc: widget.listAnswerPageBloc,
-                                )).then((value) => Navigator.pop(context));
-
-                      } else {
-                        await showDialog(
-                            context: context,
-                            builder: (context) =>
-                            const DeclineDialogAnswerPage()).then((value) => Navigator.pop(context));
-
-                      }
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.edit),
-                        Text('Edit'),
-                      ],
+              itemBuilder: (context) => <PopupMenuEntry>[
+                    PopupMenuItem(
+                      child: InkWell(
+                        onTap: () async {
+                          if (widget.checkOwner) {
+                            await showDialog(
+                                context: context,
+                                builder: (context) => EditAnswerDialog(
+                                      questionInfo: widget.questionInfo,
+                                      contentController:
+                                          widget.contentController,
+                                      titleController: widget.titleController,
+                                      answerInfo: widget.answerInfo,
+                                      editAnswerFormFieldKey:
+                                          widget.editAnswerFormFieldKey,
+                                      listAnswerPageBloc:
+                                          widget.listAnswerPageBloc,
+                                    )).then((value) => Navigator.pop(context));
+                          } else {
+                            await showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        const DeclineDialogAnswerPage())
+                                .then((value) => Navigator.pop(context));
+                          }
+                        },
+                        child:  Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.edit),
+                            Text(AppLocalizations.of(context)?.edit ?? ''),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                PopupMenuItem(
-                  child: InkWell(
-                    onTap: () async {
-                      if (widget.checkOwner) {
-                        await showDialog(
-                            context: context,
-                            builder: (context) =>
-                                DeleteAnswerDialog(
-                                  answerInfo: widget.answerInfo,
-                                  questionInfo: widget.questionInfo,
-                                  listAnswerPageBloc:
-                                  widget.listAnswerPageBloc,
-                                )).then((value) => Navigator.pop(context));
-
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) =>
-                            const DeclineDialogAnswerPage());
-                      }
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(Icons.delete, color: ManagementColor.red),
-                        Text('Delete', style: TextStyle(color: ManagementColor.red)),
-                      ],
+                    PopupMenuItem(
+                      child: InkWell(
+                        onTap: () async {
+                          if (widget.checkOwner) {
+                            await showDialog(
+                                context: context,
+                                builder: (context) => DeleteAnswerDialog(
+                                      answerInfo: widget.answerInfo,
+                                      questionInfo: widget.questionInfo,
+                                      listAnswerPageBloc:
+                                          widget.listAnswerPageBloc,
+                                    )).then((value) => Navigator.pop(context));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    const DeclineDialogAnswerPage());
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(Icons.delete,
+                                color: ManagementColor.red),
+                            Text(AppLocalizations.of(context)?.delete ?? '',
+                                style: const TextStyle(
+                                    color: ManagementColor.red)),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ]),
+                  ]),
         ),
       ),
     );

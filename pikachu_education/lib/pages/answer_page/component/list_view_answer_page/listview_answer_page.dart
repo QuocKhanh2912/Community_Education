@@ -4,6 +4,8 @@ import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 import 'item_listview/item_listview.dart';
 
@@ -76,12 +78,12 @@ class _ListViewAnswerPageState extends State<ListViewAnswerPage> {
                   ),
                 );
               } else {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
+                return  Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(
-                      'Nobody can give answer for this question, please add answer to this question or visit another time. Thanks!!!',
-                      style: TextStyle(
+                      AppLocalizations.of(context)?.noAnswer??'',
+                      style: const TextStyle(
                           color: ManagementColor.black,
                           fontWeight: FontWeight.w400,
                           fontSize: 30),

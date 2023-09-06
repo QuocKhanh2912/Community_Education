@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
@@ -205,7 +206,7 @@ class _ItemListViewState extends State<ItemListView> {
                                   color: ManagementColor.red,
                                 ),
                                 Text(
-                                    '${widget.listDataAnswerFromSever[widget.index].numberLike} like'),
+                                    '${widget.listDataAnswerFromSever[widget.index].numberLike} ${AppLocalizations.of(context)?.like ?? ''}'),
                               ],
                             ),
                           ),
@@ -213,7 +214,7 @@ class _ItemListViewState extends State<ItemListView> {
                             children: [
                               const Icon(Icons.comment_sharp),
                               Text(
-                                  '${widget.listDataAnswerFromSever[widget.index].numberComment} comment'),
+                                  '${widget.listDataAnswerFromSever[widget.index].numberComment} ${AppLocalizations.of(context)?.comment ?? ''}'),
                             ],
                           ),
                           Row(

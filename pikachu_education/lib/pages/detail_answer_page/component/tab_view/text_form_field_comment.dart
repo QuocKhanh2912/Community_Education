@@ -7,6 +7,8 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TextFormFieldComment extends StatefulWidget {
   const TextFormFieldComment(
@@ -41,11 +43,12 @@ class _TextFormFieldCommentState extends State<TextFormFieldComment> {
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'User can not be empty';
+                return AppLocalizations.of(context)?.emptyComment??'';
               }
+              return null;
             },
             decoration: InputDecoration(
-                hintText: 'Write Comment',
+                hintText: AppLocalizations.of(context)?.writeComment??'',
                 hintStyle: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,

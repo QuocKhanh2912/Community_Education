@@ -27,14 +27,13 @@ class AppSharePreference {
   }
   Future<T?> readData<T> ({required String key}) async{
     if (_prefs == null) {
-      init();
+     await init();
     }
     var result = _prefs?.get(key);
     if (result is T){
       return result;
     }
     else {
-      print('object');
       return null;
     }
 

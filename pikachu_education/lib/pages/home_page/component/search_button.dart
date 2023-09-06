@@ -1,6 +1,8 @@
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SearchButton extends StatefulWidget {
   const SearchButton({super.key,required this.searchController});
@@ -24,7 +26,7 @@ class _SearchButtonState extends State<SearchButton> {
           child: AnimSearchBar(
             boxShadow: true,
             width: MediaQuery.of(context).size.width,
-            helpText: 'Search Question',
+            helpText: AppLocalizations.of(context)?.searchQuestion??'',
             prefixIcon: const Icon(
               Icons.search,
               size: 35,

@@ -6,6 +6,8 @@ import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/utils/management_time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class EditCommentDialog extends StatefulWidget {
@@ -57,10 +59,10 @@ class _EditCommentDialogState extends State<EditCommentDialog> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const Center(
+                 Center(
                   child: Text(
-                    'EDIT Comment',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    AppLocalizations.of(context)?.editComment??'',
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(
@@ -77,11 +79,11 @@ class _EditCommentDialogState extends State<EditCommentDialog> {
                         controller: widget.contentController,
                         maxLines: 8,
                         keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
+                        decoration:  InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            border: OutlineInputBorder(),
-                            labelText: 'Edit Comment'),
+                            border: const OutlineInputBorder(),
+                            labelText: AppLocalizations.of(context)?.emptyComment??''),
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(),
                         ]),
@@ -106,9 +108,9 @@ class _EditCommentDialogState extends State<EditCommentDialog> {
                           decoration: BoxDecoration(
                               color: const Color(0xFFD9D9D9),
                               borderRadius: BorderRadius.circular(10)),
-                          child: const Text(
-                            'Cancel',
-                            style: TextStyle(
+                          child:  Text(
+                            AppLocalizations.of(context)?.cancel??'',
+                            style: const TextStyle(
                                 fontSize: 20,
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold),
@@ -150,9 +152,9 @@ class _EditCommentDialogState extends State<EditCommentDialog> {
                               decoration: BoxDecoration(
                                   color: const Color(0xFFFDCA15),
                                   borderRadius: BorderRadius.circular(10)),
-                              child: const Text(
-                                'Edit Question',
-                                style: TextStyle(
+                              child:  Text(
+                                AppLocalizations.of(context)?.emptyComment??'',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),

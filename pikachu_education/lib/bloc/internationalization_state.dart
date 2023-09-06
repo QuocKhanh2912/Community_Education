@@ -1,22 +1,18 @@
 part of 'internationalization_bloc.dart';
 
 abstract class InternationalizationState {
-  String appLangCode;
-
-  InternationalizationState({required this.appLangCode});
+  String? appLangCode;
+  InternationalizationState({this.appLangCode});
 }
 
-
 class InternationalizationInitial extends InternationalizationState {
-  InternationalizationInitial({required super.appLangCode});
+  InternationalizationInitial({ super.appLangCode});
 }
 
 class InternationalizationEnSuccessState extends InternationalizationState {
-
-  InternationalizationEnSuccessState({required super.appLangCode});
+  InternationalizationEnSuccessState({ super.appLangCode});
 }
 
 class InternationalizationViSuccessState extends InternationalizationState {
-
-  InternationalizationViSuccessState({required super.appLangCode});
+  InternationalizationViSuccessState({ super.appLangCode});
 }

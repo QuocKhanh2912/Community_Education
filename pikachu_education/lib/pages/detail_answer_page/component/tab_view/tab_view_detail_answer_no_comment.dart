@@ -7,6 +7,8 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/detail_answer_page/component/tab_view/text_form_field_comment.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 
@@ -64,12 +66,12 @@ class _TabViewDetailAnswerNoCommentState extends State<TabViewDetailAnswerNoComm
                         commentController: widget.commentController,
                         currentUserInfo: widget.currentUserInfo,
                         questionInfo: widget.questionInfo),
-                    const Align(alignment: Alignment.center,
+                     Align(alignment: Alignment.center,
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Text(textAlign: TextAlign.center,
-                          'This answer has no comments, be the first to comment or visit another time',
-                          style: TextStyle(
+                          AppLocalizations.of(context)?.noComment??'',
+                          style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 25),
                         ),

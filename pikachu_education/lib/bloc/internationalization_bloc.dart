@@ -8,7 +8,7 @@ class InternationalizationBloc
     extends Bloc<InternationalizationEvent, InternationalizationState> {
 
   InternationalizationBloc()
-      : super(InternationalizationInitial(appLangCode: 'en')) {
+      : super(InternationalizationInitial()) {
     _authService = AuthenticationLocalService();
     on<InternationalizationViEvent>(_internationalizationViEvent);
     on<InternationalizationEnEvent>(_internationalizationEnEvent);
@@ -20,7 +20,7 @@ class InternationalizationBloc
   _internationalizationInitEvent(InternationalizationEvent event,
       Emitter<InternationalizationState> emit) async {
    var appLangCode = await _authService.readAppLang();
-   print(appLangCode);
+
    emit (InternationalizationInitial(appLangCode: appLangCode));
   }
 

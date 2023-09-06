@@ -3,8 +3,9 @@ import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/post_answer/create_answer_page.dart';
-import 'package:pikachu_education/pages/authentication/component/dialog_custom.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class PostAnswerButton extends StatefulWidget {
@@ -50,9 +51,9 @@ class _PostAnswerButtonState extends State<PostAnswerButton> {
                         currentUserInfo: widget.currentUserInfo,
                           ));
                 },
-              child: const Text(
-                'Post Answer',
-                style: TextStyle(
+              child:  Text(
+                AppLocalizations.of(context)?.postAnswer??'',
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: ManagementColor.white,
                     fontSize: 25),

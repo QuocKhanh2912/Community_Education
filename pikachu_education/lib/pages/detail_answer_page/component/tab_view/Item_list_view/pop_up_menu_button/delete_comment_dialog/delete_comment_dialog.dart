@@ -5,6 +5,8 @@ import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class DeleteCommentDialog extends StatefulWidget {
@@ -46,10 +48,10 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const Center(
+                 Center(
                   child: Text(
-                    'DELETE ANSWER',
-                    style: TextStyle(
+                    AppLocalizations.of(context)?.deleteAnswer??'',
+                    style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: ManagementColor.red),
@@ -69,9 +71,9 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
                           decoration: BoxDecoration(
                               color: ManagementColor.white,
                               borderRadius: BorderRadius.circular(10)),
-                          child: const Text(
-                            'Cancel',
-                            style: TextStyle(
+                          child:  Text(
+                            AppLocalizations.of(context)?.cancel??'',
+                            style: const TextStyle(
                                 fontSize: 20,
                                 color: ManagementColor.red,
                                 fontWeight: FontWeight.bold),
@@ -97,9 +99,9 @@ class _DeleteCommentDialogState extends State<DeleteCommentDialog> {
                               decoration: BoxDecoration(
                                   color: ManagementColor.yellow,
                                   borderRadius: BorderRadius.circular(10)),
-                              child: const Text(
-                                'Delete',
-                                style: TextStyle(
+                              child: Text(
+                                AppLocalizations.of(context)?.delete??'',
+                                style: const TextStyle(
                                     fontSize: 20,
                                     color: ManagementColor.white,
                                     fontWeight: FontWeight.bold),

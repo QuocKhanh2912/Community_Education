@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DetailQuestion extends StatefulWidget {
   const DetailQuestion({super.key, required this.dataQuestionInfo});
@@ -54,7 +56,7 @@ class _DetailQuestionState extends State<DetailQuestion> {
                         children: [
                           const Icon(Icons.comment_sharp),
                           Text(
-                              '${widget.dataQuestionInfo.numberAnswer} Answers'),
+                              '${widget.dataQuestionInfo.numberAnswer} ${AppLocalizations.of(context)?.answers??''}'),
                         ],
                       ),
                       Row(

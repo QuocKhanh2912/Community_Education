@@ -32,26 +32,31 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginBloc(),
         ),
         BlocProvider(
-          create: (context) => InternationalizationBloc(),
+          create: (context) => InternationalizationBloc()..add(InternationalizationInitEvent()),
         ),
       ],
-      child: BlocBuilder<InternationalizationBloc, InternationalizationState>(
-        builder: (context, state) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            supportedLocales: L10n.all,
-            locale: Locale(state.appLangCode),
-            home: const SplashPage(),
-            localizationsDelegates: const [
-              FormBuilderLocalizations.delegate,
-              AppLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate
-            ],
-            onGenerateRoute: generateRoute,
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<InternationalizationBloc, InternationalizationState>(
+            builder: (context, state) {
+
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                supportedLocales: L10n.all,
+                locale: state.appLangCode==null?null:Locale(state.appLangCode??'en'),
+                home: const SplashPage(),
+                localizationsDelegates: const [
+                  FormBuilderLocalizations.delegate,
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate
+                ],
+                onGenerateRoute: generateRoute,
+              );
+            },
           );
-        },
+        }
       ),
     );
   }

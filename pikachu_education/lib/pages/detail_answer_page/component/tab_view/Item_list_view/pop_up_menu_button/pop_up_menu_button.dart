@@ -8,6 +8,8 @@ import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog.dart';
 import 'delete_comment_dialog/delete_comment_dialog.dart';
 import 'edit_comment_dialog/edit_comment_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class PopUpMenuButtonComment extends StatefulWidget {
@@ -70,11 +72,11 @@ class _PopUpMenuButtonCommentState extends State<PopUpMenuButtonComment> {
 
                           }
                         },
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.edit),
-                            Text('Edit'),
+                            const Icon(Icons.edit),
+                            Text(AppLocalizations.of(context)?.edit??''),
                           ],
                         ),
                       ),
@@ -99,11 +101,11 @@ class _PopUpMenuButtonCommentState extends State<PopUpMenuButtonComment> {
                                     const DeclineDialogComment()).then((value) => Navigator.pop(context));
                           }
                         },
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.delete, color: ManagementColor.red),
-                            Text('Delete', style: TextStyle(color: ManagementColor.red)),
+                            const Icon(Icons.delete, color: ManagementColor.red),
+                            Text(AppLocalizations.of(context)?.delete??'', style: const TextStyle(color: ManagementColor.red)),
                           ],
                         ),
                       ),
