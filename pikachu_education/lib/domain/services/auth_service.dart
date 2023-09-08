@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 
 class AuthenticationService {
+
+
   static Future<void> firebasePhoneNumberLogout() async {
     return FirebaseAuth.instance.signOut();
   }
@@ -96,7 +98,7 @@ class AuthenticationService {
         return userCurrentInfo;
       }
     } catch (e) {
-      print('ok: $e');
+      print(e);
     }
     return userCurrentInfo;
   }
@@ -211,7 +213,6 @@ class AuthenticationService {
         .ref("/users/$currentUserID")
         .child('name')
         .get();
-
     var currentUserName = (currentUserNameSnapshot.value ?? '') as String;
     return currentUserName;
   }

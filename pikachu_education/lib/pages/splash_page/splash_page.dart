@@ -23,7 +23,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     _splashBloc.add(OnBoardingAlreadyCheckingEvent());
-    _internationalizationBloc.add(InternationalizationInitEvent());
     super.initState();
   }
 

@@ -4,6 +4,7 @@ import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/detail_answer_page/component/tab_view/Item_list_view/pop_up_menu_button/pop_up_menu_button.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 
@@ -48,7 +49,7 @@ class _CommentModalState extends State<CommentModal> {
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(
-              widget.commentInfo.timePost,
+              widget.commentInfo.timePost.formatDateTime(context),
               style: const TextStyle(fontSize: 15),
             )
           ],

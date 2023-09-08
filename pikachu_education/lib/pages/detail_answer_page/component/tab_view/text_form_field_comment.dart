@@ -61,7 +61,7 @@ class _TextFormFieldCommentState extends State<TextFormFieldComment> {
                       widget.commentFormFieldKey.currentState!.save();
                       var itemToPost = DataCommentModal(
                           contentComment: widget.commentController.text,
-                          timePost: ManagementTime.getTimePost(),
+                          timePost: DateTime.now().toString(),
                           userIdPostComment: widget.currentUserInfo.userId,
                           userNamePostComment: widget.currentUserInfo.userName,
                           commentId: '');

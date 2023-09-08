@@ -332,7 +332,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                         true) {
                                       var item = DataQuestionModal(
                                           timePost:
-                                              ManagementTime.getTimePost(),
+                                              DateTime.now().toString(),
                                           questionContent:
                                               contentController.text,
                                           questionSubject:

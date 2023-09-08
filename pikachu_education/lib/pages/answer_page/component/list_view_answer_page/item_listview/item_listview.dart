@@ -7,6 +7,7 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/list_view_answer_page/item_listview/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
@@ -110,10 +111,10 @@ class _ItemListViewState extends State<ItemListView> {
                                         .listDataAnswerFromSever[widget.index]
                                         .userNamePost),
                                     Text(
-                                        widget
+                                        (widget
                                             .listDataAnswerFromSever[
                                                 widget.index]
-                                            .timePost,
+                                            .timePost).formatDateTime(context),
                                         style: const TextStyle(
                                             fontSize: 10,
                                             color: ManagementColor.black))
@@ -245,7 +246,7 @@ class _ItemListViewState extends State<ItemListView> {
                                   Text(
                                       widget
                                           .listDataAnswerFromSever[widget.index]
-                                          .timePost,
+                                          .timePost.formatDateTime(context),
                                       style: const TextStyle(
                                           fontSize: 8,
                                           color: ManagementColor.black))

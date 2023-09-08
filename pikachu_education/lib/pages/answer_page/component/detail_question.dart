@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -76,7 +77,7 @@ class _DetailQuestionState extends State<DetailQuestion> {
                                   child: Text(
                                       widget.dataQuestionInfo.userName,
                                       overflow: TextOverflow.ellipsis)),
-                              Text(widget.dataQuestionInfo.timePost,
+                              Text(widget.dataQuestionInfo.timePost.formatDateTime(context),
                                   style: const TextStyle(
                                     fontSize: 8,
                                     color: ManagementColor.black,

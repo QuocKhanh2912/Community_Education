@@ -5,8 +5,10 @@ import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ItemListviewQuestion extends StatefulWidget {
   const ItemListviewQuestion(
@@ -94,10 +96,12 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                                       .userName,
                                   style: const TextStyle(fontSize: 15)),
                               Text(
-                                  widget.dataQuestionFromServer[widget.index]
-                                      .timePost,
+                                  (widget.dataQuestionFromServer[widget.index]
+                                          .timePost)
+                                      .formatDateTime(context),
                                   style: const TextStyle(
-                                      fontSize: 10, color: ManagementColor.black)),
+                                      fontSize: 10,
+                                      color: ManagementColor.black)),
                             ],
                           ),
                         ),
@@ -176,7 +180,7 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                           child: Row(
                             children: [
                               Text(
-                                  '${widget.dataQuestionFromServer[widget.index].numberAnswer} answer' //ToDo
+                                  '${widget.dataQuestionFromServer[widget.index].numberAnswer} ${AppLocalizations.of(context)?.answers ?? ''}'
                                   // '${widget.dataQuestionFromServer[index].numberAnswer}'
                                   ),
                               const Icon(Icons.message)
@@ -220,9 +224,7 @@ class _ItemListviewQuestionState extends State<ItemListviewQuestion> {
                                 child: Row(
                                   children: [
                                     Text(
-                                        '${widget.dataQuestionFromServer[widget.index].numberLike} Like'
-                                        // '${widget.dataQuestionFromServer[index].numberLike}'
-                                        ),
+                                        '${widget.dataQuestionFromServer[widget.index].numberLike} ${AppLocalizations.of(context)?.like ?? ''}'),
                                     Icon(
                                       checkLiked
                                           ? Icons.favorite

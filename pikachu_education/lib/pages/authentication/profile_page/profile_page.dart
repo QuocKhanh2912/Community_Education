@@ -4,6 +4,7 @@ import 'package:pikachu_education/components/button/negative_button.dart';
 import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
+import 'package:pikachu_education/utils/extensions/user_name_extension.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
@@ -59,6 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
           }
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
             body: BlocListener<ProfilePageBloc, ProfilePageState>(
           listener: (context, state) {
             if (state is PostAvatarSuccess ||
@@ -165,6 +167,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   if (value == null || value.isEmpty) {
                                     return AppLocalizations.of(context)?.emptyUserName??'';
                                   }
+                                  RegExp phoneNumExp =
+                                      ManagementRegex.userName;
+                                  if (!phoneNumExp.hasMatch(value)) {
+                                    return AppLocalizations.of(context)?.invalidPhoneNum??'';
+                                  }
                                 },
                                 hintText: AppLocalizations.of(context)?.userName??'',
                                 textInputType: TextInputType.text,
@@ -231,10 +238,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                         if (validator) {
                                           DataUserModal item = DataUserModal(
                                               userId: currentUserInfo.userId,
-                                              userName: userNameController.text,
-                                              email: emailController.text,
+                                              userName: userNameController.text.removeSpaces(),
+                                              email: emailController.text.trim(),
                                               phoneNumber:
-                                                  phoneNumberController.text);
+                                                  phoneNumberController.text.trim());
                                           context.read<ProfilePageBloc>().add(
                                               UpdateProfileEvent(
                                                   itemToUpdate: item));

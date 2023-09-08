@@ -291,7 +291,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                                 widget.currentUserName,
                                             answerId: '',
                                             timePost:
-                                                ManagementTime.getTimePost(),
+                                              DateTime.now().toString(),
                                             answerContent:
                                                 contentController.text,
                                             answerTitle: titleController.text,

@@ -3,7 +3,7 @@ import 'package:pikachu_education/service/app_shared_preference.dart';
 import 'package:pikachu_education/utils/management_key.dart';
 
 class AuthenticationLocalService {
-  late final AppSharePreference _prefs = AppSharePreference();
+  final AppSharePreference _prefs = AppSharePreference();
 
   Future<void> saveMethodLogin({required String methodLogin}) async {
     await _prefs.saveData(key: ManagementKey.methodLoginKey, data: methodLogin);
