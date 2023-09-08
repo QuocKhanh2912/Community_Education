@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   final DataHomePageBloc _dataHomeBloc = DataHomePageBloc();
 
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
   DataUserModal currentUserInfo = DataUserModal(
       userId: 'userId', userName: 'userName', email: 'email', avatarUrl: '');
   DataQuestionModal questionInitial = DataQuestionModal(
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
   getCurrentUserInfo(String userID) async {
     var currentUserFromDataBase =
-        await AuthRepositories.getCurrentUserInfo(userID: userID);
+    await AuthRepositories.getCurrentUserInfo(userID: userID);
     setState(() {
       currentUserInfo = currentUserFromDataBase;
     });
@@ -60,8 +60,8 @@ class _HomePageState extends State<HomePage> {
 
   getListQuestionIdLiked({required String userId}) async {
     var listQuestionIdLikeFromSever =
-        await DatabaseRepositories.getListQuestionIdLiked(
-            currentUserId: userId);
+    await DatabaseRepositories.getListQuestionIdLiked(
+        currentUserId: userId);
     setState(() {
       listQuestionIdLiked = listQuestionIdLikeFromSever;
     });
@@ -152,8 +152,19 @@ class _HomePageState extends State<HomePage> {
                         AddQuestionButton(
                             dataHomeBloc: _dataHomeBloc,
                             currentUserInfo: currentUserInfo),
-                        SearchButton(
-                          searchController: searchController,
+                        BlocBuilder<DataHomePageBloc, DataHomePageState>(
+                          builder: (context, state) {
+                            if (state is FetchDataQuestionSuccessState){
+                              return SearchButton(
+                                searchController: searchController,
+                                listQuestions: state.listDataUserModal,
+                              );
+                            }
+                            return SearchButton(
+                                searchController: searchController,
+                                listQuestions: const []);
+                          },
+
                         )
                       ],
                     ),
@@ -173,16 +184,40 @@ class _HomePageState extends State<HomePage> {
                                   listQuestionIdLiked: listQuestionIdLiked,
                                   titleController: titleController,
                                   editQuestionFormFieldKey:
-                                      editQuestionFormFieldKey,
+                                  editQuestionFormFieldKey,
                                   subjectController: subjectController,
                                   contentController: contentController,
                                   dataHomePageBloc: _dataHomeBloc,
                                   dataQuestionFromServer:
-                                      dataQuestionFromServer,
+                                  dataQuestionFromServer,
                                   currentUserInfo: currentUserInfo,
                                 )),
                           );
-                        } else {
+                        } if (state is SearchQuestionSuccessState) {
+                          var dataQuestionFromServer = state.listQuestionSearched;
+                          return Expanded(
+                            child: SmartRefresher(
+                                controller: _refreshController,
+                                onRefresh: () {
+                                  context
+                                      .read<DataHomePageBloc>()
+                                      .add(RefreshDataQuestion());
+                                },
+                                child: ListViewQuestion(
+                                  listQuestionIdLiked: listQuestionIdLiked,
+                                  titleController: titleController,
+                                  editQuestionFormFieldKey:
+                                  editQuestionFormFieldKey,
+                                  subjectController: subjectController,
+                                  contentController: contentController,
+                                  dataHomePageBloc: _dataHomeBloc,
+                                  dataQuestionFromServer:
+                                  dataQuestionFromServer,
+                                  currentUserInfo: currentUserInfo,
+                                )),
+                          );
+                        }
+                        else {
                           return const Expanded(
                             child: Center(child: CircularProgressIndicator()),
                           );
