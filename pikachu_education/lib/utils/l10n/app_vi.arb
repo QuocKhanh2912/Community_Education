@@ -1,5 +1,5 @@
 {
-"language": "Tiếng Việt",
+  "language": "Tiếng Việt",
   "login": "Đăng nhập",
   "orLoginWith": "Hoặc đăng nhập với",
   "addQuestion": "Thêm Câu hỏi",
@@ -21,6 +21,7 @@
   "phoneNumber": "Số Điện Thoại",
   "userName": "Tên Người Dùng",
   "pickYourImage": "Chọn Ảnh Đại Diện",
+  "updateAvatar": "Cập nhập",
   "emptyUserName": "Tên người dùng không được đê trống",
   "invalidEmail": "Địa chỉ Email không hợp lệ",
   "emptyEmail": "Địa chỉ Email không được để trống",
@@ -45,5 +46,21 @@
   "decline": "Bạn không có quyến chỉnh sửa bài đăng này",
   "emptyComment": "Comment không được để trống",
   "editComment": "Chỉnh sửa bình luận",
-  "deleteAnswer": "Xóa câu trả lời"
+  "deleteAnswer": "Xóa câu trả lời",
+  "mathematics": "Toán",
+  "literature":"Văn học",
+  "foreignLanguage": "Ngoại ngữ",
+  "history": "Lịch Sử",
+  "physicalEducation": "Giáo dục thể chất",
+  "physics": "Vật Lý",
+  "chemistry": "Hóa Học",
+  "technology": "Công Nghệ",
+  "music": "Âm Nhạc",
+  "biology": "Sinh Học",
+  "civicEducation": "Dáo dục công dân",
+  "fineArt": "Nghệ thuật",
+  "engineering": "Kỹ thuật",
+  "english": "Tiếng anh",
+  "informatics": "Công nghệ thông tin",
+  "other": "khác"
 }

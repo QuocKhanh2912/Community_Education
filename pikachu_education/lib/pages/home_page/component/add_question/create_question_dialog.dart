@@ -13,7 +13,6 @@ import 'package:pikachu_education/pages/home_page/bloc/get_image_to_create_quest
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import 'package:pikachu_education/utils/management_time.dart';
 
 class CreateQuestionPage extends StatefulWidget {
   const CreateQuestionPage(
@@ -122,7 +121,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                   hint: Text(
                                       AppLocalizations.of(context)?.subject ??
                                           ''),
-                                  items: DataAddQuestion.listSubject
+                                  items: DataAddQuestion.listSubject(context)
                                       .map<DropdownMenuItem<String>>(
                                           (String value) {
                                     return DropdownMenuItem<String>(
@@ -331,8 +330,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                             .validate() ==
                                         true) {
                                       var item = DataQuestionModal(
-                                          timePost:
-                                              DateTime.now().toString(),
+                                          timePost: DateTime.now().toString(),
                                           questionContent:
                                               contentController.text,
                                           questionSubject:

@@ -36,8 +36,14 @@ class LikedQuestionSuccessState extends DataHomePageState {}
 
 class RemovedLikeQuestionSuccessState extends DataHomePageState {}
 
-class SearchQuestionSuccessState extends DataHomePageState {
+class SearchContentQuestionSuccessState extends DataHomePageState {
   List<DataQuestionModal> listQuestionSearched;
 
-  SearchQuestionSuccessState({required this.listQuestionSearched});
+  SearchContentQuestionSuccessState({required this.listQuestionSearched});
+}
+
+class SearchSubjectQuestionSuccessState extends DataHomePageState {
+  List<DataQuestionModal> listQuestionSearched;
+
+  SearchSubjectQuestionSuccessState({required this.listQuestionSearched});
 }

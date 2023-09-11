@@ -78,7 +78,7 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
       emit(RemovedLikeQuestionSuccessState());
     });
 
-    on<SearchQuestionEvent>((event, emit) async {
+    on<SearchContentQuestionEvent>((event, emit) async {
       emit(FetchDataQuestionLoadingState(const []));
       var listDataUsers =
           await DatabaseRepositories.fetchDataQuestionFromSever();
@@ -91,7 +91,24 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
           listDataQuestionSearched.add(item);
         }
       }
-      emit(SearchQuestionSuccessState(
+      emit(SearchContentQuestionSuccessState(
+          listQuestionSearched: listDataQuestionSearched));
+    });
+
+    on<SearchSubjectQuestionEvent>((event, emit) async {
+      emit(FetchDataQuestionLoadingState(const []));
+      var listDataUsers =
+      await DatabaseRepositories.fetchDataQuestionFromSever();
+      List<DataQuestionModal> listDataQuestionSearched = [];
+      String characterToSearch = event.subjectToSearch;
+      for (var item in listDataUsers) {
+        if (item.questionSubject
+            .toLowerCase()
+            .contains(characterToSearch.toLowerCase())) {
+          listDataQuestionSearched.add(item);
+        }
+      }
+      emit(SearchSubjectQuestionSuccessState(
           listQuestionSearched: listDataQuestionSearched));
     });
   }

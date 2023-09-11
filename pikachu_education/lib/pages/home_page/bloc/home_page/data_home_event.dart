@@ -62,10 +62,17 @@ class RemoveLikeQuestionsEvent extends DataHomePageEvent {
       required this.currentUserId});
 }
 
-class SearchQuestionEvent extends DataHomePageEvent {
-  List<DataQuestionModal> listQuestionFromSever;
+class SearchContentQuestionEvent extends DataHomePageEvent {
+
   String characterToSearch;
 
-  SearchQuestionEvent(
-      {required this.characterToSearch, required this.listQuestionFromSever});
+  SearchContentQuestionEvent(
+      {required this.characterToSearch});
+}
+
+class SearchSubjectQuestionEvent extends DataHomePageEvent {
+  String subjectToSearch;
+
+  SearchSubjectQuestionEvent(
+      {required this.subjectToSearch});
 }

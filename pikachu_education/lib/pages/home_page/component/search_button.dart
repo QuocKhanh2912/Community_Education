@@ -38,9 +38,8 @@ class _SearchButtonState extends State<SearchButton> {
                 ),
                 textController: widget.searchController,
                 onSuffixTap: () {
-                  context.read<DataHomePageBloc>().add(SearchQuestionEvent(
-                      characterToSearch: widget.searchController.text,
-                      listQuestionFromSever: widget.listQuestions));
+                  context.read<DataHomePageBloc>().add(SearchContentQuestionEvent(
+                      characterToSearch: widget.searchController.text));
                 },
                 suffixIcon: const Icon(Icons.search),
                 textFieldColor: ManagementColor.lightYellow,
