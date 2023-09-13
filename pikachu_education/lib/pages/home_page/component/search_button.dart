@@ -8,9 +8,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchButton extends StatefulWidget {
   const SearchButton(
-      {super.key, required this.searchController, required this.listQuestions});
+      {super.key,
+      required this.searchController,
+      required this.listQuestions,
+      required this.subjectFilterController});
 
   final TextEditingController searchController;
+  final TextEditingController subjectFilterController;
   final List<DataQuestionModal> listQuestions;
 
   @override
@@ -38,8 +42,11 @@ class _SearchButtonState extends State<SearchButton> {
                 ),
                 textController: widget.searchController,
                 onSuffixTap: () {
-                  context.read<DataHomePageBloc>().add(SearchContentQuestionEvent(
-                      characterToSearch: widget.searchController.text));
+                  context.read<DataHomePageBloc>().add(
+                      SearchContentQuestionEvent(
+                          characterToSearch: widget.searchController.text,
+                          subjectToFilter:
+                              widget.subjectFilterController.text,currentList: widget.listQuestions));
                 },
                 suffixIcon: const Icon(Icons.search),
                 textFieldColor: ManagementColor.lightYellow,

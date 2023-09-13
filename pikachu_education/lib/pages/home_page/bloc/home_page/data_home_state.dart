@@ -42,8 +42,3 @@ class SearchContentQuestionSuccessState extends DataHomePageState {
   SearchContentQuestionSuccessState({required this.listQuestionSearched});
 }
 
-class SearchSubjectQuestionSuccessState extends DataHomePageState {
-  List<DataQuestionModal> listQuestionSearched;
-
-  SearchSubjectQuestionSuccessState({required this.listQuestionSearched});
-}

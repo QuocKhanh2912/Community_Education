@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController subjectController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
+  final TextEditingController subjectFilterController = TextEditingController();
   final GlobalKey<FormState> editQuestionFormFieldKey = GlobalKey<FormState>();
   bool showAddQuestionButton = true;
 
@@ -77,6 +78,7 @@ class _HomePageState extends State<HomePage> {
     subjectController.dispose();
     contentController.dispose();
     _refreshController.dispose();
+    subjectFilterController.dispose();
     super.dispose();
   }
 
@@ -161,96 +163,110 @@ class _HomePageState extends State<HomePage> {
                               return SearchButton(
                                 searchController: searchController,
                                 listQuestions: state.listDataUserModal,
+                                subjectFilterController:
+                                    subjectFilterController,
                               );
                             }
                             return SearchButton(
-                                searchController: searchController,
-                                listQuestions: const []);
+                              searchController: searchController,
+                              listQuestions: const [],
+                              subjectFilterController: subjectFilterController,
+                            );
                           },
                         )
                       ],
                     ),
                     BlocBuilder<DataHomePageBloc, DataHomePageState>(
                       builder: (context, state) {
-                        return Align(
-                          alignment: Alignment.topRight,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, right: 10, bottom: 10),
-                            child: SizedBox(
-                              width: MediaQuery.sizeOf(context).width / 2.3,
-                              height: 30,
-                              child: DropdownButtonFormField(
-                                style: const TextStyle(
-                                    fontSize: 13, color: Colors.black),
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  contentPadding:
-                                      const EdgeInsets.only(left: 5, right: 5),
-                                  fillColor: ManagementColor.white,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                                icon: const Icon(
-                                    Icons.arrow_drop_down_circle_outlined),
-                                hint: Text(
-                                    AppLocalizations.of(context)?.subject ??
-                                        ''),
-                                items: DataAddQuestion.listSubject(context)
-                                    .map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (String? value) {
-                                  context.read<DataHomePageBloc>().add(
-                                      SearchSubjectQuestionEvent(
-                                          subjectToSearch: value ?? ''));
-                                },
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    BlocBuilder<DataHomePageBloc, DataHomePageState>(
-                      builder: (context, state) {
                         if (state is FetchDataQuestionSuccessState ||
-                            state is SearchSubjectQuestionSuccessState ||
                             state is SearchContentQuestionSuccessState) {
-                          List<DataQuestionModal> dataQuestionFromServer=[];
-                          if (state is FetchDataQuestionSuccessState){
-                            dataQuestionFromServer =state.listDataUserModal;
+                          List<DataQuestionModal> dataQuestionFromServer = [];
+                          if (state is FetchDataQuestionSuccessState) {
+                            dataQuestionFromServer = state.listDataUserModal;
                           }
-                          if (state is SearchSubjectQuestionSuccessState){
-                            dataQuestionFromServer =state.listQuestionSearched;
-                          }
-                          if (state is SearchContentQuestionSuccessState){
-                            dataQuestionFromServer =state.listQuestionSearched;
+                          if (state is SearchContentQuestionSuccessState) {
+                            dataQuestionFromServer = state.listQuestionSearched;
                           }
                           return Expanded(
-                            child: SmartRefresher(
-                                controller: _refreshController,
-                                onRefresh: () {
-                                  context
-                                      .read<DataHomePageBloc>()
-                                      .add(RefreshDataQuestion());
-                                  subjectController.clear();
-                                },
-                                child: ListViewQuestion(
-                                  listQuestionIdLiked: listQuestionIdLiked,
-                                  titleController: titleController,
-                                  editQuestionFormFieldKey:
-                                      editQuestionFormFieldKey,
-                                  subjectController: subjectController,
-                                  contentController: contentController,
-                                  dataHomePageBloc: _dataHomeBloc,
-                                  dataQuestionFromServer:
-                                      dataQuestionFromServer,
-                                  currentUserInfo: currentUserInfo,
-                                )),
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, right: 10, bottom: 10),
+                                    child: SizedBox(
+                                      width: MediaQuery.sizeOf(context).width /
+                                          2.3,
+                                      height: 30,
+                                      child: DropdownButtonFormField(
+                                        style: const TextStyle(
+                                            fontSize: 13, color: Colors.black),
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          contentPadding: const EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          fillColor: ManagementColor.white,
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                        icon: const Icon(Icons
+                                            .arrow_drop_down_circle_outlined),
+                                        hint: Text(AppLocalizations.of(context)
+                                                ?.subject ??
+                                            ''),
+                                        items:
+                                            DataAddQuestion.listSubject(context)
+                                                .map<DropdownMenuItem<String>>(
+                                                    (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            subjectFilterController.text =
+                                                value ?? '';
+                                            context
+                                                .read<DataHomePageBloc>()
+                                                .add(SearchContentQuestionEvent(
+                                                    characterToSearch:
+                                                        searchController.text,
+                                                    subjectToFilter:
+                                                        subjectFilterController.text,currentList: dataQuestionFromServer));
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: SmartRefresher(
+                                      controller: _refreshController,
+                                      onRefresh: () {
+                                        context
+                                            .read<DataHomePageBloc>()
+                                            .add(RefreshDataQuestion());
+                                        subjectController.clear();
+                                      },
+                                      child: ListViewQuestion(
+                                        listQuestionIdLiked:
+                                            listQuestionIdLiked,
+                                        titleController: titleController,
+                                        editQuestionFormFieldKey:
+                                            editQuestionFormFieldKey,
+                                        subjectController: subjectController,
+                                        contentController: contentController,
+                                        dataHomePageBloc: _dataHomeBloc,
+                                        dataQuestionFromServer:
+                                            dataQuestionFromServer,
+                                        currentUserInfo: currentUserInfo,
+                                      )),
+                                ),
+                              ],
+                            ),
                           );
                         } else {
                           return const Expanded(

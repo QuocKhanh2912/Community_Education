@@ -8,6 +8,7 @@ import 'package:pikachu_education/domain/repositories/database_repositories.dart
 import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 
 part 'data_home_event.dart';
+
 part 'data_home_state.dart';
 
 class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
@@ -84,31 +85,28 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
           await DatabaseRepositories.fetchDataQuestionFromSever();
       List<DataQuestionModal> listDataQuestionSearched = [];
       String characterToSearch = event.characterToSearch;
-      for (var item in listDataUsers) {
-        if (item.questionContent
-            .toLowerCase()
-            .contains(characterToSearch.toLowerCase())) {
-          listDataQuestionSearched.add(item);
+
+      if (event.subjectToFilter == '') {
+        for (var item in listDataUsers) {
+          if (item.questionContent
+              .toLowerCase()
+              .contains(characterToSearch.toLowerCase())) {
+            listDataQuestionSearched.add(item);
+          }
+        }
+      } else {
+        for (var item in event.currentList) {
+          if (item.questionContent
+                  .toLowerCase()
+                  .contains(characterToSearch.toLowerCase()) &&
+              item.questionSubject
+                  .toLowerCase()
+                  .contains(event.subjectToFilter.toLowerCase())) {
+            listDataQuestionSearched.add(item);
+          }
         }
       }
       emit(SearchContentQuestionSuccessState(
-          listQuestionSearched: listDataQuestionSearched));
-    });
-
-    on<SearchSubjectQuestionEvent>((event, emit) async {
-      emit(FetchDataQuestionLoadingState(const []));
-      var listDataUsers =
-      await DatabaseRepositories.fetchDataQuestionFromSever();
-      List<DataQuestionModal> listDataQuestionSearched = [];
-      String characterToSearch = event.subjectToSearch;
-      for (var item in listDataUsers) {
-        if (item.questionSubject
-            .toLowerCase()
-            .contains(characterToSearch.toLowerCase())) {
-          listDataQuestionSearched.add(item);
-        }
-      }
-      emit(SearchSubjectQuestionSuccessState(
           listQuestionSearched: listDataQuestionSearched));
     });
   }

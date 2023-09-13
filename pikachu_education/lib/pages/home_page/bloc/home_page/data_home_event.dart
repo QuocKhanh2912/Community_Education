@@ -65,14 +65,11 @@ class RemoveLikeQuestionsEvent extends DataHomePageEvent {
 class SearchContentQuestionEvent extends DataHomePageEvent {
 
   String characterToSearch;
+  String subjectToFilter;
+  List<DataQuestionModal> currentList;
 
   SearchContentQuestionEvent(
-      {required this.characterToSearch});
+      {required this.characterToSearch,required this.subjectToFilter,required this.currentList});
 }
 
-class SearchSubjectQuestionEvent extends DataHomePageEvent {
-  String subjectToSearch;
 
-  SearchSubjectQuestionEvent(
-      {required this.subjectToSearch});
-}
