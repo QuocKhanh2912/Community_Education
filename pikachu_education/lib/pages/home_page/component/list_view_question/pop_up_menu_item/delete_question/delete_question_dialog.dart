@@ -30,7 +30,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
         child: BlocBuilder<DataHomePageBloc, DataHomePageState>(
           builder: (context, state) {
             return AlertDialog(
-              backgroundColor: const Color(0xFFFDFFAE),
+              backgroundColor: ManagementColor.lightYellow,
               insetPadding: EdgeInsets.zero,
               contentPadding: EdgeInsets.zero,
               alignment: Alignment.center,
@@ -47,7 +47,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.red),
+                            color: ManagementColor.red),
                       ),
                     ),
                     Row(
@@ -68,7 +68,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
                                 'Cancel',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.red,
+                                    color: ManagementColor.red,
                                     fontWeight: FontWeight.bold),
                               ),
                             )),
@@ -92,7 +92,7 @@ class _DeleteQuestionDialogState extends State<DeleteQuestionDialog> {
                                 'Delete',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: ManagementColor.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             )),

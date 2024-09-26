@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class DetailQuestion extends StatefulWidget {
   const DetailQuestion({super.key, required this.dataQuestionInfo});
@@ -18,10 +22,10 @@ class _DetailQuestionState extends State<DetailQuestion> {
       padding: const EdgeInsets.only(top: 8, left: 10, right: 10),
       child: Container(
           decoration: BoxDecoration(
-              gradient: const LinearGradient(
+              gradient:  const LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
-                  colors: [Color(0xFFFDFFAE), Color(0xFFFFFFFF)]),
+                  colors: [ManagementColor.lightYellow, ManagementColor.white]),
               borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -53,7 +57,7 @@ class _DetailQuestionState extends State<DetailQuestion> {
                         children: [
                           const Icon(Icons.comment_sharp),
                           Text(
-                              '${widget.dataQuestionInfo.numberAnswer} Answers'),
+                              '${widget.dataQuestionInfo.numberAnswer} ${AppLocalizations.of(context)?.answers??''}'),
                         ],
                       ),
                       Row(
@@ -73,10 +77,10 @@ class _DetailQuestionState extends State<DetailQuestion> {
                                   child: Text(
                                       widget.dataQuestionInfo.userName,
                                       overflow: TextOverflow.ellipsis)),
-                              Text(widget.dataQuestionInfo.timePost,
+                              Text(widget.dataQuestionInfo.timePost.formatDateTime(context),
                                   style: const TextStyle(
                                     fontSize: 8,
-                                    color: Color(0x4D000000),
+                                    color: ManagementColor.black,
                                   ))
                             ],
                           ),

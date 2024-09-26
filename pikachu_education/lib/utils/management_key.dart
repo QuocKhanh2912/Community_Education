@@ -7,6 +7,7 @@ class ManagementKey{
   static const String user = 'user';
   static const String methodLoginKey='methodLoginKey';
   static const String onBoardingAlready='onBoardingAlready';
+  static const String   appLang='appLang';
 
 
 }

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_answer_page_bloc.dart';
 import 'package:pikachu_education/pages/answer_page/component/list_view_answer_page/item_listview/pop_up_menu_button.dart';
 import 'package:pikachu_education/routes/page_name.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 
 class ItemListView extends StatefulWidget {
@@ -108,13 +111,13 @@ class _ItemListViewState extends State<ItemListView> {
                                         .listDataAnswerFromSever[widget.index]
                                         .userNamePost),
                                     Text(
-                                        widget
+                                        (widget
                                             .listDataAnswerFromSever[
                                                 widget.index]
-                                            .timePost,
+                                            .timePost).formatDateTime(context),
                                         style: const TextStyle(
                                             fontSize: 10,
-                                            color: Color(0x4D000000)))
+                                            color: ManagementColor.black))
                                   ],
                                 ),
                               )
@@ -201,10 +204,10 @@ class _ItemListViewState extends State<ItemListView> {
                                   checkLiked
                                       ? Icons.favorite
                                       : Icons.favorite_border,
-                                  color: Colors.red,
+                                  color: ManagementColor.red,
                                 ),
                                 Text(
-                                    '${widget.listDataAnswerFromSever[widget.index].numberLike} like'),
+                                    '${widget.listDataAnswerFromSever[widget.index].numberLike} ${AppLocalizations.of(context)?.like ?? ''}'),
                               ],
                             ),
                           ),
@@ -212,7 +215,7 @@ class _ItemListViewState extends State<ItemListView> {
                             children: [
                               const Icon(Icons.comment_sharp),
                               Text(
-                                  '${widget.listDataAnswerFromSever[widget.index].numberComment} comment'),
+                                  '${widget.listDataAnswerFromSever[widget.index].numberComment} ${AppLocalizations.of(context)?.comment ?? ''}'),
                             ],
                           ),
                           Row(
@@ -243,10 +246,10 @@ class _ItemListViewState extends State<ItemListView> {
                                   Text(
                                       widget
                                           .listDataAnswerFromSever[widget.index]
-                                          .timePost,
+                                          .timePost.formatDateTime(context),
                                       style: const TextStyle(
                                           fontSize: 8,
-                                          color: Color(0x4D000000)))
+                                          color: ManagementColor.black))
                                 ],
                               ),
                             ],

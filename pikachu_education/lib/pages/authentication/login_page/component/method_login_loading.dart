@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/utils/management_text_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class MethodLoginLoading extends StatelessWidget {
   const MethodLoginLoading(
@@ -8,12 +10,12 @@ class MethodLoginLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(mainAxisAlignment: MainAxisAlignment.center,
+    return  Row(mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircularProgressIndicator(),
-        SizedBox(width: 5),
+        const CircularProgressIndicator(),
+        const SizedBox(width: 5),
         Text(
-          'Please waiting',
+          AppLocalizations.of(context)?.pleaseWaiting??'',
           style: ManagementTextStyle.methodLogin,
         )
       ],

@@ -1,6 +1,5 @@
 part of 'data_home_bloc.dart';
 
-@immutable
 abstract class DataHomePageEvent {}
 
 class FetchDataQuestionEvent extends DataHomePageEvent {}
@@ -12,7 +11,8 @@ class PostDataQuestionsEvent extends DataHomePageEvent {
   String userId;
   File? file;
 
-  PostDataQuestionsEvent({required this.dataToPost, required this.userId,required this.file});
+  PostDataQuestionsEvent(
+      {required this.dataToPost, required this.userId, required this.file});
 }
 
 class GetCurrentUserInfoEvent extends DataHomePageEvent {
@@ -40,8 +40,6 @@ class DeleteQuestionsEvent extends DataHomePageEvent {
       {required this.userIdOfQuestion, required this.questionId});
 }
 
-
-
 class LikeQuestionsEvent extends DataHomePageEvent {
   String userIdOfQuestion;
   String questionId;
@@ -54,14 +52,24 @@ class LikeQuestionsEvent extends DataHomePageEvent {
 }
 
 class RemoveLikeQuestionsEvent extends DataHomePageEvent {
-
   String userIdOfQuestion;
   String questionId;
   String currentUserId;
 
-
   RemoveLikeQuestionsEvent(
       {required this.userIdOfQuestion,
-        required this.questionId,
-        required this.currentUserId});
+      required this.questionId,
+      required this.currentUserId});
 }
+
+class SearchContentQuestionEvent extends DataHomePageEvent {
+
+  String characterToSearch;
+  String subjectToFilter;
+  List<DataQuestionModal> currentList;
+
+  SearchContentQuestionEvent(
+      {required this.characterToSearch,required this.subjectToFilter,required this.currentList});
+}
+
+

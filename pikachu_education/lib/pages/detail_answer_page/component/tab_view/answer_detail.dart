@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/utils/extensions/datetime_extension.dart';
 
 import '../../../../../utils/management_image.dart';
 
@@ -44,7 +45,7 @@ class _AnswerDetailState extends State<AnswerDetail> {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    widget.answerInfo.timePost,
+                    widget.answerInfo.timePost.formatDateTime(context),
                     style: const TextStyle(fontSize: 15),
                   )
                 ],

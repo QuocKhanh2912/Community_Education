@@ -1,36 +1,34 @@
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
-import 'package:pikachu_education/domain/repositories/database_repositories.dart';
+import 'package:pikachu_education/service/app_shared_preference.dart';
 import 'package:pikachu_education/utils/management_key.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenticationLocalService {
-  static Future<void> saveDataForLogin(String user, String password) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user', user);
-    await prefs.setString('password', password);
+  final AppSharePreference _prefs = AppSharePreference();
+
+  Future<void> saveMethodLogin({required String methodLogin}) async {
+    await _prefs.saveData(key: ManagementKey.methodLoginKey, data: methodLogin);
   }
 
-  static Future<void> saveMethodLogin({required String methodLogin}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(ManagementKey.methodLoginKey, methodLogin);
+  Future<void> saveDataUserId({required String userId}) async {
+    await _prefs.saveData(key: ManagementKey.userId, data: userId);
   }
 
-  static Future<void> saveDataUserId({required String userId}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(ManagementKey.userId, userId);
-  }
-
-  static Future<void> saveDataUserName({required String userId}) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> saveDataUserName({required String userId}) async {
     var currentUserName =
         await AuthRepositories.getCurrentUserName(currentUserID: userId);
-    await prefs.setString(ManagementKey.userName, currentUserName);
+    await _prefs.saveData(key: ManagementKey.userName, data: currentUserName);
   }
 
-  static Future<String> methodLoginCurrent() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(ManagementKey.methodLoginKey) ?? '';
+  Future<void> saveAppLang({required String appLang}) async {
+    await _prefs.saveData(key: ManagementKey.appLang, data: appLang);
   }
 
+  Future<String> readAppLang() async {
+    return await _prefs.readData<String>(key: ManagementKey.appLang) ??
+        'en';
+  }
 
+  Future<String> methodLoginCurrent() async {
+    return await _prefs.readData<String>(key: ManagementKey.methodLoginKey) ?? '';
+  }
 }

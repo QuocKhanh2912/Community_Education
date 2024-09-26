@@ -11,6 +11,8 @@ import 'package:pikachu_education/pages/answer_page/bloc/list_answer_page/list_a
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_time.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CreateAnswerPage extends StatefulWidget {
   const CreateAnswerPage(
@@ -75,10 +77,10 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                         padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            const Center(
+                             Center(
                               child: Text(
-                                'POST ANSWER',
-                                style: TextStyle(
+                                AppLocalizations.of(context)?.postAnswer??'',
+                                style: const TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -93,17 +95,17 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                       controller: titleController,
                                       autofocus: false,
                                       keyboardType: TextInputType.text,
-                                      decoration: const InputDecoration(
-                                          border: OutlineInputBorder(
+                                      decoration:  InputDecoration(
+                                          border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           filled: true,
                                           fillColor: Colors.white,
-                                          labelText: 'Title'),
+                                          labelText: AppLocalizations.of(context)?.title??''),
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(),
                                       ]),
-                                      name: 'title'),
+                                      name: AppLocalizations.of(context)?.title??''),
                                   const SizedBox(
                                     height: 16,
                                   ),
@@ -112,17 +114,17 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                       autofocus: false,
                                       maxLines: 8,
                                       keyboardType: TextInputType.text,
-                                      decoration: const InputDecoration(
-                                          border: OutlineInputBorder(
+                                      decoration:  InputDecoration(
+                                          border: const OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           filled: true,
                                           fillColor: ManagementColor.white,
-                                          labelText: 'Content'),
+                                          labelText: AppLocalizations.of(context)?.content??''),
                                       validator: FormBuilderValidators.compose([
                                         FormBuilderValidators.required(),
                                       ]),
-                                      name: 'content')
+                                      name: AppLocalizations.of(context)?.content??'')
                                 ],
                               ),
                             ),
@@ -141,10 +143,10 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all()),
                               child: Column(children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Add Image By:',
-                                      style: TextStyle(
+                                 Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(AppLocalizations.of(context)?.addImageBy??'',
+                                      style: const TextStyle(
                                           color: ManagementColor.grey,
                                           fontSize: 25,
                                           fontWeight: FontWeight.w400)),
@@ -173,16 +175,16 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
-                                                child: const Row(
+                                                child:  Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          EdgeInsets.all(8.0),
+                                                          const EdgeInsets.all(8.0),
                                                       child: Text(
-                                                        'Your Storage',
-                                                        style: TextStyle(
+                                                        AppLocalizations.of(context)?.yourStorage??'',
+                                                        style: const TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 15,
                                                             fontWeight:
@@ -190,7 +192,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                                                     .w400),
                                                       ),
                                                     ),
-                                                    Icon(
+                                                    const Icon(
                                                       Icons.photo_library,
                                                       color: Colors.grey,
                                                     ),
@@ -219,22 +221,22 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
-                                                child: const Padding(
-                                                  padding: EdgeInsets.all(5.0),
+                                                child:  Padding(
+                                                  padding: const EdgeInsets.all(5.0),
                                                   child: Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     children: [
                                                       Text(
-                                                        'Your Camera',
-                                                        style: TextStyle(
+                                                        AppLocalizations.of(context)?.yourCamera??'',
+                                                        style: const TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w400),
                                                       ),
-                                                      Icon(
+                                                      const Icon(
                                                         Icons
                                                             .camera_alt_outlined,
                                                         color: Colors.grey,
@@ -264,11 +266,11 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                           color: ManagementColor.white,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          'Cancel',
-                                          style: TextStyle(
+                                          AppLocalizations.of(context)?.cancel??'',
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               color: Colors.red,
                                               fontWeight: FontWeight.bold),
@@ -289,7 +291,7 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                                 widget.currentUserName,
                                             answerId: '',
                                             timePost:
-                                                ManagementTime.getTimePost(),
+                                              DateTime.now().toString(),
                                             answerContent:
                                                 contentController.text,
                                             answerTitle: titleController.text,
@@ -309,11 +311,11 @@ class _CreateAnswerPageState extends State<CreateAnswerPage> {
                                           color: ManagementColor.yellow,
                                           borderRadius:
                                               BorderRadius.circular(10)),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Text(
-                                          'Create Answer',
-                                          style: TextStyle(
+                                          AppLocalizations.of(context)?.createAnswer??'',
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),

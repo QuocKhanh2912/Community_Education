@@ -4,7 +4,9 @@ import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/delete_question/delete_question_dialog.dart';
 import 'package:pikachu_education/pages/home_page/component/list_view_question/pop_up_menu_item/edit_questions/edit_question_dialog.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog/decline_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PopUpMenuButtonHomePage extends StatefulWidget {
   const PopUpMenuButtonHomePage(
@@ -46,16 +48,14 @@ class _PopUpMenuButtonHomePageState extends State<PopUpMenuButtonHomePage> {
               itemBuilder: (context) => <PopupMenuEntry>[
                     PopupMenuItem(
                       child: InkWell(
-                        onTap: ()  {
+                        onTap: () {
                           if (widget.checkOwner) {
-                             showDialog(
+                            showDialog(
                                 context: context,
                                 builder: (context) => EditQuestionDialog(
-                                      questionInfo:
-                                          widget.dataQuestionFromServer[
-                                              widget.index],
-                                      dataHomePageBloc:
-                                          widget.dataHomePageBloc,
+                                      questionInfo: widget
+                                          .dataQuestionFromServer[widget.index],
+                                      dataHomePageBloc: widget.dataHomePageBloc,
                                       contentController:
                                           widget.contentController,
                                       editQuestionFormFieldKey:
@@ -65,47 +65,47 @@ class _PopUpMenuButtonHomePageState extends State<PopUpMenuButtonHomePage> {
                                       titleController: widget.titleController,
                                     )).then((value) => Navigator.pop(context));
                           } else {
-                             showDialog(
+                            showDialog(
                                     context: context,
-                                    builder: (context) =>
-                                        const DeclineDialog())
+                                    builder: (context) => const DeclineDialog())
                                 .then((value) => Navigator.pop(context));
                           }
                         },
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.edit),
-                            Text('Edit'),
+                            const Icon(Icons.edit),
+                            Text(AppLocalizations.of(context)?.edit ?? ''),
                           ],
                         ),
                       ),
                     ),
                     PopupMenuItem(
                       child: InkWell(
-                        onTap: ()  {
+                        onTap: () {
                           if (widget.checkOwner) {
-                             showDialog(
-                                context: context,
-                                builder: (context) => DeleteQuestionDialog(
-                                      dataHomePageBloc:
-                                          widget.dataHomePageBloc,
-                                      questionInfo:
-                                          widget.dataQuestionFromServer[
-                                              widget.index],
-                                    )) .then((value) => Navigator.pop(context));
-                          } else {
                             showDialog(
                                 context: context,
-                                builder: (context) => const DeclineDialog()).then((value) => Navigator.pop(context));
+                                builder: (context) => DeleteQuestionDialog(
+                                      dataHomePageBloc: widget.dataHomePageBloc,
+                                      questionInfo: widget
+                                          .dataQuestionFromServer[widget.index],
+                                    )).then((value) => Navigator.pop(context));
+                          } else {
+                            showDialog(
+                                    context: context,
+                                    builder: (context) => const DeclineDialog())
+                                .then((value) => Navigator.pop(context));
                           }
                         },
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.delete, color: Colors.red),
-                            Text('Delete',
-                                style: TextStyle(color: Colors.red)),
+                            const Icon(Icons.delete,
+                                color: ManagementColor.red),
+                            Text(AppLocalizations.of(context)?.delete ?? '',
+                                style: const TextStyle(
+                                    color: ManagementColor.red)),
                           ],
                         ),
                       ),

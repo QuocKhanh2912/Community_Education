@@ -1,12 +1,14 @@
 import 'dart:io';
+
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/domain/repositories/auth_repositories.dart';
 import 'package:pikachu_education/domain/repositories/database_repositories.dart';
 import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
+
 part 'data_home_event.dart';
+
 part 'data_home_state.dart';
 
 class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
@@ -61,8 +63,6 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
       emit(DeleteQuestionSuccessState());
     });
 
-
-
     on<LikeQuestionsEvent>((event, emit) async {
       await DatabaseRepositories.likedQuestion(
           userIdOfQuestion: event.userIdOfQuestion,
@@ -77,6 +77,37 @@ class DataHomePageBloc extends Bloc<DataHomePageEvent, DataHomePageState> {
           questionId: event.questionId,
           currentUserId: event.currentUserId);
       emit(RemovedLikeQuestionSuccessState());
+    });
+
+    on<SearchContentQuestionEvent>((event, emit) async {
+      emit(FetchDataQuestionLoadingState(const []));
+      var listDataUsers =
+          await DatabaseRepositories.fetchDataQuestionFromSever();
+      List<DataQuestionModal> listDataQuestionSearched = [];
+      String characterToSearch = event.characterToSearch;
+
+      if (event.subjectToFilter == '') {
+        for (var item in listDataUsers) {
+          if (item.questionContent
+              .toLowerCase()
+              .contains(characterToSearch.toLowerCase())) {
+            listDataQuestionSearched.add(item);
+          }
+        }
+      } else {
+        for (var item in event.currentList) {
+          if (item.questionContent
+                  .toLowerCase()
+                  .contains(characterToSearch.toLowerCase()) &&
+              item.questionSubject
+                  .toLowerCase()
+                  .contains(event.subjectToFilter.toLowerCase())) {
+            listDataQuestionSearched.add(item);
+          }
+        }
+      }
+      emit(SearchContentQuestionSuccessState(
+          listQuestionSearched: listDataQuestionSearched));
     });
   }
 }

@@ -32,7 +32,7 @@ class _DeleteAnswerDialogState extends State<DeleteAnswerDialog> {
           }
         },
         child: AlertDialog(
-          backgroundColor: const Color(0xFFFDFFAE),
+          backgroundColor: ManagementColor.lightYellow,
           insetPadding: EdgeInsets.zero,
           contentPadding: EdgeInsets.zero,
           alignment: Alignment.center,
@@ -48,7 +48,7 @@ class _DeleteAnswerDialogState extends State<DeleteAnswerDialog> {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.red),
+                        color: ManagementColor.red),
                   ),
                 ),
                 Row(
@@ -69,7 +69,7 @@ class _DeleteAnswerDialogState extends State<DeleteAnswerDialog> {
                             'Cancel',
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Colors.red,
+                                color: ManagementColor.red,
                                 fontWeight: FontWeight.bold),
                           ),
                         )),
@@ -96,7 +96,7 @@ class _DeleteAnswerDialogState extends State<DeleteAnswerDialog> {
                                 'Delete',
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.white,
+                                    color: ManagementColor.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ));

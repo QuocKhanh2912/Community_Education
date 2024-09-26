@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,6 +7,8 @@ import 'package:pikachu_education/pages/authentication/profile_page/bloc/image_t
 import 'package:pikachu_education/pages/authentication/profile_page/bloc/profile_page/profile_page_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class GetImageToSetAvatar extends StatefulWidget {
   const GetImageToSetAvatar({super.key, required this.currentUserInfo});
@@ -58,10 +59,10 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                             padding: const EdgeInsets.all(20),
                             child: Column(
                               children: [
-                                const Center(
+                                 Center(
                                   child: Text(
-                                    'Pick Your Image',
-                                    style: TextStyle(
+                                    AppLocalizations.of(context)?.pickYourImage??'',
+                                    style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -77,15 +78,15 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                      color: Colors.white,
+                                      color: ManagementColor.white,
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all()),
                                   child: Column(children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(8.0),
-                                      child: Text('Add Image By:',
-                                          style: TextStyle(
-                                              color: Colors.grey,
+                                     Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(AppLocalizations.of(context)?.addImageBy??'',
+                                          style: const TextStyle(
+                                              color: ManagementColor.grey,
                                               fontSize: 25,
                                               fontWeight: FontWeight.w400)),
                                     ),
@@ -111,34 +112,33 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                 Container(
                                                     height: 50,
                                                     decoration: BoxDecoration(
-                                                        color: const Color(
-                                                            0xFFFDCA15),
+                                                        color:  ManagementColor.yellow,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10)),
-                                                    child: const Row(
+                                                    child:  Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .start,
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   8.0),
                                                           child: Text(
-                                                            'Your Storage',
-                                                            style: TextStyle(
+                                                            AppLocalizations.of(context)?.yourStorage??'',
+                                                            style: const TextStyle(
                                                                 color:
-                                                                    Colors.grey,
+                                                                ManagementColor.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400),
                                                           ),
                                                         ),
-                                                        Icon(
+                                                        const Icon(
                                                           Icons.photo_library,
-                                                          color: Colors.grey,
+                                                          color: ManagementColor.grey,
                                                         ),
                                                       ],
                                                     )),
@@ -170,28 +170,28 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10)),
-                                                    child: const Padding(
+                                                    child:  Padding(
                                                       padding:
-                                                          EdgeInsets.all(5.0),
+                                                          const EdgeInsets.all(5.0),
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Your Camera',
-                                                            style: TextStyle(
+                                                            AppLocalizations.of(context)?.yourCamera??'',
+                                                            style: const TextStyle(
                                                                 color:
-                                                                    Colors.grey,
+                                                                ManagementColor.grey,
                                                                 fontSize: 15,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400),
                                                           ),
-                                                          Icon(
+                                                          const Icon(
                                                             Icons
                                                                 .camera_alt_outlined,
-                                                            color: Colors.grey,
+                                                            color: ManagementColor.grey,
                                                           ),
                                                         ],
                                                       ),
@@ -219,13 +219,13 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                               color: ManagementColor.white,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
+                                          child:  Padding(
+                                            padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                              'Cancel',
-                                              style: TextStyle(
+                                              AppLocalizations.of(context)?.cancel??'',
+                                              style: const TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.red,
+                                                  color: ManagementColor.red,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
@@ -249,13 +249,13 @@ class _GetImageToSetAvatarState extends State<GetImageToSetAvatar> {
                                               color: ManagementColor.yellow,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(8.0),
+                                          child:  Padding(
+                                            padding: const EdgeInsets.all(8.0),
                                             child: Text(
-                                              'Update Avatar',
-                                              style: TextStyle(
+                                              AppLocalizations.of(context)?.updateAvatar??'',
+                                              style: const TextStyle(
                                                   fontSize: 20,
-                                                  color: Colors.white,
+                                                  color: ManagementColor.white,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),

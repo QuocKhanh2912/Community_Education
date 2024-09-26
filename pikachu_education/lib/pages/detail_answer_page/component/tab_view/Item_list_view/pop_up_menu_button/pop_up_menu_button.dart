@@ -4,9 +4,12 @@ import 'package:pikachu_education/data/modal/answer_modal.dart';
 import 'package:pikachu_education/data/modal/comment_modal.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/pages/detail_answer_page/bloc/detail_answer_page/detail_answer_page_bloc.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'decline_dialog.dart';
 import 'delete_comment_dialog/delete_comment_dialog.dart';
 import 'edit_comment_dialog/edit_comment_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class PopUpMenuButtonComment extends StatefulWidget {
@@ -60,21 +63,20 @@ class _PopUpMenuButtonCommentState extends State<PopUpMenuButtonComment> {
                                       commentInfo: widget.commentInfo,
                                       detailAnswerPageBloc:
                                           widget.detailAnswerPageBloc,
-                                    ));
-                            Navigator.pop(context);
+                                    )).then((value) => Navigator.pop(context));
                           } else {
                             await showDialog(
                                 context: context,
                                 builder: (context) =>
-                                    const DeclineDialogComment());
-                            Navigator.pop(context);
+                                    const DeclineDialogComment()).then((value) => Navigator.pop(context));
+
                           }
                         },
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.edit),
-                            Text('Edit'),
+                            const Icon(Icons.edit),
+                            Text(AppLocalizations.of(context)?.edit??''),
                           ],
                         ),
                       ),
@@ -90,21 +92,20 @@ class _PopUpMenuButtonCommentState extends State<PopUpMenuButtonComment> {
                                       questionInfo: widget.questionInfo,
                                       commentInfo: widget.commentInfo,
                                       detailAnswerPageBloc:
-                                          widget.detailAnswerPageBloc,
-                                    ));
-                            Navigator.pop(context);
+                                      widget.detailAnswerPageBloc,
+                                    )).then((value) => Navigator.pop(context));
                           } else {
                             showDialog(
                                 context: context,
                                 builder: (context) =>
-                                    const DeclineDialogComment());
+                                    const DeclineDialogComment()).then((value) => Navigator.pop(context));
                           }
                         },
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(Icons.delete, color: Colors.red),
-                            Text('Delete', style: TextStyle(color: Colors.red)),
+                            const Icon(Icons.delete, color: ManagementColor.red),
+                            Text(AppLocalizations.of(context)?.delete??'', style: const TextStyle(color: ManagementColor.red)),
                           ],
                         ),
                       ),
@@ -113,6 +114,5 @@ class _PopUpMenuButtonCommentState extends State<PopUpMenuButtonComment> {
         ),
       ),
     );
-    ;
   }
 }

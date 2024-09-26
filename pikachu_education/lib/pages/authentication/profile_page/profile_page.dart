@@ -4,10 +4,11 @@ import 'package:pikachu_education/components/button/negative_button.dart';
 import 'package:pikachu_education/components/button/positive_button.dart';
 import 'package:pikachu_education/components/text_form_field.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
-import 'package:pikachu_education/service/authentication/authentication_service.dart';
+import 'package:pikachu_education/utils/extensions/user_name_extension.dart';
+import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'bloc/profile_page/profile_page_bloc.dart';
 import 'component/get_image_to_set_avatar.dart';
 
@@ -39,11 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     profilePageBloc.add(FetchProfilePageData(widget.currentUserInfo.userId));
-    AuthenticationLocalService.methodLoginCurrent().then((value) {
-      setState(() {
-        methodLogin = value;
-      });
-    });
+    profilePageBloc.add(GetMethodLogin());
     super.initState();
   }
 
@@ -56,8 +53,14 @@ class _ProfilePageState extends State<ProfilePage> {
           if (state is PostAvatarSuccess) {
             setState(() {});
           }
+          if (state is GetMethodLoginSuccessState) {
+            setState(() {
+              methodLogin = state.methodLogin;
+            });
+          }
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: true,
             body: BlocListener<ProfilePageBloc, ProfilePageState>(
           listener: (context, state) {
             if (state is PostAvatarSuccess ||
@@ -106,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   width: 130,
                                   height: 130,
                                   decoration: const BoxDecoration(
-                                      color: Colors.red,
+                                      color: ManagementColor.red,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(130))),
                                   child: widget.currentUserInfo.avatarUrl == ''
@@ -134,8 +137,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: Border.all(
-                                              width: 4, color: Colors.white),
-                                          color: Colors.yellow),
+                                              width: 4,
+                                              color: ManagementColor.white),
+                                          color: ManagementColor.yellow),
                                       child: InkWell(
                                         onTap: () {
                                           showDialog(
@@ -148,7 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         },
                                         child: const Icon(
                                           Icons.photo_camera,
-                                          color: Colors.white,
+                                          color: ManagementColor.white,
                                         ),
                                       ),
                                     ))
@@ -161,12 +165,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 textEditingController: userNameController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'User Name can not be empty';
+                                    return AppLocalizations.of(context)?.emptyUserName??'';
+                                  }
+                                  RegExp phoneNumExp =
+                                      ManagementRegex.userName;
+                                  if (!phoneNumExp.hasMatch(value)) {
+                                    return AppLocalizations.of(context)?.invalidPhoneNum??'';
                                   }
                                 },
-                                hintText: 'User Name',
+                                hintText: AppLocalizations.of(context)?.userName??'',
                                 textInputType: TextInputType.text,
-                                textLabel: 'User Name'),
+                                textLabel: AppLocalizations.of(context)?.userName??''),
                             const SizedBox(
                               height: 30,
                             ),
@@ -177,17 +186,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                 textEditingController: phoneNumberController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Phone Number can not be empty';
+                                    return AppLocalizations.of(context)?.emptyPhoneNum??'';
                                   }
                                   RegExp phoneNumExp =
                                       ManagementRegex.phoneNumber;
                                   if (!phoneNumExp.hasMatch(value)) {
-                                    return 'Your Phone Number is invalid';
+                                    return AppLocalizations.of(context)?.invalidPhoneNum??'';
                                   }
                                 },
-                                hintText: 'Phone Number',
+                                hintText: AppLocalizations.of(context)?.phoneNumber??'',
                                 textInputType: TextInputType.phone,
-                                textLabel: 'Phone Number'),
+                                textLabel: AppLocalizations.of(context)?.phoneNumber??''),
                             const SizedBox(
                               height: 30,
                             ),
@@ -199,16 +208,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                 textEditingController: emailController,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Email can not be empty';
+                                    return AppLocalizations.of(context)?.emptyEmail??'';
                                   }
                                   RegExp phoneNumExp = ManagementRegex.email;
                                   if (!phoneNumExp.hasMatch(value)) {
-                                    return 'Your Email Number is invalid';
+                                    return AppLocalizations.of(context)?.invalidEmail??'';
                                   }
                                 },
-                                hintText: 'Email',
+                                hintText: AppLocalizations.of(context)?.email??'',
                                 textInputType: TextInputType.text,
-                                textLabel: 'Email'),
+                                textLabel: AppLocalizations.of(context)?.email??''),
                             const SizedBox(
                               height: 30,
                             ),
@@ -219,8 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const NegativeButtonCustom(
-                                      nameButton: 'Cancel'),
+                                   NegativeButtonCustom(
+                                      nameButton: AppLocalizations.of(context)?.cancel??''),
                                   PositiveButtonCustom(
                                       onPressed: () {
                                         var validator = keyOfProfile
@@ -229,16 +238,16 @@ class _ProfilePageState extends State<ProfilePage> {
                                         if (validator) {
                                           DataUserModal item = DataUserModal(
                                               userId: currentUserInfo.userId,
-                                              userName: userNameController.text,
-                                              email: emailController.text,
+                                              userName: userNameController.text.removeSpaces(),
+                                              email: emailController.text.trim(),
                                               phoneNumber:
-                                                  phoneNumberController.text);
+                                                  phoneNumberController.text.trim());
                                           context.read<ProfilePageBloc>().add(
                                               UpdateProfileEvent(
                                                   itemToUpdate: item));
                                         }
                                       },
-                                      nameButton: '  Save  ',
+                                      nameButton: '  ${AppLocalizations.of(context)?.save??''}  ',
                                       stateLoading:
                                           (state is UpdateProfileLoadingState)
                                               ? true

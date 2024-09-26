@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pikachu_education/data/modal/answer_modal.dart';
+import 'package:pikachu_education/utils/management_color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TabBarShowNumberLikeComment extends StatefulWidget {
   const TabBarShowNumberLikeComment({super.key,required this.answerInfo,required this.tabController});
@@ -15,14 +18,14 @@ class _TabBarShowNumberLikeCommentState extends State<TabBarShowNumberLikeCommen
   @override
   Widget build(BuildContext context) {
     return TabBar(
-        overlayColor: MaterialStateProperty.all(Colors.white),
-        indicatorColor: Colors.yellowAccent,
+        overlayColor: MaterialStateProperty.all(ManagementColor.white),
+        indicatorColor: ManagementColor.lightYellow,
         controller: widget.tabController,
         tabs: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-                '${widget.answerInfo.numberComment} Comment',
+                '${widget.answerInfo.numberComment} ${AppLocalizations.of(context)?.comment??''}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontSize: 18,
@@ -31,7 +34,7 @@ class _TabBarShowNumberLikeCommentState extends State<TabBarShowNumberLikeCommen
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('${widget.answerInfo.numberLike} Like',
+            child: Text('${widget.answerInfo.numberLike} ${AppLocalizations.of(context)?.like??''}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                     fontSize: 18,

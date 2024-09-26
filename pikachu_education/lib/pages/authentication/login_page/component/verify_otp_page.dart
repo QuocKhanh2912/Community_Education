@@ -7,7 +7,8 @@ import 'package:pikachu_education/routes/page_name.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
 import 'package:pikachu_education/utils/management_regex.dart';
-import 'package:pikachu_education/utils/management_text_inform.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class VerifyOTPPage extends StatefulWidget {
@@ -70,24 +71,24 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                             padding: const EdgeInsets.all(0),
                             child: Image.asset(ManagementImage.logo),
                           ),
-                          const Padding(
+                           Padding(
                             padding:
-                                EdgeInsets.only(top: 60, left: 10, right: 10),
-                            child: Text('Verification',
-                                style: TextStyle(
+                                const EdgeInsets.only(top: 60, left: 10, right: 10),
+                            child: Text(AppLocalizations.of(context)?.verification??'',
+                                style: const TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold)),
                           ),
                           const SizedBox(
                             height: 40,
                           ),
-                           const Padding(
+                            Padding(
                             padding:
-                                EdgeInsets.symmetric(horizontal: 20),
+                                const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                                 textAlign: TextAlign.center,
-                                ManagementTextInform.informOTP,
-                                style: TextStyle(
+                                AppLocalizations.of(context)?.informOTP??'',
+                                style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.normal)),
                           ),
@@ -98,14 +99,14 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                               textEditingController: otpController,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'OTP can not be empty';
+                                  return AppLocalizations.of(context)?.emptyOTP??'';
                                 }
                                 RegExp otpExp = ManagementRegex.otpCode;
                                 if (!otpExp.hasMatch(value)) {
-                                  return 'OTP is invalid';
+                                  return AppLocalizations.of(context)?.invalidOTP??'';
                                 }
                               },
-                              hintText: 'Enter OTP Code',
+                              hintText: AppLocalizations.of(context)?.enterOTPCode??'',
                               textInputType: TextInputType.number),
                           const SizedBox(
                             height: 40,
@@ -144,12 +145,12 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> {
                                         height: 60,
                                         width:
                                             MediaQuery.of(context).size.width,
-                                        child: const Center(
+                                        child:  Center(
                                           child: Text(
-                                            'VERIFY',
-                                            style: TextStyle(
+                                            AppLocalizations.of(context)?.verify??'',
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.white,
+                                                color: ManagementColor.white,
                                                 fontSize: 25),
                                           ),
                                         ),

@@ -1,18 +1,18 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pikachu_education/data/modal/question_modal.dart';
 import 'package:pikachu_education/data/modal/user_modal.dart';
 import 'package:pikachu_education/data/subject/list_subject.dart';
-import 'package:pikachu_education/domain/services/database_storage_service/storage_service.dart';
 import 'package:pikachu_education/pages/home_page/bloc/get_image_to_create_question/get_image_bloc.dart';
 import 'package:pikachu_education/pages/home_page/bloc/home_page/data_home_bloc.dart';
 import 'package:pikachu_education/utils/management_color.dart';
 import 'package:pikachu_education/utils/management_image.dart';
-import 'package:pikachu_education/utils/management_time.dart';
 
 class CreateQuestionPage extends StatefulWidget {
   const CreateQuestionPage(
@@ -61,7 +61,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
               child: BlocBuilder<GetImageBloc, GetImageState>(
                 builder: (context, state) {
                   return AlertDialog(
-                    backgroundColor: const Color(0xFFFDFFAE),
+                    backgroundColor: ManagementColor.lightYellow,
                     insetPadding: EdgeInsets.zero,
                     contentPadding: EdgeInsets.zero,
                     alignment: Alignment.topCenter,
@@ -72,10 +72,10 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
-                          const Center(
+                          Center(
                             child: Text(
-                              'N e w Q u e s t i o n',
-                              style: TextStyle(
+                              AppLocalizations.of(context)?.newQuestion ?? '',
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -90,17 +90,20 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                     controller: titleController,
                                     autofocus: false,
                                     keyboardType: TextInputType.text,
-                                    decoration: const InputDecoration(
-                                        border: OutlineInputBorder(
+                                    decoration: InputDecoration(
+                                        border: const OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(10))),
                                         filled: true,
-                                        fillColor: Colors.white,
-                                        labelText: 'Title'),
+                                        fillColor: ManagementColor.white,
+                                        labelText: AppLocalizations.of(context)
+                                                ?.title ??
+                                            ''),
                                     validator: FormBuilderValidators.compose([
                                       FormBuilderValidators.required(),
                                     ]),
-                                    name: 'title'),
+                                    name: AppLocalizations.of(context)?.title ??
+                                        ''),
                                 const SizedBox(
                                   height: 16,
                                 ),
@@ -108,15 +111,17 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                   validator: FormBuilderValidators.required(),
                                   decoration: InputDecoration(
                                     filled: true,
-                                    fillColor: Colors.white,
+                                    fillColor: ManagementColor.white,
                                     border: OutlineInputBorder(
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                   ),
                                   icon: const Icon(
                                       Icons.arrow_drop_down_circle_outlined),
-                                  hint: const Text('Subject'),
-                                  items: DataAddQuestion.listSubject
+                                  hint: Text(
+                                      AppLocalizations.of(context)?.subject ??
+                                          ''),
+                                  items: DataAddQuestion.listSubject(context)
                                       .map<DropdownMenuItem<String>>(
                                           (String value) {
                                     return DropdownMenuItem<String>(
@@ -140,15 +145,19 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                     keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                         filled: true,
-                                        fillColor: Colors.white,
+                                        fillColor: ManagementColor.white,
                                         border: OutlineInputBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        labelText: 'Content'),
+                                        labelText: AppLocalizations.of(context)
+                                                ?.content ??
+                                            ''),
                                     validator: FormBuilderValidators.compose([
                                       FormBuilderValidators.required(),
                                     ]),
-                                    name: 'content')
+                                    name:
+                                        AppLocalizations.of(context)?.content ??
+                                            '')
                               ],
                             ),
                           ),
@@ -163,15 +172,17 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: ManagementColor.white,
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all()),
                             child: Column(children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text('Add Image By:',
-                                    style: TextStyle(
-                                        color: Colors.grey,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    AppLocalizations.of(context)?.addImageBy ??
+                                        '',
+                                    style: const TextStyle(
+                                        color: ManagementColor.grey,
                                         fontSize: 25,
                                         fontWeight: FontWeight.w400)),
                               ),
@@ -194,30 +205,34 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                           Container(
                                               height: 50,
                                               decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFFFDCA15),
+                                                  color: ManagementColor.yellow,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: const Row(
+                                              child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsets.all(8.0),
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child: Text(
-                                                      'Your Storage',
-                                                      style: TextStyle(
-                                                          color: Colors.grey,
+                                                      AppLocalizations.of(
+                                                                  context)
+                                                              ?.yourStorage ??
+                                                          '',
+                                                      style: const TextStyle(
+                                                          color: ManagementColor
+                                                              .grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
                                                   ),
-                                                  Icon(
+                                                  const Icon(
                                                     Icons.photo_library,
-                                                    color: Colors.grey,
+                                                    color: ManagementColor.grey,
                                                   ),
                                                 ],
                                               )),
@@ -244,23 +259,29 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10)),
-                                              child: const Padding(
-                                                padding: EdgeInsets.all(5.0),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Your Camera',
-                                                      style: TextStyle(
-                                                          color: Colors.grey,
+                                                      AppLocalizations.of(
+                                                                  context)
+                                                              ?.yourCamera ??
+                                                          '',
+                                                      style: const TextStyle(
+                                                          color: ManagementColor
+                                                              .grey,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.w400),
                                                     ),
-                                                    Icon(
+                                                    const Icon(
                                                       Icons.camera_alt_outlined,
-                                                      color: Colors.grey,
+                                                      color:
+                                                          ManagementColor.grey,
                                                     ),
                                                   ],
                                                 ),
@@ -281,8 +302,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                             children: [
                               TextButton(
                                   onPressed: () {
-                                    StorageService.upLoadImageToStorage(
-                                        file: _image!);
+                                    Navigator.pop(context);
                                   },
                                   child: Container(
                                     alignment: Alignment.center,
@@ -291,13 +311,14 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                         color: ManagementColor.white,
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Cancel',
-                                        style: TextStyle(
+                                        AppLocalizations.of(context)?.cancel ??
+                                            '',
+                                        style: const TextStyle(
                                             fontSize: 20,
-                                            color: Colors.red,
+                                            color: ManagementColor.red,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
@@ -309,8 +330,7 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                             .validate() ==
                                         true) {
                                       var item = DataQuestionModal(
-                                          timePost:
-                                              ManagementTime.getTimePost(),
+                                          timePost: DateTime.now().toString(),
                                           questionContent:
                                               contentController.text,
                                           questionSubject:
@@ -338,13 +358,15 @@ class CreateQuestionPageState extends State<CreateQuestionPage> {
                                         color: ManagementColor.yellow,
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(8.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        'Create Question',
-                                        style: TextStyle(
+                                        AppLocalizations.of(context)
+                                                ?.createQuestion ??
+                                            '',
+                                        style: const TextStyle(
                                             fontSize: 20,
-                                            color: Colors.white,
+                                            color: ManagementColor.white,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),

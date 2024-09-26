@@ -1,6 +1,5 @@
 part of 'data_home_bloc.dart';
 
-
 abstract class DataHomePageState {}
 
 class DataHomePageInitial extends DataHomePageState {
@@ -30,7 +29,16 @@ class GetCurrentUserSuccessState extends DataHomePageState {
 }
 
 class EditQuestionSuccessState extends DataHomePageState {}
+
 class DeleteQuestionSuccessState extends DataHomePageState {}
 
-class LikedQuestionSuccessState extends DataHomePageState{}
-class RemovedLikeQuestionSuccessState extends DataHomePageState{}
+class LikedQuestionSuccessState extends DataHomePageState {}
+
+class RemovedLikeQuestionSuccessState extends DataHomePageState {}
+
+class SearchContentQuestionSuccessState extends DataHomePageState {
+  List<DataQuestionModal> listQuestionSearched;
+
+  SearchContentQuestionSuccessState({required this.listQuestionSearched});
+}
+
